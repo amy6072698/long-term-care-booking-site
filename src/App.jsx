@@ -1,168 +1,316 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [products, setProducts] = useState({
+    id: null,
+    name: "",
+    cardImg: "",
+    images: [],
+    city: "",
+    region: "",
+    address: "",
+    like: 0,
+    comments: 0,
+    services: [],
+    description: "",
+    age: "",
+    caringItem: [],
+    medicalService: [],
+    allowance: [],
+    roomCards: [],
+  });
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}products`);
+      console.log(res.data[0]);
+      setProducts(res.data[0]);
+    } catch (error) {
+      alert("取得產品資料失敗");
+    }
+  };
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   return (
     <>
-      <div
-        className="card overflow-hidden mb-11"
-        style={{ maxWidth: "1296px" }}
-      >
-        <div className="row g-0">
-          <div className="col-lg-5">
-            <div className="checkbox-relative h-100">
-              <img
-                src="https://github.com/Jack-Xiao-2024/Project_D01/blob/main/assets/images/Building/B-05.png?raw=true"
-                className="img-fluid card-img rounded-0 h-100"
-                alt="building"
-              />
-              <div className="checkbox-moble">
-                <input
-                  className="form-check-input custom-checkbox checkbox-absolute"
-                  type="checkbox"
-                  id="checkboxNoLabel"
-                  value=""
-                  aria-label="勾選框"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-7">
-            <div className="card-body p-4">
-              <div className="infor mb-3">
-                <div className="checkbox d-flex justify-content-between mb-2">
-                  <h5 className="card-title">祥和樂年苑</h5>
-                  <div className="checkbox-desk">
-                    <input
-                      className="form-check-input custom-checkbox"
-                      type="checkbox"
-                      id="checkboxNoLabel"
-                      value=""
-                      aria-label="勾選框"
+      <main>
+        {/* header */}
+        <div className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
+          {/* <!--description --> */}
+          <div className="container">
+            <div className="row mt-lg-11">
+              <div className="col-lg-8 col-12">
+                <div className="d-flex mb-2">
+                  <div className="fs-7">
+                    {products.comments}個評論
+                    <img
+                      id="intro-like-icon"
+                      src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Interact%20Icon/Like-01.png?raw=true"
+                      alt="praise"
+                      className="align-bottom"
+                      style={{ cursor: "pointer" }}
                     />
+                    <span id="intro-like">{products.like}</span>
                   </div>
                 </div>
-                <div className="address d-flex">
-                  <svg
-                    width="16"
-                    height="20"
-                    viewBox="0 0 16 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 7.92285C1 12.7747 5.24448 16.7869 7.12319 18.3252C7.39206 18.5454 7.52811 18.6568 7.72871 18.7132C7.88491 18.7572 8.1148 18.7572 8.271 18.7132C8.47197 18.6567 8.60707 18.5463 8.87695 18.3254C10.7557 16.7871 14.9999 12.7751 14.9999 7.9233C14.9999 6.08718 14.2625 4.32605 12.9497 3.02772C11.637 1.72939 9.8566 1 8.00008 1C6.14357 1 4.36301 1.7295 3.05025 3.02783C1.7375 4.32616 1 6.08674 1 7.92285Z"
-                      fill="#EA8C55"
-                    />
-                    <path
-                      d="M6 7C6 8.10457 6.89543 9 8 9C9.10457 9 10 8.10457 10 7C10 5.89543 9.10457 5 8 5C6.89543 5 6 5.89543 6 7Z"
-                      fill="#EA8C55"
-                    />
-                    <path
-                      d="M1 7.92285C1 12.7747 5.24448 16.7869 7.12319 18.3252C7.39206 18.5454 7.52811 18.6568 7.72871 18.7132C7.88491 18.7572 8.1148 18.7572 8.271 18.7132C8.47197 18.6567 8.60707 18.5463 8.87695 18.3254C10.7557 16.7871 14.9999 12.7751 14.9999 7.9233C14.9999 6.08718 14.2625 4.32605 12.9497 3.02772C11.637 1.72939 9.8566 1 8.00008 1C6.14357 1 4.36301 1.7295 3.05025 3.02783C1.7375 4.32616 1 6.08674 1 7.92285Z"
-                      stroke="black"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M6 7C6 8.10457 6.89543 9 8 9C9.10457 9 10 8.10457 10 7C10 5.89543 9.10457 5 8 5C6.89543 5 6 5.89543 6 7Z"
-                      stroke="black"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <p className="fs-7 ps-1">新北市中和區中山路</p>
+                <h3 className="mb-2"></h3>
+                <div className="d-flex mb-5 gap-1">
+                  <i
+                    className="bi bi-geo-alt-fill"
+                    style={{ color: "#ea8c55" }}
+                  ></i>
+                  <div className="fs-7">{products.address}</div>
+                </div>
+                <div className="fs-7 mb-5">{products.description}</div>
+                <div className="d-flex gap-2 flex-wrap mb-7">
+                  {products.services.map((service) => {
+                    return (
+                      <div
+                        key={service.name}
+                        className="border border-dark rounded-2 py-1 px-2"
+                      >
+                        <img
+                          src={`./src/assets/images/Icon/tag/${service.name}.svg`}
+                          alt={service.name}
+                        />
+                        {service.name}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-
-              <div className="date d-flex align-items-center mb-3">
-                <p className="fs-8 me-1">預定入住：</p>
-                <div className="calendar">
-                  <p className="fs-6">2024/09/24</p>
-                  <svg
-                    className="d-block"
-                    width="28"
-                    height="29"
-                    viewBox="0 0 28 29"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      y="0.600006"
-                      width="28"
-                      height="28"
-                      rx="14"
-                      fill="#FFE8C6"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M6.08008 8.48022C6.08008 8.08258 6.40243 7.76022 6.80008 7.76022H21.2001C21.5977 7.76022 21.9201 8.08258 21.9201 8.48022V22.1602C21.9201 22.5579 21.5977 22.8802 21.2001 22.8802H6.80008C6.40243 22.8802 6.08008 22.5579 6.08008 22.1602V8.48022ZM7.52008 9.20022V21.4402H20.4801V9.20022H7.52008Z"
-                      fill="#A03200"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M10.4 7.40022V9.56022H8.95996V7.40022H10.4Z"
-                      fill="#A03200"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M19.0396 7.40013V9.56013H17.5996V7.40013H19.0396Z"
-                      fill="#A03200"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M6.7998 10.6402H21.1998V12.0802H6.7998V10.6402Z"
-                      fill="#A03200"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M14.36 13.8802C12.7695 13.8802 11.48 15.1696 11.48 16.7602C11.48 18.3508 12.7695 19.6402 14.36 19.6402C15.9506 19.6402 17.24 18.3508 17.24 16.7602C17.24 15.1696 15.9506 13.8802 14.36 13.8802ZM10.04 16.7602C10.04 14.3743 11.9742 12.4402 14.36 12.4402C16.7459 12.4402 18.68 14.3743 18.68 16.7602C18.68 19.1461 16.7459 21.0802 14.36 21.0802C11.9742 21.0802 10.04 19.1461 10.04 16.7602Z"
-                      fill="#A03200"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M13.28 17.1202V14.9602H14.72V16.4002H16.16V17.8402H14C13.6024 17.8402 13.28 17.5179 13.28 17.1202Z"
-                      fill="#A03200"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div className="card-text d-flex justify-content-between align-items-end mb-2">
-                <div className="beds fs-7">
-                  剩餘床位：<span className="last-bed">8</span>
-                </div>
-                <div className="room-info text-end">
-                  <p className="room-tylie fs-8">三人房型</p>
-                  <p className="romm-price fs-5">NTD 5,000</p>
-                </div>
-              </div>
-
-              <div className="d-flex justify-content-end">
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary-40"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
+              <div className="d-flex align-items-end col-lg-4 col-12 mb-7">
+                <a
+                  href="#"
+                  className="btn btn-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
                 >
-                  <i className="bi bi-x-lg"></i>
-                  <span className="fs-6">刪除</span>
-                </button>
+                  預約參訪
+                </a>
+                <a
+                  href="#"
+                  className="btn btn-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
+                >
+                  預約參訪
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* <!-- service --> */}
+        <div className="bg-primary-10">
+          <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
+            <h4 className="mb-2">服務內容</h4>
+            <div className="fs-7 mb-7 text-secondary-90">
+              ＊入住者年齡限制：{products.age}歲
+            </div>
+            <div className="row g-7">
+              <div
+                className="col-lg-4"
+                data-aos="flip-left"
+                data-aos-duration="1000"
+                data-aos-offset="300"
+              >
+                <div className="card w-100 pt-9 pb-10 px-7 rounded-2 border-0 h-100">
+                  <img
+                    className="mx-auto intro-service"
+                    src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/399576c7c8ec60e611e2d35218b94d8f6a92a78b/assets/images/Vector%20Icon/VI-04.svg"
+                    alt="card"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title text-center text-secondary-60">
+                      照護項目
+                    </h5>
+                    <p className="card-text">
+                      {products?.caringItem?.map((item, index) => {
+                        if (products?.caringItem?.length - 1 !== index) {
+                          return `${item}、`;
+                        } else {
+                          return `${item}`;
+                        }
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="col-lg-4"
+                data-aos="flip-left"
+                data-aos-duration="1000"
+                data-aos-offset="300"
+              >
+                <div className="card w-100 pt-9 pb-10 px-7 rounded-2 border-0 h-100">
+                  <img
+                    className="mx-auto intro-service"
+                    src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/399576c7c8ec60e611e2d35218b94d8f6a92a78b/assets/images/Vector%20Icon/VI-06.svg.svg"
+                    alt="card"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title text-center text-secondary-60 overflow-hidden text-nowrap">
+                      醫療服務＆專業照護
+                    </h5>
+                    <p className="card-text">
+                      {products?.medicalService?.map((item, index) => {
+                        if (products?.medicalService?.length - 1 !== index) {
+                          return `${item}、`;
+                        } else {
+                          return `${item}`;
+                        }
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="col-lg-4"
+                data-aos="flip-left"
+                data-aos-duration="1000"
+                data-aos-offset="300"
+              >
+                <div className="card w-100 pt-9 pb-10 px-7 rounded-2 border-0 h-100">
+                  <img
+                    className="mx-auto intro-service"
+                    src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/399576c7c8ec60e611e2d35218b94d8f6a92a78b/assets/images/Vector%20Icon/VI-05.svg"
+                    alt="card"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title text-center text-secondary-60">
+                      政府補助
+                    </h5>
+                    <p className="card-text text-center mb-auto">
+                      {products?.allowance?.map((item, index) => {
+                        if (products?.allowance?.length - 1 !== index) {
+                          return `${item}、`;
+                        } else {
+                          return `${item}`;
+                        }
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <!-- 房型費用 start--> */}
+        <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
+          <h4 className="mb-1">房型費用</h4>
+          <div className="fs-8 text-secondary-90 mb-7">
+            ＊房型費用不含保證金、耗材及其他相關費用。價格以服務契約為準。
+          </div>
+          <div className="row row-cols-lg-3 row-cols-1 gx-lg-11 gx-7">
+            {products.roomCards.map((room) => {
+              return (
+                <div className="col" key={room.id}>
+                  <div className="card overflow-hidden intro-rounded">
+                    <img
+                      src={room.imgUrl}
+                      className="card-img-top object-fit-cover"
+                      alt="room"
+                    />
+                    <div className="card-body py-4 px-7">
+                      <h5 className="text-center">{room.roomType}</h5>
+                      <h6 className="d-flex align-items-center gap-1 justify-content-center">
+                        每月
+                        <span className="h5 align-self-center mb-0 text-secondary-40">
+                          {room.price}
+                        </span>
+                        元起
+                      </h6>
+                      <div className="fs-7 text-end mb-1">
+                        剩餘床位：{room.availableBeds}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 機構評價 */}
+        <div className="bg-primary-80">
+          <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
+            <h4 className="mb-9 text-primary-10">機構評價</h4>
+            <div className="row g-7">
+              <div className="col-md-4 col-12">
+                <div className="gap-7 d-flex flex-column justify-content-between h-100 rounded-top-4 rounded-bottom-start-2 rounded-bottom-end-4 border border-dark bg-white pt-7 pb-8 px-7">
+                  <h6>
+                    參訪樂康頤和園後，我感受到這裡如家的溫暖，設施無障礙且現代化
+                  </h6>
+                  <div className="d-flex gap-1 align-items-center">
+                    <img
+                      src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-04.png?raw=true"
+                      alt="user"
+                      className="intro-user"
+                    />
+                    <div className="fs-7">郭先生</div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4 col-12">
+                <div className="gap-7 d-flex flex-column justify-content-between h-100 rounded-top-4 rounded-bottom-start-2 rounded-bottom-end-4 border border-dark bg-white pt-7 pb-8 px-7">
+                  <h6>我參觀了樂康頤和園，發現這裡的護理服務非常周到。</h6>
+                  <div className="d-flex gap-1 align-items-center">
+                    <img
+                      src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-05.png?raw=true"
+                      alt="user"
+                      className="intro-user"
+                    />
+                    <div className="fs-7">李小姐</div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4 col-12">
+                <div className="gap-7 d-flex flex-column justify-content-between h-100 rounded-top-4 rounded-bottom-start-2 rounded-bottom-end-4 border border-dark bg-white pt-7 pb-8 px-7">
+                  <h6>
+                    這裡的環境不僅舒適，還有很多促進長者互動的公共區域和活動。
+                  </h6>
+                  <div className="d-flex gap-1 align-items-center">
+                    <img
+                      src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-03.png?raw=true"
+                      alt="user"
+                      className="intro-user"
+                    />
+                    <div className="fs-7">王先生</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-primary-10">
+          <div className="container pt-lg-14 pb-lg-11 text-primary-100 pt-12 pb-12">
+            <h4 className="mb-9">貼心提醒！</h4>
+            <ul
+              className="d-flex list-group gap-1 flex-column gap-5 ps-6"
+              style={{ listStyle: "disc" }}
+            >
+              <li className="fs-7 ">
+                入住者須提供體檢報告，體檢項目請依各機構規定。體檢後約需七個工作天才能領取報告，敬請即早準備。
+              </li>
+              <li className="fs-7">
+                參訪時，請攜帶病歷摘要或相關資料，讓機構可以評估參考。
+              </li>
+              <li className="fs-7">
+                參訪後，需經由機構進行評估、確認可以收住後，才會安排後續入住事宜。
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
     </>
   );
 }

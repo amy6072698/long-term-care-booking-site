@@ -1,0 +1,79 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "樂康頤和園",
+      "cardImg": "http://",
+      "images": ["http://A", "http://B", "http://C", "http://D", "http://E"],
+      "city": "台北市",
+      "region": "中正區",
+      "address": "台北市中正區中正路",
+      "like": 5,
+      "comments": 12,
+      "services": [
+        {
+          "name": "機構內門診"
+        },
+        {
+          "name": "特殊沐浴設備"
+        },
+        {
+          "name": "門診接送"
+        },
+        {
+          "name": "大傷口照顧"
+        }
+      ],
+      "description": "本長照機構設有無障礙設施、專業護理室、康復治療室、活動娛樂區及24小時緊急呼叫系統,提供全方位的照護服務。",
+      "age": "0~59",
+      "caringItem": [
+        "鼻胃管",
+        "導尿管",
+        "精神照護",
+        "認知障礙（失智）",
+        "氣切管",
+        "氧氣",
+        "復健照護",
+        "腫瘤照護（癌症）",
+        "透析照護（洗腎）"
+      ],
+      "medicalService": [
+        "醫師巡診",
+        "鄰近醫院",
+        "藥師評估",
+        "腫瘤照顧",
+        "洗腎接送",
+        "營養評估",
+        "術後照顧",
+        "生活照顧",
+        "傷口照顧",
+        "如廁訓練",
+        "延緩失能"
+      ],
+      "allowance": ["老人補助（低收、中低收）", "身心障礙", "喘息服務"],
+      "roomCards": [
+        {
+          "id": 1,
+          "imgUrl": "http://",
+          "roomType": "單人房",
+          "price": 40000,
+          "availableBeds": 3
+        },
+        {
+          "id": 2,
+          "imgUrl": "http://",
+          "roomType": "三人房",
+          "price": 36000,
+          "availableBeds": 3
+        },
+        {
+          "id": 3,
+          "imgUrl": "http://",
+          "roomType": "六人房",
+          "price": 33000,
+          "availableBeds": 6
+        }
+      ]
+    }
+  ]
+}

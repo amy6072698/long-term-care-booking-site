@@ -4,7 +4,7 @@
       "id": 1,
       "name": "樂康頤和園",
       "cardImg": "http://",
-      "images": ["http://A", "http://B", "http://C", "http://D", "http://E"],
+      "images": ["https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-01.png?raw=true", "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-18.png?raw=true", "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-17.png?raw=true", "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-15.png?raw=true", "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-14.png?raw=true"],
       "city": "台北市",
       "region": "中正區",
       "address": "台北市中正區中正路",
@@ -54,21 +54,21 @@
       "roomCards": [
         {
           "id": 1,
-          "imgUrl": "http://",
+          "imgUrl": "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-13.png?raw=true",
           "roomType": "單人房",
           "price": 40000,
           "availableBeds": 3
         },
         {
           "id": 2,
-          "imgUrl": "http://",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
         },
         {
           "id": 3,
-          "imgUrl": "http://",
+          "imgUrl": "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-16.png?raw=true",
           "roomType": "六人房",
           "price": 33000,
           "availableBeds": 6

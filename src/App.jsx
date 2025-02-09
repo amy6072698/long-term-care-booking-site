@@ -54,10 +54,23 @@ function App() {
   return (
     <>
       <main>
+        {/* mobile */}
+        <div className="container-fluid d-lg-none px-0 mb-7">
+          <Swiper className="swiper-mobile-banner">
+            {products?.thumbs?.map((thumb, index) => {
+              return (
+                <SwiperSlide key={index}>
+                  <img src={thumb} alt="機構圖片" className="h-100" />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+
         {/* header */}
 
         <div className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
-          <div className="d-flex column-gap-2">
+          <div className="d-lg-flex column-gap-2  d-none swiper-banner">
             <Swiper
               style={{
                 "--swiper-navigation-color": "#fff",
@@ -70,7 +83,7 @@ function App() {
               className="mySwiper2"
               loop={true}
             >
-              {products?.images?.map((image,index) => {
+              {products?.images?.map((image, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <img
@@ -96,10 +109,10 @@ function App() {
               direction="vertical"
               style={{ height: "535px" }}
             >
-              {products?.thumbs?.map((thumb,index) => {
+              {products?.thumbs?.map((thumb, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <img src={thumb} alt="機構圖片" className="h-100"/>
+                    <img src={thumb} alt="機構圖片" className="h-100" />
                   </SwiperSlide>
                 );
               })}
@@ -270,32 +283,44 @@ function App() {
             ＊房型費用不含保證金、耗材及其他相關費用。價格以服務契約為準。
           </div>
           <div className="row row-cols-lg-3 row-cols-1 gx-lg-11 gx-7">
-            {products.roomCards.map((room) => {
-              return (
-                <div className="col" key={room.id}>
-                  <div className="card overflow-hidden intro-rounded">
-                    <img
-                      src={room.imgUrl}
-                      className="card-img-top object-fit-cover"
-                      alt="room"
-                    />
-                    <div className="card-body py-4 px-7">
-                      <h5 className="text-center">{room.roomType}</h5>
-                      <h6 className="d-flex align-items-center gap-1 justify-content-center">
-                        每月
-                        <span className="h5 align-self-center mb-0 text-secondary-40">
-                          {room.price}
-                        </span>
-                        元起
-                      </h6>
-                      <div className="fs-7 text-end mb-1">
-                        剩餘床位：{room.availableBeds}
+            <Swiper
+              spaceBetween={24}
+              loop={true}
+              breakpoints={{
+                992: {
+                  slidesPerView: 3,
+                },
+              }}
+            >
+              {products.roomCards.map((room) => {
+                return (
+                  <SwiperSlide key={room.id}>
+                    <div className="col">
+                      <div className="card overflow-hidden intro-rounded">
+                        <img
+                          src={room.imgUrl}
+                          className="card-img-top object-fit-cover"
+                          alt="room"
+                        />
+                        <div className="card-body py-4 px-7">
+                          <h5 className="text-center">{room.roomType}</h5>
+                          <h6 className="d-flex align-items-center gap-1 justify-content-center">
+                            每月
+                            <span className="h5 align-self-center mb-0 text-secondary-40">
+                              {room.price}
+                            </span>
+                            元起
+                          </h6>
+                          <div className="fs-7 text-end mb-1">
+                            剩餘床位：{room.availableBeds}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </div>
         </div>
 

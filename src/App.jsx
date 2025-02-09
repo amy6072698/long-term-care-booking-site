@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+// import "./App.css";
 import axios from "axios";
+import { Navigation, FreeMode, Thumbs } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import "./assets/scss/pages/_intro.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -42,11 +49,63 @@ function App() {
     console.log(products);
   }, [products]);
 
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   return (
     <>
       <main>
         {/* header */}
+
         <div className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
+          <div className="d-flex column-gap-2">
+            <Swiper
+              style={{
+                "--swiper-navigation-color": "#fff",
+                "--swiper-pagination-color": "#fff",
+              }}
+              spaceBetween={10}
+              navigation={true}
+              thumbs={{ swiper: thumbsSwiper }}
+              modules={[FreeMode, Navigation, Thumbs]}
+              className="mySwiper2"
+              loop={true}
+            >
+              {products?.images?.map((image,index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <img
+                      className="object-fit-cover"
+                      style={{ height: "535px" }}
+                      src={image}
+                      alt="機構圖片"
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+
+            <Swiper
+              onSwiper={setThumbsSwiper}
+              spaceBetween={8}
+              loop={true}
+              slidesPerView={4}
+              freeMode={true}
+              watchSlidesProgress={true}
+              modules={[FreeMode, Navigation, Thumbs]}
+              className="mySwiper"
+              direction="vertical"
+              style={{ height: "535px" }}
+            >
+              {products?.thumbs?.map((thumb,index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <img src={thumb} alt="機構圖片" className="h-100"/>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
+
           {/* <!--description --> */}
           <div className="container">
             <div className="row mt-lg-11">

@@ -282,11 +282,12 @@ function App() {
           <div className="fs-8 text-secondary-90 mb-7">
             ＊房型費用不含保證金、耗材及其他相關費用。價格以服務契約為準。
           </div>
-          <div className="row row-cols-lg-3 row-cols-1 gx-lg-11 gx-7">
+          {/* <div className="d-flex gx-lg-11 gx-7"> */}
             <Swiper
               spaceBetween={24}
               loop={true}
-              breakpoints={{
+              slidesPerView={1}
+              breakpoints={{                
                 992: {
                   slidesPerView: 3,
                 },
@@ -294,26 +295,24 @@ function App() {
             >
               {products.roomCards.map((room) => {
                 return (
-                  <SwiperSlide key={room.id}>
-                    <div className="col">
-                      <div className="card overflow-hidden intro-rounded">
-                        <img
-                          src={room.imgUrl}
-                          className="card-img-top object-fit-cover"
-                          alt="room"
-                        />
-                        <div className="card-body py-4 px-7">
-                          <h5 className="text-center">{room.roomType}</h5>
-                          <h6 className="d-flex align-items-center gap-1 justify-content-center">
-                            每月
-                            <span className="h5 align-self-center mb-0 text-secondary-40">
-                              {room.price}
-                            </span>
-                            元起
-                          </h6>
-                          <div className="fs-7 text-end mb-1">
-                            剩餘床位：{room.availableBeds}
-                          </div>
+                  <SwiperSlide  key={room.id}>
+                    <div className="card overflow-hidden intro-rounded">
+                      <img
+                        src={room.imgUrl}
+                        className="card-img-top object-fit-cover"
+                        alt="room"
+                      />
+                      <div className="card-body py-4 px-7">
+                        <h5 className="text-center">{room.roomType}</h5>
+                        <h6 className="d-flex align-items-center gap-1 justify-content-center">
+                          每月
+                          <span className="h5 align-self-center mb-0 text-secondary-40">
+                            {room.price}
+                          </span>
+                          元起
+                        </h6>
+                        <div className="fs-7 text-end mb-1">
+                          剩餘床位：{room.availableBeds}
                         </div>
                       </div>
                     </div>
@@ -321,7 +320,7 @@ function App() {
                 );
               })}
             </Swiper>
-          </div>
+          {/* </div> */}
         </div>
 
         {/* 機構評價 */}

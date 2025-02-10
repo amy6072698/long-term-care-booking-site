@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 // import "./App.css";
 import axios from "axios";
-import { Navigation, FreeMode, Thumbs } from "swiper/modules";
+import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import "swiper/css/pagination";
+import "swiper/css";
 import "./assets/scss/pages/_intro.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -54,13 +56,28 @@ function App() {
   return (
     <>
       <main>
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
         {/* mobile */}
-        <div className="container-fluid d-lg-none px-0 mb-7">
-          <Swiper className="swiper-mobile-banner">
-            {products?.thumbs?.map((thumb, index) => {
+        <div className="d-lg-none">
+          <Swiper
+            loop={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination, Navigation]}
+            navigation={true}
+            className=" d-lg-none"
+          >
+            {products?.test?.map((test, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <img src={thumb} alt="機構圖片" className="h-100" />
+                  <img
+                    src={test}
+                    alt="機構圖片"
+                    className=" w-100 object-fit-cover"
+                  />
                 </SwiperSlide>
               );
             })}
@@ -76,11 +93,11 @@ function App() {
                 "--swiper-navigation-color": "#fff",
                 "--swiper-pagination-color": "#fff",
               }}
-              spaceBetween={10}
+              // spaceBetween={10}
               navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
               modules={[FreeMode, Navigation, Thumbs]}
-              className="mySwiper2"
+              className="mySwiper2 h-100"
               loop={true}
             >
               {products?.images?.map((image, index) => {
@@ -283,43 +300,43 @@ function App() {
             ＊房型費用不含保證金、耗材及其他相關費用。價格以服務契約為準。
           </div>
           {/* <div className="d-flex gx-lg-11 gx-7"> */}
-            <Swiper
-              spaceBetween={24}
-              loop={true}
-              slidesPerView={1}
-              breakpoints={{                
-                992: {
-                  slidesPerView: 3,
-                },
-              }}
-            >
-              {products.roomCards.map((room) => {
-                return (
-                  <SwiperSlide  key={room.id}>
-                    <div className="card overflow-hidden intro-rounded">
-                      <img
-                        src={room.imgUrl}
-                        className="card-img-top object-fit-cover"
-                        alt="room"
-                      />
-                      <div className="card-body py-4 px-7">
-                        <h5 className="text-center">{room.roomType}</h5>
-                        <h6 className="d-flex align-items-center gap-1 justify-content-center">
-                          每月
-                          <span className="h5 align-self-center mb-0 text-secondary-40">
-                            {room.price}
-                          </span>
-                          元起
-                        </h6>
-                        <div className="fs-7 text-end mb-1">
-                          剩餘床位：{room.availableBeds}
-                        </div>
+          <Swiper
+            spaceBetween={24}
+            loop={true}
+            slidesPerView={1}
+            breakpoints={{
+              768: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+            {products.roomCards.map((room) => {
+              return (
+                <SwiperSlide key={room.id}>
+                  <div className="card overflow-hidden intro-rounded">
+                    <img
+                      src={room.imgUrl}
+                      className="card-img-top object-fit-cover"
+                      alt="room"
+                    />
+                    <div className="card-body py-4 px-7">
+                      <h5 className="text-center">{room.roomType}</h5>
+                      <h6 className="d-flex align-items-center gap-1 justify-content-center fs-7 fs-lg-6">
+                        每月
+                        <span className="h5 align-self-center mb-0 text-secondary-40">
+                          {room.price}
+                        </span>
+                        元起
+                      </h6>
+                      <div className="fs-7 text-end mb-1">
+                        剩餘床位：{room.availableBeds}
                       </div>
                     </div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
           {/* </div> */}
         </div>
 

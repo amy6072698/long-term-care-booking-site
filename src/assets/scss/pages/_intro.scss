@@ -76,58 +76,36 @@
 
 //手機版banner
 .swiper-mobile-banner {
-  width: 100%;
-  height: 100%;
-  .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  .swiper-pagination{
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    color: white;
   }
-
-  .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+  .swiper {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
-  /* 箭頭背景顏色調整 */
-  .swiper-button-next,
-  .swiper-button-prev {
-      background: #ffffff73;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-  }
-  /* 箭頭尺寸和顏色調整 */
-  .swiper-button-next:after,
-  .swiper-button-prev:after {
-      font-size: 21px;
-      color: #fff;
-  }
-  /* 第一張或最後一張圖片透明度不透明 */
-  .swiper-button-prev.swiper-button-disabled,
-  .swiper-button-next.swiper-button-disabled {
-      opacity: 1;
-  }
-
-  .swiper-pagination {
-      text-align: right;
-  }
-  /* 圓角設定 */
-  .swiper-pagination-bullet {
-      width: 11px;
-      height: 11px;
-      width: 10.8px;
-      border-radius: 50px;
-      border: 1px solid rgba(255, 255, 255, 1);
-      opacity: 1;
-      background: transparent;
-  }
-  /* active放下面,蓋掉背景空白 */
-  .swiper-pagination-bullet-active {
-      background: #ffffffcc;
-  }
+  
+  // .swiper-slide {
+  //   text-align: center;
+  //   font-size: 18px;
+  //   background: #fff;
+  
+  //   /* Center slide text vertically */
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+  
+  // .swiper-slide img {
+  //   display: block;
+  //   width: 100%;
+  //   height: 100%;
+  //   object-fit: cover;
+  // }
+    
 }

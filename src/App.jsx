@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import "./App.css";
 import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ReactLoading from "react-loading";
 
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -15,6 +16,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function App() {
   const [products, setProducts] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getProducts();
@@ -23,7 +25,7 @@ function App() {
   //取得產品資料
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}products`);
+      const res = await axios.get(`${BASE_URL}/products`);
       setProducts(res.data[0]);
     } catch (error) {
       alert("取得產品資料失敗");
@@ -34,16 +36,24 @@ function App() {
   const addCartItem = async (e, id) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${BASE_URL}carts`, {
+      setIsLoading(true);
+      await axios.post(`${BASE_URL}/carts`, {
         productId: id,
       });
-      console.log(res);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
     } catch (error) {
       alert("加入產品失敗");
     }
   };
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const [bannerIsLoading, setBannerIsLoading] = useState(true);
+  const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
+  const bannerRefNum = useRef(0);
+  const thumbsRefNum = useRef(0);
 
   return (
     <>
@@ -81,9 +91,21 @@ function App() {
         {/* header */}
 
         <div className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
-          <div className="d-lg-flex column-gap-2  d-none swiper-banner">
+          <div className="d-lg-flex column-gap-2  d-none swiper-banner justify-content-center">
+            {bannerIsLoading && thumbsIsLoading && (
+              <>
+                <div
+                  className="spinner-grow text-warning"
+                  style={{ width: "3rem", height: "3rem" }}
+                  role="status"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </>
+            )}
             <Swiper
               style={{
+                display: !bannerIsLoading ? "block" : "none",
                 "--swiper-navigation-color": "var(--swiper-primary)",
               }}
               navigation={true}
@@ -92,21 +114,40 @@ function App() {
               className="mySwiper2 h-100"
               loop={true}
             >
-              {products?.images?.map((image, index) => {
+              {products?.images?.map((imageUrl, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <img
                       className="object-fit-cover"
                       style={{ height: "535px" }}
-                      src={image}
+                      src={imageUrl}
                       alt="機構圖片"
+                      onLoad={() => {
+                        bannerRefNum.current++;
+                        bannerRefNum.current === products.images.length
+                          ? setBannerIsLoading(false)
+                          : null;
+                      }}
                     />
                   </SwiperSlide>
                 );
               })}
             </Swiper>
 
+            {/* {!test2 && (
+              <>
+                <div className="spinner-border text-warning" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </>
+            )} */}
             <Swiper
+              style={{
+                display: !thumbsIsLoading ? "block" : "none",
+                "--swiper-navigation-color": "var(--swiper-primary)",
+                height: "535px",
+              }}
+              init={false}
               onSwiper={setThumbsSwiper}
               spaceBetween={8}
               loop={true}
@@ -116,12 +157,21 @@ function App() {
               modules={[FreeMode, Navigation, Thumbs]}
               className="mySwiper"
               direction="vertical"
-              style={{ height: "535px" }}
             >
               {products?.thumbs?.map((thumb, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <img src={thumb} alt="機構圖片" className="h-100" />
+                    <img
+                      src={thumb}
+                      alt="機構圖片"
+                      className="h-100"
+                      onLoad={() => {
+                        thumbsRefNum.current++;
+                        thumbsRefNum.current === products.thumbs.length
+                          ? setThumbsIsLoading(false)
+                          : null;
+                      }}
+                    />
                   </SwiperSlide>
                 );
               })}
@@ -172,21 +222,42 @@ function App() {
                 </div>
               </div>
               <div className="d-flex align-items-end col-lg-4 col-12 mb-7 gap-3">
-                <a
-                  href="#"
-                  className="btn btn-outline-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
-                >
-                  預約參訪
-                </a>
-                <a
-                  href="#"
+                <button
+                  disabled={isLoading}
+                  type="button"
                   onClick={(e) => {
                     addCartItem(e, products.id);
                   }}
-                  className="btn btn-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
+                  className="btn btn-outline-primary-40  py-4 w-100  intro-btn d-flex justify-content-center align-items-center gap-2"
+                >
+                  預約參訪
+                  {isLoading && (
+                    <ReactLoading
+                      type={"spin"}
+                      color={"#000"}
+                      height={"1.5rem"}
+                      width={"1.5rem"}
+                    />
+                  )}
+                </button>
+                <button
+                  disabled={isLoading}
+                  type="button"
+                  onClick={(e) => {
+                    addCartItem(e, products.id);
+                  }}
+                  className="btn btn-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
                 >
                   預約留床
-                </a>
+                  {isLoading && (
+                    <ReactLoading
+                      type={"spin"}
+                      color={"#000"}
+                      height={"1.5rem"}
+                      width={"1.5rem"}
+                    />
+                  )}
+                </button>
               </div>
             </div>
           </div>
@@ -300,7 +371,6 @@ function App() {
             }}
             modules={[Navigation]}
             spaceBetween={24}
-            loop={true}
             navigation={true}
             slidesPerView={1}
             breakpoints={{

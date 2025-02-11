@@ -56,7 +56,7 @@ function App() {
   const showSuccessMessage = () => {
     toast.success(`加入預約成功👋\n請去立即預訂查看`, {
       position: "top-center",
-      autoClose: 3000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: true,
@@ -71,7 +71,7 @@ function App() {
   const showErrorMessage = () => {
     toast.error("預訂失敗", {
       position: "top-center",
-      autoClose: 3000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: true,

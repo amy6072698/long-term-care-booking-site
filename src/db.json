@@ -15,11 +15,11 @@
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-18.png",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-17.png",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
-        "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/main/assets/images/Building/B-13.png"
+        "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-13.png"
       ],
       "city": "台北市",
       "region": "中正區",
-      "address": "台北市中正區中正路",  
+      "address": "台北市中正區中正路",
       "like": 5,
       "comments": 12,
       "services": [
@@ -62,11 +62,7 @@
         "如廁訓練",
         "延緩失能"
       ],
-      "allowance": [
-        "老人補助（低收、中低收）",
-        "身心障礙",
-        "喘息服務"
-      ],
+      "allowance": ["老人補助（低收、中低收）", "身心障礙", "喘息服務"],
       "roomCards": [
         {
           "id": 1,

@@ -47,18 +47,18 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(products);
-  // }, [products]);
-
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
     <>
       <main>
         {/* mobile */}
-        <div className="d-lg-none">
+        <div className="d-lg-none mb-7">
           <Swiper
+           style={{
+            "--swiper-navigation-color": "#fff",
+            "--swiper-pagination-color": "#fff",
+          }}
             loop={true}
             pagination={{
               clickable: true,
@@ -176,11 +176,11 @@ function App() {
                   })}
                 </div>
               </div>
-              <div className="d-flex align-items-end col-lg-4 col-12 mb-7">
+              <div className="d-flex align-items-end col-lg-4 col-12 mb-7 gap-3">
                 <a
                   href="#"
-                  className="btn btn-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
-                >
+                  className="btn btn-outline-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
+                > 
                   預約參訪
                 </a>
                 <a
@@ -345,7 +345,7 @@ function App() {
               <div className="col-md-4 col-12">
                 <div className="gap-7 d-flex flex-column justify-content-between h-100 rounded-top-4 rounded-bottom-start-2 rounded-bottom-end-4 border border-dark bg-white pt-7 pb-8 px-7">
                   <h6>
-                    參訪樂康頤和園後，我感受到這裡如家的溫暖，設施無障礙且現代化
+                    參訪{products.name}後，我感受到這裡如家的溫暖，設施無障礙且現代化
                   </h6>
                   <div className="d-flex gap-1 align-items-center">
                     <img
@@ -359,7 +359,7 @@ function App() {
               </div>
               <div className="col-md-4 col-12">
                 <div className="gap-7 d-flex flex-column justify-content-between h-100 rounded-top-4 rounded-bottom-start-2 rounded-bottom-end-4 border border-dark bg-white pt-7 pb-8 px-7">
-                  <h6>我參觀了樂康頤和園，發現這裡的護理服務非常周到。</h6>
+                  <h6>我參觀了{products.name}，發現這裡的護理服務非常周到。</h6>
                   <div className="d-flex gap-1 align-items-center">
                     <img
                       src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-05.png?raw=true"

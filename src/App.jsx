@@ -14,36 +14,32 @@ import "./assets/scss/pages/_intro.scss";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function App() {
-  const [products, setProducts] = useState({
-    id: null,
-    name: "",
-    cardImg: "",
-    images: [],
-    city: "",
-    region: "",
-    address: "",
-    like: 0,
-    comments: 0,
-    services: [],
-    description: "",
-    age: "",
-    caringItem: [],
-    medicalService: [],
-    allowance: [],
-    roomCards: [],
-  });
+  const [products, setProducts] = useState({});
 
   useEffect(() => {
     getProducts();
   }, []);
 
+  //取得產品資料
   const getProducts = async () => {
     try {
       const res = await axios.get(`${BASE_URL}products`);
-      console.log(res.data[0]);
       setProducts(res.data[0]);
     } catch (error) {
       alert("取得產品資料失敗");
+    }
+  };
+
+  //加入預約購物車
+  const addCartItem = async (e, id) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${BASE_URL}carts`, {
+        productId: id,
+      });
+      console.log(res);
+    } catch (error) {
+      alert("加入產品失敗");
     }
   };
 
@@ -55,17 +51,18 @@ function App() {
         {/* mobile */}
         <div className="d-lg-none mb-7">
           <Swiper
-           style={{
-            "--swiper-navigation-color": "#fff",
-            "--swiper-pagination-color": "#fff",
-          }}
+            style={{
+              "--swiper-navigation-color": "var(--swiper-primary)",
+              "--swiper-pagination-color": "var(--swiper-primary)",
+              "--swiper-pagination-bullet-size": "15px",
+            }}
             loop={true}
             pagination={{
               clickable: true,
             }}
             modules={[Pagination, Navigation]}
             navigation={true}
-            className=" d-lg-none swiper-mobile-banner"  
+            className=" d-lg-none swiper-mobile-banner"
           >
             {products?.images?.map((thumb, index) => {
               return (
@@ -87,10 +84,8 @@ function App() {
           <div className="d-lg-flex column-gap-2  d-none swiper-banner">
             <Swiper
               style={{
-                "--swiper-navigation-color": "#fff",
-                "--swiper-pagination-color": "#fff",
+                "--swiper-navigation-color": "var(--swiper-primary)",
               }}
-              // spaceBetween={10}
               navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
               modules={[FreeMode, Navigation, Thumbs]}
@@ -160,7 +155,7 @@ function App() {
                 </div>
                 <div className="fs-7 mb-5">{products.description}</div>
                 <div className="d-flex gap-2 flex-wrap mb-7">
-                  {products.services.map((service) => {
+                  {products?.services?.map((service) => {
                     return (
                       <div
                         key={service.name}
@@ -180,14 +175,17 @@ function App() {
                 <a
                   href="#"
                   className="btn btn-outline-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
-                > 
+                >
                   預約參訪
                 </a>
                 <a
                   href="#"
+                  onClick={(e) => {
+                    addCartItem(e, products.id);
+                  }}
                   className="btn btn-primary-40 py-4 w-100 mx-2 mx-lg-0 intro-btn"
                 >
-                  預約參訪
+                  預約留床
                 </a>
               </div>
             </div>
@@ -296,18 +294,23 @@ function App() {
           <div className="fs-8 text-secondary-90 mb-7">
             ＊房型費用不含保證金、耗材及其他相關費用。價格以服務契約為準。
           </div>
-          {/* <div className="d-flex gx-lg-11 gx-7"> */}
           <Swiper
+            style={{
+              "--swiper-navigation-color": "var(--swiper-primary)",
+            }}
+            modules={[Navigation]}
             spaceBetween={24}
             loop={true}
+            navigation={true}
             slidesPerView={1}
             breakpoints={{
               768: {
                 slidesPerView: 3,
+                hideOnClick: true,
               },
             }}
           >
-            {products.roomCards.map((room) => {
+            {products?.roomCards?.map((room) => {
               return (
                 <SwiperSlide key={room.id}>
                   <div className="card overflow-hidden intro-rounded">
@@ -334,7 +337,6 @@ function App() {
               );
             })}
           </Swiper>
-          {/* </div> */}
         </div>
 
         {/* 機構評價 */}
@@ -345,7 +347,8 @@ function App() {
               <div className="col-md-4 col-12">
                 <div className="gap-7 d-flex flex-column justify-content-between h-100 rounded-top-4 rounded-bottom-start-2 rounded-bottom-end-4 border border-dark bg-white pt-7 pb-8 px-7">
                   <h6>
-                    參訪{products.name}後，我感受到這裡如家的溫暖，設施無障礙且現代化
+                    參訪{products.name}
+                    後，我感受到這裡如家的溫暖，設施無障礙且現代化
                   </h6>
                   <div className="d-flex gap-1 align-items-center">
                     <img

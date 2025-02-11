@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-// import "./App.css";
 import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
-
+import { ToastContainer, toast, Zoom } from "react-toastify";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
@@ -17,7 +16,12 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 function App() {
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [bannerIsLoading, setBannerIsLoading] = useState(true);
+  const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
+  const bannerRefNum = useRef(0);
+  const thumbsRefNum = useRef(0);
+  //畫面渲染完成觸發取得產品
   useEffect(() => {
     getProducts();
   }, []);
@@ -36,28 +40,56 @@ function App() {
   const addCartItem = async (e, id) => {
     e.preventDefault();
     try {
-      setIsLoading(true);
       await axios.post(`${BASE_URL}/carts`, {
         productId: id,
       });
+      setIsLoading(true);
+      showSuccessMessage();
       setTimeout(() => {
         setIsLoading(false);
       }, 3000);
     } catch (error) {
-      alert("加入產品失敗");
+      showErrorMessage();
     }
   };
-
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-  const [bannerIsLoading, setBannerIsLoading] = useState(true);
-  const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
-  const bannerRefNum = useRef(0);
-  const thumbsRefNum = useRef(0);
+  //加入預訂成功觸發彈跳視窗
+  const showSuccessMessage = () => {
+    toast.success(`加入預約成功👋\n請去立即預訂查看`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Zoom,
+      style: { whiteSpace: "pre-line" },
+    });
+  };
+  //加入預訂成功觸發彈跳視窗
+  const showErrorMessage = () => {
+    toast.error("預訂失敗", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Zoom,
+    });
+  };
 
   return (
     <>
       <main>
+        {/* 彈跳視窗 */}
+        <div>
+          <ToastContainer />
+        </div>
+
         {/* mobile */}
         <div className="d-lg-none mb-7">
           <Swiper
@@ -226,7 +258,8 @@ function App() {
                   disabled={isLoading}
                   type="button"
                   onClick={(e) => {
-                    addCartItem(e, products.id);
+                    // addCartItem(e, products.id);
+                    e.preventDefault();
                   }}
                   className="btn btn-outline-primary-40  py-4 w-100  intro-btn d-flex justify-content-center align-items-center gap-2"
                 >
@@ -461,6 +494,7 @@ function App() {
             </div>
           </div>
         </div>
+        {/* 貼心提醒 */}
         <div className="bg-primary-10">
           <div className="container pt-lg-14 pb-lg-11 text-primary-100 pt-12 pb-12">
             <h4 className="mb-9">貼心提醒！</h4>

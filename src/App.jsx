@@ -47,18 +47,15 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
     <>
       <main>
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
         {/* mobile */}
         <div className="d-lg-none">
           <Swiper
@@ -68,15 +65,15 @@ function App() {
             }}
             modules={[Pagination, Navigation]}
             navigation={true}
-            className=" d-lg-none"
+            className=" d-lg-none swiper-mobile-banner"  
           >
-            {products?.test?.map((test, index) => {
+            {products?.images?.map((thumb, index) => {
               return (
                 <SwiperSlide key={index}>
                   <img
-                    src={test}
+                    src={thumb}
                     alt="機構圖片"
-                    className=" w-100 object-fit-cover"
+                    className=" w-100 h-100 object-fit-cover"
                   />
                 </SwiperSlide>
               );

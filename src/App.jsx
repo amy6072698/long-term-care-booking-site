@@ -280,8 +280,8 @@ function App() {
                               </svg>
                               <p className="ms-1">{product.address}</p>
                             </div>
-                            <ul className="d-flex ps-0 mb-4 flex-wrap align-items-center">
-                              <li className="border border-dark rounded-pill me-3">
+                            <ul className="d-flex ps-0 mb-4 flex-wrap align-items-center gap-2">
+                              <li className="border border-dark rounded-pill ">
                                 <p className="d-flex align-items-center py-1 px-2">
                                   <img
                                     className="me-1"
@@ -291,7 +291,7 @@ function App() {
                                 </p>
                               </li>
 
-                              <li className="border border-dark rounded-pill me-3 mt-md-0">
+                              <li className="border border-dark rounded-pill  ">
                                 <p className="d-flex align-items-center py-1 px-2 ">
                                   <img
                                     className="me-1"
@@ -302,7 +302,7 @@ function App() {
                                 </p>
                               </li>
 
-                              <li className="border border-dark rounded-pill me-3 mt-md-0">
+                              <li className="border border-dark rounded-pill  ">
                                 <p className="d-flex align-items-center py-1 px-2 ">
                                   <img
                                     className="me-1"
@@ -313,7 +313,7 @@ function App() {
                                 </p>
                               </li>
 
-                              <li className="border border-dark rounded-pill me-3 mt-3 mt-md-0">
+                              <li className="border border-dark rounded-pill   ">
                                 <p className="d-flex align-items-center py-1 px-2 ">
                                   <img
                                     className="me-1"

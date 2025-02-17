@@ -1,0 +1,54 @@
+// 搜尋框
+.searchbar{
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  .search-wrapper{
+    padding: 2px;
+    border-radius: 7px;
+    background-color: #000000;
+    gap: 2px;
+  }
+  .search-wrapper-sm{
+    gap: 2px;
+  }
+  .btn-width{
+    width: auto;
+  }
+  .form-select{
+    border-radius: 5px;
+    padding: 20px;
+    color: #444444;
+    --bs-form-select-bg-img: url("https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/366789c203647fae0d1d85480b842094e9431e74/assets/images/Icon/IconBlack/CaretDown-B.svg");
+    background-size: 24px 24px;
+    cursor: pointer;
+    border: 0;
+  }
+}
+
+// index 各區段 RWD 調整(768px以上)
+@media (min-width: 768px) {
+  .searchbar{
+    bottom: 0;
+    transform: translate(-50%,50%);
+    .form-select{
+      padding: 0 10px;
+    }
+    .btn-width{
+      width: 188px;
+    }
+  }
+}
+
+// index 各區段 RWD 調整(992px以上)
+@media (min-width: 992px) {
+  .searchbar{
+    .form-select{
+      padding: 0 20px;
+    }
+    .btn-width{
+      width: 231px;
+    }
+  }
+}

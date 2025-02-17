@@ -1,8 +1,10 @@
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Banner from '../components/Banner';
 
 import axios from "axios";
+
 
 function Index() {
 
@@ -12,72 +14,9 @@ function Index() {
     <Header/>
 
     <main className="index">
-      {/* index banner和搜尋框區段 */}
-      <section className="index-banner">
-        <div className="card border-0 rounded-0 position-relative">
-          <div className="banner-image d-md-inline-block d-none" style={{backgroundImage: "url('https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Cover-lg.png?raw=true')", height: "624px"}}></div>
-          <div className="banner-image d-md-none d-inline-block" style={{backgroundImage: "url('https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Cover-sm.png?raw=true')", height: "644px"}}></div>
-          <div className="container-lg container-fluid card-img-overlay py-10">
-            <h1 className="banner-title pb-9 px-lg-0 px-md-2 px-0">長照不煩惱，<br/>好厝邊陪你找</h1>
-            <p className="banner-subtitle fs-lg-4 fs-md-6 fs-8 px-lg-0 px-md-2 px-0">找機構跟訂飯店<span className="d-xl-inline d-none">，</span><br className="d-xl-none d-block"/>一樣簡單！</p>
-          </div>
-          {/* 搜尋框  */}
-          <div className="index-search container-lg container-fluid">
-            <form className="search-wrapper d-flex flex-md-row flex-column" action="">
-              <select className="form-select fs-lg-6 fs-md-7 fs-6" aria-label="Default select example">
-                <option defaultValue="機構類型">機構類型</option>
-                <option value="1">長期照顧中心</option>
-                <option value="2">護理之家</option>
-                <option value="3">安養中心</option>
-                <option value="3">日間照顧中心</option>
-              </select>
-              <select className="form-select fs-lg-6 fs-md-7 fs-6 d-md-block d-none" aria-label="Default select example">
-                <option defaultValue="縣市">縣市</option>
-                <option value="1">台北市</option>
-                <option value="2">新北市</option>
-              </select>
-              <select className="form-select fs-lg-6 fs-md-7 fs-6 d-md-block d-none" aria-label="Default select example">
-                <option defaultValue="地區">地區</option>
-                <option value="1">中正區</option>
-                <option value="2">大同區</option>
-              </select>
 
-              {/* 手機版 */}
-              <div className="search-wrapper-sm d-flex d-md-none">
-                <select className="form-select fs-6 w-50" aria-label="Default select example">
-                  <option defaultValue="縣市">縣市</option>
-                  <option value="1">台北市</option>
-                  <option value="2">新北市</option>
-                </select>
-                <select className="form-select fs-6 w-50" aria-label="Default select example">
-                  <option defaultValue="地區">地區</option>
-                  <option value="1">中正區</option>
-                  <option value="2">大同區</option>
-                </select>
-              </div>
-
-              <select className="form-select fs-lg-6 fs-md-7 fs-6" aria-label="Default select example">
-                <option defaultValue="照護需求">照護需求</option>
-                <option value="1">鼻胃管</option>
-                <option value="2">氣切管</option>
-                <option value="3">導尿管</option>
-              </select>
-              <select className="form-select fs-lg-6 fs-md-7 fs-6" aria-label="Default select example">
-                <option defaultValue="醫療需求">醫療需求</option>
-                <option value="1">復健</option>
-                <option value="2">洗腎</option>
-                <option value="3">腫瘤</option>
-              </select>
-              <div className="d-lg-block d-grid">
-                <a href="result.html" role="button" className="search-primary-btn btn-width btn btn-primary-40 rounded-1 py-5 px-0 fs-lg-5 fs-md-6 fs-5 text-black d-flex justify-content-center align-items-center gap-lg-4 gap-md-0 gap-4">
-                  <img src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/972c057941c61b13fd6db44e084aac94405b25ed/assets/images/Icon/IconBlack/Search-B.svg" alt="search icon"/>
-                  <h5 className="fs-lg-5 fs-md-6">搜尋合適機構</h5>
-                </a>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
+      <Banner />
+      
       {/* index 人氣機構精選區段 */}
       <section className="index-hots pb-lg-14 pb-0">
         <div className="hots-container">

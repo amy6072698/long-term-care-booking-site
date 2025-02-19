@@ -1,6 +1,6 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
- @import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/functions";
 @import"./helpers/variables"; //匯入
 @import"./helpers/variables-dark"; //匯入
 @import "../../../node_modules/bootstrap";
@@ -9,7 +9,9 @@
 @import "../../../node_modules/bootstrap/scss/utilities/api"; //匯入
 
 @import './base/base'; //匯入
-@import './components/cards.scss'; //匯入 Card 自訂通用樣式
+@import './components/banner'; //匯入 banner 自訂通用樣式
+@import './components/searchbar'; //匯入 searchbar 自訂通用樣式
+@import './components/cards.scss'; //匯入 card 自訂通用樣式
 @import './components/btn'; //匯入 btn 自訂通用樣式
 
 

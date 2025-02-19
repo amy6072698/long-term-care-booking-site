@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function Searchbar(){
   return (
 
@@ -48,10 +50,10 @@ function Searchbar(){
           <option value="3">腫瘤</option>
         </select>
         <div className="d-lg-block d-grid">
-          <a href="result.html" role="button" className="search-primary-btn btn-width btn btn-primary-40 rounded-1 py-5 px-0 fs-lg-5 fs-md-6 fs-5 text-black d-flex justify-content-center align-items-center gap-lg-4 gap-md-0 gap-4">
+          <Link to='results' role="button" className="search-primary-btn btn-width btn btn-primary-40 rounded-1 py-5 px-0 fs-lg-5 fs-md-6 fs-5 text-black d-flex justify-content-center align-items-center gap-lg-4 gap-md-0 gap-4">
             <img src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/972c057941c61b13fd6db44e084aac94405b25ed/assets/images/Icon/IconBlack/Search-B.svg" alt="search icon"/>
             <h5 className="fs-lg-5 fs-md-6">搜尋合適機構</h5>
-          </a>
+          </Link>
         </div>
       </form>
     </div>

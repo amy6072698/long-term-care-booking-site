@@ -7,6 +7,7 @@ import ProductPage from "../pages/ProductPage";
 import News from "../pages/News";
 import Other from "../pages/Other";
 import Cart from "../pages/Cart";
+import Results from "../pages/Results";
 
 const router = createHashRouter([
   {
@@ -33,6 +34,10 @@ const router = createHashRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "results",
+        element: <Results />,
       },
     ],
   },

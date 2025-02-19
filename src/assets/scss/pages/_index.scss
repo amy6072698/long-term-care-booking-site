@@ -1,51 +1,3 @@
-// index banner和搜尋框區段
-.index-banner{
-  .banner-image{
-    width: 100%;
-    background-repeat: repeat;
-    background-size: cover;
-    background-position: center;
-  }
-  .banner-title{
-    color: #ffffff;
-    margin-top: 0;
-    font-size: 31px;
-    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
-  }
-  .banner-subtitle{
-    color: #ffffff;
-    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
-  }
-}
-// 搜尋框
-.index-search{
-  position: absolute;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
-  .search-wrapper{
-    padding: 2px;
-    border-radius: 7px;
-    background-color: #000000;
-    gap: 2px;
-  }
-  .search-wrapper-sm{
-    gap: 2px;
-  }
-  .btn-width{
-    width: auto;
-  }
-  .form-select{
-    border-radius: 5px;
-    padding: 20px;
-    color: #444444;
-    --bs-form-select-bg-img: url("https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/366789c203647fae0d1d85480b842094e9431e74/assets/images/Icon/IconBlack/CaretDown-B.svg");
-    background-size: 24px 24px;
-    cursor: pointer;
-    border: 0;
-  }
-}
-
 // index 人氣機構精選區段
 .index-hots{
   padding-top: 56px;
@@ -261,24 +213,6 @@
 
 // index 各區段 RWD 調整(768px以上)
 @media (min-width: 768px) {
-  // index banner和搜尋框區段
-  .index-banner{
-    .banner-image{
-      background-position: top 50% right 35%;
-    }
-  }
-  // 搜尋框
-  .index-search{
-    bottom: 0;
-    transform: translate(-50%,50%);
-    .form-select{
-      padding: 0 10px;
-    }
-    .btn-width{
-      width: 188px;
-    }
-  }
-
   // index 聽聽大家怎麼說區段
   .index-reviews{
     .swiper-slide {
@@ -299,32 +233,6 @@
 
 // index 各區段 RWD 調整(992px以上)
 @media (min-width: 992px) {
-  // index banner和搜尋框區段
-  .index-banner{
-    .banner-image{
-      background-position: center;
-    }
-    .banner-title{
-      margin-top: 184px;
-      font-size: 64px;
-      line-height: 1.39;
-    }
-    .banner-subtitle{
-      color: #444444;
-      letter-spacing: 0.16em;
-      text-shadow: 0px 4px 4px rgba(255,255,255,0.5);
-    }
-  }
-  // 搜尋框
-  .index-search{
-    .form-select{
-      padding: 0 20px;
-    }
-    .btn-width{
-      width: 231px;
-    }
-  }
-
   // index 人氣機構精選區段
   .index-hots{
     .hots-container{

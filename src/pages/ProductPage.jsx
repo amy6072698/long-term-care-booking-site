@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
@@ -9,82 +10,79 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css";
-import "./assets/scss/pages/_intro.scss";
+// import "./assets/scss/pages/_intro.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-function App() {
-  const [products, setProducts] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [bannerIsLoading, setBannerIsLoading] = useState(true);
-  const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
-  const bannerRefNum = useRef(0);
-  const thumbsRefNum = useRef(0);
-  //畫面渲染完成觸發取得產品
-  useEffect(() => {
-    getProducts();
-  }, []);
-
-  //取得產品資料
-  const getProducts = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/products`);
-      setProducts(res.data[0]);
-    } catch (error) {
-      alert("取得產品資料失敗");
-    }
-  };
-
-  //加入預約購物車
-  const addCartItem = async (e, id) => {
-    e.preventDefault();
-    try {
-      await axios.post(`${BASE_URL}/carts`, {
-        productId: id,
-      });
-      setIsLoading(true);
-      showSuccessMessage();
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
-    } catch (error) {
-      showErrorMessage();
-    }
-  };
-  //加入預訂成功觸發彈跳視窗
-  const showSuccessMessage = () => {
-    toast.success(`加入預約成功👋\n請去立即預訂查看`, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-      style: { whiteSpace: "pre-line" },
-    });
-  };
-  //加入預訂成功觸發彈跳視窗
-  const showErrorMessage = () => {
-    toast.error("預訂失敗", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-    });
-  };
-
-  return (
-    <>
-      <main>
+export default function ProductPage(){
+    const [products, setProducts] = useState({});
+      const [isLoading, setIsLoading] = useState(false);
+      const [thumbsSwiper, setThumbsSwiper] = useState(null);
+      const [bannerIsLoading, setBannerIsLoading] = useState(true);
+      const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
+      const bannerRefNum = useRef(0);
+      const thumbsRefNum = useRef(0);
+      //畫面渲染完成觸發取得產品
+      useEffect(() => {
+        getProducts();
+      }, []);
+    
+      //取得產品資料
+      const getProducts = async () => {
+        try {
+          const res = await axios.get(`${BASE_URL}/products`);
+          setProducts(res.data[0]);
+        } catch (error) {
+          alert("取得產品資料失敗");
+        }
+      };
+    
+      //加入預約購物車
+      const addCartItem = async (e, id) => {
+        e.preventDefault();
+        try {
+          await axios.post(`${BASE_URL}/carts`, {
+            productId: id,
+          });
+          setIsLoading(true);
+          showSuccessMessage();
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 3000);
+        } catch (error) {
+          showErrorMessage();
+        }
+      };
+      //加入預訂成功觸發彈跳視窗
+      const showSuccessMessage = () => {
+        toast.success(`加入預約成功👋\n請去立即預訂查看`, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+          style: { whiteSpace: "pre-line" },
+        });
+      };
+      //加入預訂成功觸發彈跳視窗
+      const showErrorMessage = () => {
+        toast.error("預訂失敗", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+      };
+    return (
+        <main>
         {/* 彈跳視窗 */}
         <div>
           <ToastContainer />
@@ -515,8 +513,5 @@ function App() {
           </div>
         </div>
       </main>
-    </>
-  );
+    )
 }
-
-export default App;

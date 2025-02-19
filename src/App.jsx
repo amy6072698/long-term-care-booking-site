@@ -9,7 +9,7 @@ function App() {
   //畫面渲染完取得產品
   useEffect(() => {
     getProducts();
-  });
+  }, []);
   //取得產品
   const getProducts = async () => {
     try {
@@ -48,7 +48,7 @@ function App() {
               </h1>
               <p className="banner-subtitle fs-lg-4 fs-md-6 fs-8 px-lg-0 px-md-2 px-0">
                 找機構跟訂飯店<span className="d-xl-inline d-none">，</span>
-                <br class="d-xl-none d-block" />
+                <br className="d-xl-none d-block" />
                 一樣簡單！
               </p>
             </div>
@@ -65,7 +65,7 @@ function App() {
                   className="form-select p-6 rounded-1 rounded-1 fs-6"
                   aria-label="Default select example"
                 >
-                  <option selected>機構類型</option>
+                  <option value={"機構類型"}>機構類型</option>
                   <option value="1">長期照顧中心</option>
                   <option value="2">護理之家</option>
                   <option value="3">安養中心</option>
@@ -77,7 +77,7 @@ function App() {
                   className="form-select p-6 rounded-1 fs-6"
                   aria-label="Default select example"
                 >
-                  <option selected>縣市</option>
+                  <option value={"縣市"}>縣市</option>
                   <option value="1">台北市</option>
                   <option value="2">新北市</option>
                 </select>
@@ -87,7 +87,7 @@ function App() {
                   className="form-select p-6 rounded-1 fs-6"
                   aria-label="Default select example"
                 >
-                  <option selected>地區</option>
+                  <option value={"地區"}>地區</option>
                   <option value="1">中正區</option>
                   <option value="2">大同區</option>
                 </select>
@@ -97,7 +97,7 @@ function App() {
                   className="form-select p-6 rounded-1 fs-6"
                   aria-label="Default select example"
                 >
-                  <option selected>照護需求</option>
+                  <option value={"照護需求"}>照護需求</option>
                   <option value="1">鼻胃管</option>
                   <option value="2">氣切管</option>
                   <option value="3">導尿管</option>
@@ -108,7 +108,7 @@ function App() {
                   className="form-select p-6 rounded-1 fs-6"
                   aria-label="Default select example"
                 >
-                  <option selected>醫療需求</option>
+                  <option value={"醫療需求"}>醫療需求</option>
                   <option value="1">復健</option>
                   <option value="2">洗腎</option>
                   <option value="3">腫瘤</option>
@@ -142,7 +142,7 @@ function App() {
                     className="form-select p-6 fs-6 rounded-1"
                     aria-label="Default select example"
                   >
-                    <option selected>機構類型</option>
+                    <option>機構類型</option>
                     <option value="1">長期照顧中心</option>
                     <option value="2">護理之家</option>
                     <option value="3">安養中心</option>
@@ -157,7 +157,7 @@ function App() {
                           className="form-select p-6 fs-6 rounded-1"
                           aria-label="Default select example"
                         >
-                          <option selected>縣市</option>
+                          <option>縣市</option>
                           <option value="1">台北市</option>
                           <option value="2">新北市</option>
                         </select>
@@ -167,7 +167,7 @@ function App() {
                           className="form-select p-6 fs-6 rounded-1"
                           aria-label="Default select example"
                         >
-                          <option selected>地區</option>
+                          <option>地區</option>
                           <option value="1">中正區</option>
                           <option value="2">大同區</option>
                         </select>
@@ -180,7 +180,7 @@ function App() {
                     className="form-select p-6 fs-6 rounded-1"
                     aria-label="Default select example"
                   >
-                    <option selected>照護需求</option>
+                    <option>照護需求</option>
                     <option value="1">鼻胃管</option>
                     <option value="2">氣切管</option>
                     <option value="3">導尿管</option>
@@ -191,7 +191,7 @@ function App() {
                     className="form-select p-6 fs-6 rounded-1"
                     aria-label="Default select example"
                   >
-                    <option selected>醫療需求</option>
+                    <option>醫療需求</option>
                     <option value="1">復健</option>
                     <option value="2">洗腎</option>
                     <option value="3">腫瘤</option>
@@ -336,13 +336,11 @@ function App() {
                                 </p>
                               </div>
                               <div className="comment_right d-flex align-items-center">
-                                <h6>
-                                  {product.roomCards?.[0]?.roomType ||
-                                    "載入中..."}
-                                  剩餘床位：
-                                </h6>{" "}
+                                <h6>剩餘床位：</h6>{" "}
                                 <h5>
-                                  {product.roomCards?.[0]?.availableBeds ||
+                                  {product.roomCards?.[0]?.availableBeds +
+                                    product.roomCards?.[1]?.availableBeds +
+                                    product.roomCards?.[2]?.availableBeds ||
                                     "載入中..."}
                                 </h5>
                               </div>

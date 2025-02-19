@@ -20,6 +20,35 @@ function App() {
     }
   };
 
+  //點擊愛心改變-元件
+  const HeartCard = () => {
+    const [heart, setHeart] = useState(false);
+
+    return (
+      <>
+        <a
+          className="heart"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setHeart(!heart);
+          }}
+        >
+          <img
+            src={
+              heart
+                ? "src/assets/images/Interact Icon/Heard-02.svg"
+                : "src/assets/images/Interact Icon/Heard-01.svg"
+            }
+            alt="heart"
+            onClick={() => setHeart(!heart)}
+            style={{ cursor: "pointer" }}
+          />
+        </a>
+      </>
+    );
+  };
+
   return (
     <>
       <div className="main">
@@ -55,167 +84,6 @@ function App() {
           </div>
         </section>
 
-        {/* 電腦版搜尋框  */}
-
-        <div className="container search-bar">
-          <form className="search">
-            <div className="row align-items-center">
-              <div className="col px-0">
-                <select
-                  className="form-select p-6 rounded-1 rounded-1 fs-6"
-                  aria-label="Default select example"
-                >
-                  <option value={"機構類型"}>機構類型</option>
-                  <option value="1">長期照顧中心</option>
-                  <option value="2">護理之家</option>
-                  <option value="3">安養中心</option>
-                  <option value="3">日間照顧中心</option>
-                </select>
-              </div>
-              <div className="col px-0">
-                <select
-                  className="form-select p-6 rounded-1 fs-6"
-                  aria-label="Default select example"
-                >
-                  <option value={"縣市"}>縣市</option>
-                  <option value="1">台北市</option>
-                  <option value="2">新北市</option>
-                </select>
-              </div>
-              <div className="col px-0">
-                <select
-                  className="form-select p-6 rounded-1 fs-6"
-                  aria-label="Default select example"
-                >
-                  <option value={"地區"}>地區</option>
-                  <option value="1">中正區</option>
-                  <option value="2">大同區</option>
-                </select>
-              </div>
-              <div className="col px-0">
-                <select
-                  className="form-select p-6 rounded-1 fs-6"
-                  aria-label="Default select example"
-                >
-                  <option value={"照護需求"}>照護需求</option>
-                  <option value="1">鼻胃管</option>
-                  <option value="2">氣切管</option>
-                  <option value="3">導尿管</option>
-                </select>
-              </div>
-              <div className="col px-0">
-                <select
-                  className="form-select p-6 rounded-1 fs-6"
-                  aria-label="Default select example"
-                >
-                  <option value={"醫療需求"}>醫療需求</option>
-                  <option value="1">復健</option>
-                  <option value="2">洗腎</option>
-                  <option value="3">腫瘤</option>
-                </select>
-              </div>
-              <div className="col px-0">
-                <button
-                  type="submit"
-                  className=" search-btn btn btn-primary-40 p-5 rounded-1 fs-5"
-                  style={{ width: "231px" }}
-                >
-                  <img
-                    src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/399576c7c8ec60e611e2d35218b94d8f6a92a78b/assets/images/Icon/IconBlack/Search-B.svg"
-                    alt="search"
-                  />
-                  搜尋合適機構
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        {/*手機版搜尋框*/}
-
-        <div className="container">
-          <div className="d-flex justify-content-center">
-            <form className="search phone-search-bar">
-              <div className="row">
-                <div className="col-12 px-0">
-                  <select
-                    className="form-select p-6 fs-6 rounded-1"
-                    aria-label="Default select example"
-                  >
-                    <option>機構類型</option>
-                    <option value="1">長期照顧中心</option>
-                    <option value="2">護理之家</option>
-                    <option value="3">安養中心</option>
-                    <option value="3">日間照顧中心</option>
-                  </select>
-                </div>
-                <div className="col-12 px-0">
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-6 p-0">
-                        <select
-                          className="form-select p-6 fs-6 rounded-1"
-                          aria-label="Default select example"
-                        >
-                          <option>縣市</option>
-                          <option value="1">台北市</option>
-                          <option value="2">新北市</option>
-                        </select>
-                      </div>
-                      <div className="col-6 p-0">
-                        <select
-                          className="form-select p-6 fs-6 rounded-1"
-                          aria-label="Default select example"
-                        >
-                          <option>地區</option>
-                          <option value="1">中正區</option>
-                          <option value="2">大同區</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 px-0">
-                  <select
-                    className="form-select p-6 fs-6 rounded-1"
-                    aria-label="Default select example"
-                  >
-                    <option>照護需求</option>
-                    <option value="1">鼻胃管</option>
-                    <option value="2">氣切管</option>
-                    <option value="3">導尿管</option>
-                  </select>
-                </div>
-                <div className="col-12 px-0">
-                  <select
-                    className="form-select p-6 fs-6 rounded-1"
-                    aria-label="Default select example"
-                  >
-                    <option>醫療需求</option>
-                    <option value="1">復健</option>
-                    <option value="2">洗腎</option>
-                    <option value="3">腫瘤</option>
-                  </select>
-                </div>
-                <div className="col-12 px-0">
-                  <a className="d-block" href="#">
-                    <button
-                      type="submit"
-                      className=" search-btn btn btn-primary-40 fs-6 p-6 rounded-1"
-                    >
-                      <img
-                        src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/399576c7c8ec60e611e2d35218b94d8f6a92a78b/assets/images/Icon/IconBlack/Search-B.svg"
-                        alt="search"
-                      />
-                      搜尋合適機構
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
         {/* 搜尋結果卡片 */}
         <div className="content pt-12 mt-md-14 result-content">
           <div className="container">
@@ -232,12 +100,7 @@ function App() {
                               src={product?.thumbs?.[0]}
                               alt="building"
                             />
-                            <a className="heart" href="#">
-                              <img
-                                src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/ed880d3f2bbe0799b124b8c29fb04e530924454e/assets/images/Interact%20Icon/Heard-01.svg"
-                                alt="heart"
-                              />
-                            </a>
+                            <HeartCard />
                           </a>
                         </div>
                         <div className="col-md-7">
@@ -281,48 +144,20 @@ function App() {
                               <p className="ms-1">{product.address}</p>
                             </div>
                             <ul className="d-flex ps-0 mb-4 flex-wrap align-items-center gap-2">
-                              <li className="border border-dark rounded-pill ">
-                                <p className="d-flex align-items-center py-1 px-2">
-                                  <img
-                                    className="me-1"
-                                    src={product.services?.[0]?.icon}
-                                  />
-                                  {product.services?.[0]?.name || "載入中..."}
-                                </p>
-                              </li>
-
-                              <li className="border border-dark rounded-pill  ">
-                                <p className="d-flex align-items-center py-1 px-2 ">
-                                  <img
-                                    className="me-1"
-                                    src={product.services?.[1]?.icon}
-                                    alt="Shower-B"
-                                  />
-                                  {product.services?.[1]?.name || "載入中..."}
-                                </p>
-                              </li>
-
-                              <li className="border border-dark rounded-pill  ">
-                                <p className="d-flex align-items-center py-1 px-2 ">
-                                  <img
-                                    className="me-1"
-                                    src={product.services?.[2]?.icon}
-                                    alt="Bus-B"
-                                  />
-                                  {product.services?.[2]?.name || "載入中..."}
-                                </p>
-                              </li>
-
-                              <li className="border border-dark rounded-pill   ">
-                                <p className="d-flex align-items-center py-1 px-2 ">
-                                  <img
-                                    className="me-1"
-                                    src={product.services?.[3]?.icon}
-                                    alt="Bandaid-B"
-                                  />
-                                  {product.services?.[3]?.name || "載入中..."}
-                                </p>
-                              </li>
+                              {product.services?.map((service, index) => (
+                                <li
+                                  key={index}
+                                  className="border border-dark rounded-pill "
+                                >
+                                  <p className="d-flex align-items-center py-1 px-2">
+                                    <img
+                                      className="me-1"
+                                      src={`src/assets/images/Icon/IconBlack/${service.name}.svg`}
+                                    />
+                                    {service.name || "載入中..."}
+                                  </p>
+                                </li>
+                              ))}
                             </ul>
                             <div className="card_comment d-flex justify-content-between mb-1">
                               <div className="comment_left d-flex align-items-center">
@@ -338,9 +173,7 @@ function App() {
                               <div className="comment_right d-flex align-items-center">
                                 <h6>剩餘床位：</h6>{" "}
                                 <h5>
-                                  {product.roomCards?.[0]?.availableBeds +
-                                    product.roomCards?.[1]?.availableBeds +
-                                    product.roomCards?.[2]?.availableBeds ||
+                                  {product.roomCards?.[0]?.availableBeds ||
                                     "載入中..."}
                                 </h5>
                               </div>
@@ -372,7 +205,10 @@ function App() {
               <div className="left d-flex align-items-center">
                 <a className="d-flex align-items-center" href="#">
                   <span className="material-symbols-outlined text-secondary-80 ">
-                    chevron_left
+                    <img
+                      src="./src/assets/images/Icon/IconSecondary/VectorLeft-S-80.svg"
+                      alt="left"
+                    />
                   </span>
                 </a>
               </div>
@@ -384,7 +220,10 @@ function App() {
               <div className="right d-flex align-items-center">
                 <a className="d-flex align-items-center" href="#">
                   <span className="material-symbols-outlined text-secondary-80">
-                    chevron_right
+                    <img
+                      src="./src/assets/images/Icon/IconSecondary/VectorRight-S-80.svg"
+                      alt="left"
+                    />
                   </span>
                 </a>
               </div>

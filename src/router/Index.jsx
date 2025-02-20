@@ -20,7 +20,7 @@ const router = createHashRouter([
         element: <Home />,
       },
       {
-        path: "product",
+        path: "product/:id",
         element: <ProductPage />,
       },
       {

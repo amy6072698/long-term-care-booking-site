@@ -140,7 +140,7 @@ export default function Home() {
                       ></div>
                       <div className="px-7 pt-9 pb-11">
                         <Link
-                          to='product'
+                          to='product/1'
                           className="text-secondary-70 stretched-link fs-5 mb-2"
                         >
                           康樂長照中心

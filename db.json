@@ -1,4 +1,15 @@
 {
+  "users": [
+    {
+      "email": "123@mail.com",
+      "password": "$2a$10$21AmIsoqSNGmXgYX2L6kQ.2JzQ.7Z4wTvOIXuRXOPI342AcBsyrvq",
+      "name": "123",
+      "gender": "male",
+      "birthday": "1999-09-09",
+      "phone": "0912345678",
+      "id": 1
+    }
+  ],
   "products": [
     {
       "id": 1,

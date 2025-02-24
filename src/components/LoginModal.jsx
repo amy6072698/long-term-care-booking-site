@@ -183,7 +183,7 @@ function LoginModal({
               <form onSubmit={onSubmitSignup} className="d-flex flex-column justify-content-center">
                 <div className="input-group border-1 border-bottom py-6">
                   <label htmlFor="email" className="input-group-text border-0 fs-6 py-0 px-3 bg-white">電子信箱：</label>
-                  <input name="email" value={users.email ?? ""} onChange={handleInputChange} type="email" className="form-control border-0 rounded-2 fs-6 py-0 px-3" id="email" placeholder="作為帳號使用" aria-label="Email" autoComplete="email"/>
+                  {/* <input name="email" value={users.email ?? ""} onChange={handleInputChange} type="email" className="form-control border-0 rounded-2 fs-6 py-0 px-3" id="email" placeholder="作為帳號使用" aria-label="Email" autoComplete="email"/> */}
                 </div>
                 <div className="input-group border-1 border-bottom py-6">
                   <label htmlFor="password" className="input-group-text border-0 fs-6 py-0 px-3 bg-white">密碼：</label>

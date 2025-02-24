@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-
+import { useForm } from "react-hook-form";
 
 
 // 匯入 Modal
 import { Modal } from 'bootstrap';
 import axios from "axios";
+
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -18,14 +19,14 @@ function LoginModal({
 
   const loginModalRef = useRef(null);
 
-  const [users, setUsers] = useState({
-    "email": "",
-    "password": "",
-    "name": "",
-    "gender": "male",
-    "birthday": "",
-    "phone": ""
-  });
+  // const [users, setUsers] = useState({
+  //   "email": "",
+  //   "password": "",
+  //   "name": "",
+  //   "gender": "male",
+  //   "birthday": "",
+  //   "phone": ""
+  // });
 
   const [ isLogin, setIsLogin ] = useState(false);
 
@@ -51,32 +52,39 @@ function LoginModal({
     setIsOpen(false);
   }
 
-  // 處理輸入框寫入
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  // // 處理輸入框寫入
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
 
-    setUsers({
-      ...users,
-      [name]: value
-    });
-  }
+  //   setUsers({
+  //     ...users,
+  //     [name]: value
+  //   });
+  // }
+
+  // 表單驗證
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm();
 
   // 註冊 API
-  const signUp = async() => {
+  const signUp = async(data) => {
     try {
-      await axios.post(`${BASE_URL}/signup`, users)
+      await axios.post(`${BASE_URL}/signup`, data);
+      reset();
+      handleLoginModalOpen("login");
     } catch (error) {
       alert("註冊失敗")
     }
   }
 
   // 登入 API
-  const logIn = async() => {
+  const logIn = async(data) => {
     try {
-      const res = await axios.post(`${BASE_URL}/login`, {
-        email: users.email,
-        password: users.password
-      })
+      const res = await axios.post(`${BASE_URL}/login`, data)
       
       const token = res.data.accessToken;
 
@@ -87,23 +95,34 @@ function LoginModal({
       document.cookie = `${res.data.user.name}Token=${token}; expires=${expired.toUTCString()}`;
 
       axios.defaults.headers.common['Authorization'] = token;
+      setIsLogin(true);
+      handleLoginModalClose();
     } catch (error) {
       alert("登入失敗")
     }
   }
 
-  // 登入表單送出
-  const handleLogin = (e) => {
-    e.preventDefault();
-    logIn();
-  }
+  // // 登入表單送出
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   logIn();
+  // }
 
-  // 註冊表單送出
-  const handleSignup = (e) => {
-    e.preventDefault();
-    signUp();
-  }
-  
+  // // 註冊表單送出
+  // const handleSignup = (e) => {
+  //   e.preventDefault();
+  //   signUp();
+  // }
+
+  const onSubmitSignup = handleSubmit((data) => {
+    console.log(data);
+    signUp(data);
+  })
+
+  const onSubmitLogin = handleSubmit((data) => {
+    console.log(data);
+    logIn();
+  })
 
 
   return (
@@ -119,15 +138,34 @@ function LoginModal({
             <>
               <div className="modal-body py-0 px-14">
                 <h5 className="modal-title text-center mb-4" id="logInModalToggleLabel">帳號登入</h5>
-                <form onSubmit={handleLogin} className="d-flex flex-column justify-content-center">
+                <form onSubmit={onSubmitLogin} className="d-flex flex-column justify-content-center">
                   
                   <div className="input-group border-1 border-bottom py-6">
                     <label htmlFor="account" className="input-group-text border-0 fs-6 py-0 px-3 bg-white">帳號：</label>
-                    <input name="email" value={users.email ?? ""} onChange={handleInputChange} type="email" className="form-control border-0 rounded-2 fs-6 py-0 px-3" id="account" placeholder="您的電子信箱" aria-label="Account" autoComplete="email"/>
+                    <input 
+                    {...register("email",{
+                      required: "Email 欄位必填",
+                      pattern: {
+                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Email 格式錯誤"
+                      }
+                    })} 
+                    type="email" 
+                    className={`form-control border-0 rounded-2 fs-6 py-0 px-3 ${errors.email && 'is-invalid'}`} id="account" placeholder="您的電子信箱" aria-label="Account" autoComplete="email"/>
+                    {errors.email && <p className="text-danger my-2">{errors.email.message}</p>}
                   </div>
                   <div className="input-group border-1 border-bottom py-6">
                     <label htmlFor="loginPassword" className="input-group-text border-0 fs-6 py-0 px-3 bg-white">密碼：</label>
-                    <input name="password" value={users.password ?? ""} onChange={handleInputChange} type="password" className="form-control border-0 rounded-2 fs-6 py-0 px-3" id="loginPassword" placeholder="請輸入密碼" aria-label="Password" autoComplete="current-password"/>
+                    <input 
+                    {...register("password",{
+                      required: "密碼欄位必填",
+                      minLength: {
+                        value: 6,
+                        message: "密碼長度最少 6 碼"
+                      }
+                    })} 
+                    type="password" className="form-control border-0 rounded-2 fs-6 py-0 px-3" id="loginPassword" placeholder="請輸入密碼" aria-label="Password" autoComplete="current-password"/>
+                    {errors.password && <p className="text-danger my-2">{errors.password.message}</p>}
                   </div>
                   <a href="#" className="ms-auto mt-4 link-secondary-40">忘記密碼</a>
                   <button type="submit" className="mt-4 btn btn-primary-40 custom-primary-btn fs-6 p-4">登入</button>
@@ -142,7 +180,7 @@ function LoginModal({
           <>
             <div className="modal-body py-0 px-14">
               <h5 className="modal-title text-center mb-4" id="logInModalToggleLabel">註冊</h5>
-              <form onSubmit={handleSignup} className="d-flex flex-column justify-content-center">
+              <form onSubmit={onSubmitSignup} className="d-flex flex-column justify-content-center">
                 <div className="input-group border-1 border-bottom py-6">
                   <label htmlFor="email" className="input-group-text border-0 fs-6 py-0 px-3 bg-white">電子信箱：</label>
                   <input name="email" value={users.email ?? ""} onChange={handleInputChange} type="email" className="form-control border-0 rounded-2 fs-6 py-0 px-3" id="email" placeholder="作為帳號使用" aria-label="Email" autoComplete="email"/>

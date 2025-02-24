@@ -223,7 +223,7 @@ export default function Results() {
         {/* 分頁 */}
         <nav aria-label="...">
           {/* 上一頁 */}
-          <ul className="pagination d-lg-flex py-8 justify-content-center d-none">
+          <ul className="pagination d-lg-flex py-8 justify-content-center ">
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
               <button
                 className={`page-link ${currentPage === 1 && "disabled"} `}

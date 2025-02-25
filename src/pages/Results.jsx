@@ -104,7 +104,7 @@ export default function Results() {
         <Banner />
 
         {/* 搜尋結果卡片 */}
-        <div className="content pt-12 mt-md-14 result-content">
+        <div className="content pt-12 pt-md-14 result-content">
           <div className="container">
             <div className="row d-flex flex-column gy-7 gy-lg-9">
               {displayProducts.map((product) => (

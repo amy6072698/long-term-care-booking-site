@@ -100,7 +100,7 @@ export default function ProductPage() {
       </div>
 
       {/* mobile */}
-      <div className="d-lg-none mb-7">
+      <section className="d-lg-none mb-7">
         <Swiper
           style={{
             "--swiper-navigation-color": "var(--swiper-primary)",
@@ -127,11 +127,11 @@ export default function ProductPage() {
             );
           })}
         </Swiper>
-      </div>
+      </section>
 
       {/* header */}
 
-      <div className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
+      <section className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
         <div className="d-lg-flex column-gap-2  d-none swiper-banner justify-content-center">
           {bannerIsLoading && thumbsIsLoading && (
             <>
@@ -296,10 +296,10 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* <!-- service --> */}
-      <div className="bg-primary-10">
+      <section className="bg-primary-10">
         <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
           <h4 className="mb-2">服務內容</h4>
           <div className="fs-7 mb-7 text-secondary-90">
@@ -392,10 +392,10 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* <!-- 房型費用 start--> */}
-      <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
+      <section className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
         <h4 className="mb-1">房型費用</h4>
         <div className="fs-8 text-secondary-90 mb-7">
           ＊房型費用不含保證金、耗材及其他相關費用。價格以服務契約為準。
@@ -442,10 +442,10 @@ export default function ProductPage() {
             );
           })}
         </Swiper>
-      </div>
+      </section>
 
       {/* 機構評價 */}
-      <div className="bg-primary-80">
+      <section className="bg-primary-80">
         <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
           <h4 className="mb-9 text-primary-10">機構評價</h4>
           <div className="row g-7">
@@ -495,9 +495,9 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
       {/* 貼心提醒 */}
-      <div className="bg-primary-10">
+      <section className="bg-primary-10">
         <div className="container pt-lg-14 pb-lg-11 text-primary-100 pt-12 pb-12">
           <h4 className="mb-9">貼心提醒！</h4>
           <ul
@@ -515,7 +515,7 @@ export default function ProductPage() {
             </li>
           </ul>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

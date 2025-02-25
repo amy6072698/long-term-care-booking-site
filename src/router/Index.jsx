@@ -8,6 +8,8 @@ import News from "../pages/News";
 import Other from "../pages/Other";
 import Cart from "../pages/Cart";
 import Results from "../pages/Results";
+import Checkout from "../pages/Checkout";
+
 
 const router = createHashRouter([
   {
@@ -38,6 +40,10 @@ const router = createHashRouter([
       {
         path: "results",
         element: <Results />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
     ],
   },

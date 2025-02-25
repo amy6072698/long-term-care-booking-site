@@ -1,0 +1,10 @@
+.checkout {
+  background-color: #fffcf8;
+
+  &-border-primary {
+    border: 1px solid #e8c0c0;
+  }
+  &-border-secondary{
+    border: 1px outset #B0B0B0;
+  }
+}

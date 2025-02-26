@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
+import Banner from "../components/Banner";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Results() {
   const [products, setProducts] = useState([]);
@@ -66,37 +67,6 @@ export default function Results() {
   return (
     <>
       <div className="main">
-        {/* banner部分 */}
-        {/* <section className="index-banner">
-          <div className="card border-0 rounded-0">
-            <div
-              className="banner-image d-md-inline-block d-none "
-              style={{
-                backgroundImage: `url("/src/assets/images/Cover-lg.png")`,
-                height: "624px",
-              }}
-            ></div>
-            <div
-              className="banner-image d-md-none d-inline-block"
-              style={{
-                backgroundImage: `url("/src/assets/images/Cover-sm.png")`,
-                height: "644px",
-              }}
-            ></div>
-            <div className="container-lg container-fluid card-img-overlay py-10">
-              <h1 className="banner-title pb-9 px-lg-0 px-md-2 px-0">
-                長照不煩惱，
-                <br />
-                好厝邊陪你找
-              </h1>
-              <p className="banner-subtitle fs-lg-4 fs-md-6 fs-8 px-lg-0 px-md-2 px-0">
-                找機構跟訂飯店<span className="d-xl-inline d-none">，</span>
-                <br className="d-xl-none d-block" />
-                一樣簡單！
-              </p>
-            </div>
-          </div>
-        </section> */}
         <Banner />
 
         {/* 搜尋結果卡片 */}
@@ -113,6 +83,7 @@ export default function Results() {
                             className="card-img img-fluid result-card"
                             src={product?.thumbs?.[0]}
                             alt="building"
+                            style={{ height: "290px" }}
                           />
                           <HeartCard />
                         </div>

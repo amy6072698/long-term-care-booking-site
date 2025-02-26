@@ -1,13 +1,11 @@
-// import Header from "../components/Header";
-// import Footer from "../components/Footer";
 import { Link } from "react-router";
 import Banner from "../components/Banner";
 // import axios from "axios";
 
+
 export default function Home() {
   return (
     <>
-      {/* <Header /> */}
       <main className="index">
         <Banner />
 
@@ -140,7 +138,7 @@ export default function Home() {
                       ></div>
                       <div className="px-7 pt-9 pb-11">
                         <Link
-                          to='product'
+                          to='product/1'
                           className="text-secondary-70 stretched-link fs-5 mb-2"
                         >
                           康樂長照中心
@@ -1000,8 +998,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* <Footer /> */}
     </>
   );
 }

@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Searchbar from "../components/Searchbar";
-import Banner from "../components/Banner";
-
+import { Link } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 export default function Results() {
-  // const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
   //畫面渲染完取得產品
   useEffect(() => {
@@ -112,7 +108,7 @@ export default function Results() {
                   <div className="cards shadow rounded">
                     <div className="card mb-3">
                       <div className="row g-0">
-                        <div className="col-md-5 " style={{ height: "290px" }}>
+                        <div className="col-md-5 ">
                           <img
                             className="card-img img-fluid result-card"
                             src={product?.thumbs?.[0]}
@@ -122,11 +118,11 @@ export default function Results() {
                         </div>
                         <div className="col-md-7">
                           <div className="card-body">
-                            <a href="intro.html">
+                            <Link to={`/product/${product.id}`}>
                               <h5 className="card-title mt-7">
                                 {product.name}
                               </h5>
-                            </a>
+                            </Link>
                             <div className="address d-flex align-items-center mb-4">
                               <svg
                                 width="16"

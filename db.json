@@ -2,39 +2,12 @@
   "users": [
     {
       "email": "123@mail.com",
-      "password": "$2a$10$21AmIsoqSNGmXgYX2L6kQ.2JzQ.7Z4wTvOIXuRXOPI342AcBsyrvq",
-      "name": "123",
-      "gender": "male",
-      "birthday": "1999-09-09",
-      "phone": "0912345678",
-      "id": 1
-    },
-    {
-      "email": "test@mail.com",
-      "password": "$2a$10$TlaxEdrb5hftPTQ6s456XexZfVYDY/y0ThRJpF3jsBG5nxPWn26Pu",
+      "password": "$2a$10$9YH6eodSpmozYiWxt0ZPs.SU18FB1O88QxIWk2grRyoh/TIckzvd6",
       "name": "陳小玲",
       "gender": "female",
-      "birthday": "1999-11-11",
+      "birthday": "1999-09-09",
       "phone": "0911111111",
-      "id": 2
-    },
-    {
-      "email": "123@gmail.com",
-      "password": "$2a$10$JKkrZAnuYd6t/Ai4Fnv6EOSfSxJtS8SH6/I2XDvbYW3y/Kr74UkMS",
-      "name": "陳筱君",
-      "gender": "female",
-      "birthday": "1999-11-04",
-      "phone": "0911111111",
-      "id": 3
-    },
-    {
-      "email": "122@mail.com",
-      "password": "$2a$10$GXsf6C.xaDjB.3y18leMluh.crrWldMmX0FxcFEQSe8e2Wy46X3Xu",
-      "name": "劉小魚",
-      "gender": "male",
-      "birthday": "1999-11-01",
-      "phone": "0911111111",
-      "id": 4
+      "id": 1
     }
   ],
   "products": [

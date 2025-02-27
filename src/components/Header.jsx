@@ -1,6 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import LoginModal from './LoginModal';
 import { Link } from 'react-router';
+
+// 將 FrontLayout 中的 UserContext 匯入
+import { UserContext } from '../pages/FrontLayout';
+
+import axios from 'axios';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function Header(){
 
@@ -8,10 +15,65 @@ function Header(){
 
   const [ loginModalMode, setLoginModalMode ] = useState("");
 
+  // 用 useContext 引入 isLogin, setIsLogin, userName, setUserName
+  const { isLogin, setIsLogin } = useContext(UserContext); // 用來判斷是否登入
+  const { userName, setUserName } = useContext(UserContext); // 用來記錄使用者姓名
+
+
   const handleLoginModalOpen = (mode) => {
     setLoginModalMode(mode);
     setIsLoginModalOpen(true);
   }
+
+  // 登出功能
+  const handleLogout = () => {
+    // 把 cookie 中的 myToken 移除，設定過去時間使其失效
+    document.cookie = "myToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    // 移除用 axios 預設夾帶在 header 的 token
+    delete axios.defaults.headers.common["Authorization"];
+
+    setIsLogin(false);
+    alert("登出成功");
+    window.location.reload(); // 刷新網頁
+  }
+
+  // 取得cookie裡的token驗證是否還有效，是就維持登入狀態、否則自動登出
+  const checkLogin = async() => {
+    try {
+      const token = document.cookie.replace(
+        /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+        "$1"
+      );
+
+      if(!token){
+        setIsLogin(false);
+        return;
+      }
+
+      axios.defaults.headers.common["Authorization"] = token;
+
+
+      const id = document.cookie.replace(
+        /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+        "$1"
+      );
+
+      // 試著訪問需要授權的 API（例如 /users）確認 token 是否有效
+      const res = await axios.get(`${BASE_URL}/users/${id}`);
+
+      setUserName(res.data.name);
+
+      setIsLogin(true);
+    } catch (error) {
+      console.error("Token 驗證失敗，可能已過期", error);
+      setIsLogin(false);
+    }
+  }
+
+  useEffect(() => {
+    checkLogin();
+  },[])
 
   return (
     <>
@@ -33,7 +95,7 @@ function Header(){
                 <div className="d-lg-flex gap-lg-5 gap-0">
                   <li className="nav-item">
                     <Link to='news' className="nav-link px-xl-5 px-lg-0" href="#">
-                      <svg className="d-inline edit-icon me-xl-4 me-lg-0 me-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="d-inline edit-icon me-xl-4 me-lg-0 me-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path className="edit-icon-stroke" d="M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17.0001M15 17L9 17.0001M15 17H19C19.5523 17 20 16.5523 20 16V15.4141C20 15.1489 19.8945 14.8946 19.707 14.707L19.1963 14.1963C19.0706 14.0706 19 13.9 19 13.7222V10C19 9.82357 18.9936 9.64855 18.9805 9.4761M9 17.0001L5 17.0001C4.44772 17.0001 4 16.5521 4 15.9998V15.4141C4 15.1489 4.10544 14.8949 4.29297 14.7073L4.80371 14.1958C4.92939 14.0701 5 13.9002 5 13.7224V9.99998C5 6.13401 8.134 3 12 3C12.7116 3 13.3984 3.10618 14.0454 3.30357M18.9805 9.4761C20.1868 8.7873 21 7.48861 21 6C21 3.79086 19.2091 2 17 2C15.8298 2 14.7769 2.50253 14.0454 3.30357M18.9805 9.4761C18.3966 9.80949 17.7205 10 17 10C14.7909 10 13 8.20914 13 6C13 4.9611 13.3961 4.0147 14.0454 3.30357M18.9805 9.4761C18.9805 9.47609 18.9805 9.4761 18.9805 9.4761ZM14.0454 3.30357C14.0459 3.30371 14.0464 3.30385 14.0468 3.304" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                       <h5 className="d-inline align-middle">最新消息</h5>
@@ -58,6 +120,23 @@ function Header(){
                       <h5 className="d-inline align-middle">立即預訂</h5>
                     </Link>
                   </li>
+                  {/* 判斷是否登入若是顯示使用者姓名、否顯示註冊｜登入 */}
+                  {isLogin ? (
+                  <li className="nav-item dropdown">
+                    <button className="nav-link dropdown-toggle px-xl-5 px-lg-0 w-100 text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <svg className="d-inline edit-icon me-xl-4 me-lg-0 me-3" width="22" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path className="edit-icon-stroke"  fillRule="evenodd" clipRule="evenodd" d="M20 4C11.1634 4 4 11.1634 4 20C4 28.8366 11.1634 36 20 36C28.8366 36 36 28.8366 36 20C36 11.1634 28.8366 4 20 4ZM0 20C0 8.95431 8.95431 0 20 0C31.0457 0 40 8.95431 40 20C40 31.0457 31.0457 40 20 40C8.95431 40 0 31.0457 0 20Z" fill="currentColor"/>
+                        <path className="edit-icon-stroke"  fillRule="evenodd" clipRule="evenodd" d="M20 12C17.7909 12 16 13.7909 16 16C16 18.2091 17.7909 20 20 20C22.2091 20 24 18.2091 24 16C24 13.7909 22.2091 12 20 12ZM12 16C12 11.5817 15.5817 8 20 8C24.4183 8 28 11.5817 28 16C28 20.4183 24.4183 24 20 24C15.5817 24 12 20.4183 12 16Z" fill="currentColor"/>
+                        <path className="edit-icon-stroke"  fillRule="evenodd" clipRule="evenodd" d="M19.9999 29C15.5607 29 11.6819 31.4094 9.60402 35.0014L6.1416 32.9985C8.90506 28.2214 14.0751 25 19.9999 25C25.9246 25 31.0947 28.2214 33.8581 32.9985L30.3957 35.0014C28.3178 31.4094 24.439 29 19.9999 29Z" fill="currentColor"/>
+                      </svg>
+                      <h5 className="d-inline align-middle">{userName}</h5>
+                    </button>
+                    <ul className="dropdown-menu fs-6 w-100 mt-0 overflow-hidden">
+                      <li><a className="dropdown-item mb-1" href="#">會員中心</a></li>
+                      <li><Link onClick={handleLogout} className="dropdown-item" to="/">登出</Link></li>
+                    </ul>
+                  </li>
+                  ) : (
                   <li className="nav-item">
                     <button className="nav-link px-xl-5 px-lg-0 w-100 text-start"  type="button" onClick={() => handleLoginModalOpen("login")}>
                       <svg className="d-inline edit-icon me-xl-4 me-lg-0 me-3" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,14 +145,17 @@ function Header(){
                       <h5 className="d-inline align-middle">註冊｜登入</h5>
                     </button>
                   </li>
+                  ) }
+
                 </div>
               </ul>
             </div>
           </div>
         </nav>
       </header>
-
-      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen} modalMode={loginModalMode} setModalMode={setLoginModalMode}/>
+      
+      {/* 引入寫在 Header 但需要在 LoginModal 中使用的內容 */}
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} handleLoginModalOpen={handleLoginModalOpen} modalMode={loginModalMode}/>
       
     </>
   )

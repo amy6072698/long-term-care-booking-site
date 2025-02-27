@@ -229,7 +229,7 @@ export default function ProductPage() {
                   <span id="intro-like">{product.like}</span>
                 </div>
               </div>
-              <h3 className="mb-2"></h3>
+              <h3 className="mb-2">{product.name}</h3>
               <div className="d-flex mb-5 gap-1">
                 <i
                   className="bi bi-geo-alt-fill"

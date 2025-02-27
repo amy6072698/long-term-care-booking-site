@@ -1,10 +1,26 @@
 .checkout {
   background-color: #fffcf8;
-
   &-border-primary {
-    border: 1px solid #e8c0c0;
+    border: 1px solid #b6b6b6;
   }
-  &-border-secondary{
-    border: 1px outset #B0B0B0;
+  &-border-secondary {
+    border: 1px outset #b0b0b0;
+  }
+
+  .btn {
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    box-sizing: border-box;
+    &:hover {
+      background-color: #ffdaa3;
+      border: 3px solid #fcf1e0;
+      transform: scale(1.03);
+      box-shadow: 0px 4px 9px 0px #0000001a;
+    }
+    &:focus {
+      outline: none;
+      background-color: #ffdaa3;
+      border: 3px solid #aa792f;
+    }
   }
 }

@@ -1,34 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-
 
 // 匯入 Modal
 import { Modal } from 'bootstrap';
+
 import axios from "axios";
 
+// 將 FrontLayout 中的 UserContext 匯入
+import { UserContext } from '../pages/FrontLayout';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function LoginModal({
+  // 引入在 Header 寫的內容(名稱為自訂義)
   isOpen,
   setIsOpen,
   modalMode,
-  setModalMode,
   handleLoginModalOpen
 }){
 
+  // 用 useRef 取得要控制的 Modal DOM 元素 
   const loginModalRef = useRef(null);
 
-  // const [users, setUsers] = useState({
-  //   "email": "",
-  //   "password": "",
-  //   "name": "",
-  //   "gender": "male",
-  //   "birthday": "",
-  //   "phone": ""
-  // });
-
-  const [ isLogin, setIsLogin ] = useState(false);
+  // 用 useContext 引入 setIsLogin, setUserName
+  const { setIsLogin } = useContext(UserContext);
+  const { setUserName } = useContext(UserContext);
 
   // 建立 LoginModal 實例
   useEffect(() => {
@@ -52,23 +48,15 @@ function LoginModal({
     setIsOpen(false);
   }
 
-  // // 處理輸入框寫入
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
 
-  //   setUsers({
-  //     ...users,
-  //     [name]: value
-  //   });
-  // }
-
-  // 表單驗證
+  // 用 React Hook Form 驗證表單
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset
   } = useForm({
+    // 表單預設值
     defaultValues: {
       email: "",
       password: "",
@@ -83,9 +71,14 @@ function LoginModal({
   const signUp = async(data) => {
     try {
       await axios.post(`${BASE_URL}/signup`, data);
+
+      // 註冊後刷新清空表單內容
       reset();
+
+      // 註冊後自動切換到登入 Modal 
       handleLoginModalOpen("login");
     } catch (error) {
+      console.error(error);
       alert("註冊失敗")
     }
   }
@@ -94,51 +87,57 @@ function LoginModal({
   const logIn = async(data) => {
     try {
       const res = await axios.post(`${BASE_URL}/login`, data)
-      
-      const token = res.data.accessToken;
+      // console.log(res.data);
+
+      const id = res.data.user.id; // 使用者的 id
+      const token = res.data.accessToken; // 使用者的 token
+      const name = res.data.user.name; // 使用者的 name
 
       // json-server-auth 預設 1 小時 token 失效，宣告失效時間變數 expired，並做時間處理
       const expired = new Date();
       expired.setTime(expired.getTime() + 60 * 60 * 1000);
 
-      document.cookie = `${res.data.user.id}Token=${token}; expires=${expired.toUTCString()}`;
+      // 將使用者 token 和 id 存入 cookie 避免網頁重整失去資料
+      document.cookie = `myToken=${token}; expires=${expired.toUTCString()}; path=/;`;
+      document.cookie = `myUserId=${id}; expires=${expired.toUTCString()}; path=/;`;
 
+      // 用 axios 將 token 預設帶入 header
       axios.defaults.headers.common['Authorization'] = token;
+
+      // 把使用者的 name 更新到 userName
+      setUserName(name);
+
+      // 登入後刷新清空表單內容
       reset();
+
+      // 將 isLogin 設為 true 表示已登入
       setIsLogin(true);
+
+      // 自動關閉登入的 Modal
       handleLoginModalClose();
     } catch (error) {
+      console.error(error);
       alert("登入失敗")
     }
   }
 
-  // // 登入表單送出
-  // const handleLogin = (e) => {
-  //   e.preventDefault();
-  //   logIn();
-  // }
-
-  // // 註冊表單送出
-  // const handleSignup = (e) => {
-  //   e.preventDefault();
-  //   signUp();
-  // }
-
+  // 用 React Hook Form 中的方法 handleSubmit 來提交表單內容
   const onSubmitSignup = handleSubmit((data) => {
-    console.log(data);
-
+    // console.log(data);
     signUp(data);
-
   })
 
   const onSubmitLogin = handleSubmit((data) => {
-    console.log(data);
+    // console.log(data);
+
+    // 從 data 解構出使用者填入的 email 和 password 
     const { email, password } = data;
     const logInData = {
       email,
       password
     }
 
+    // 將解構後的新資料帶入 logIn 
     logIn(logInData);
   })
 
@@ -152,7 +151,10 @@ function LoginModal({
           <div className="modal-header border-bottom-0">
             <button type="button" className="btn-close" aria-label="Close" onClick={handleLoginModalClose}></button>
           </div>
+
+          {/* 用從 Header 引入的 modalMode 判斷要開啟哪個 Modal */}
           {modalMode === "login" ? (
+            // 登入的 Modal
             <>
               <div className="modal-body py-0 px-14">
                 <h5 className="modal-title text-center mb-4" id="logInModalToggleLabel">帳號登入</h5>
@@ -160,16 +162,19 @@ function LoginModal({
                   
                   <label htmlFor="account" className="fs-6">帳號：</label>
                   <input 
-                  {...register("email",{
-                    required: "Email 欄位必填",
+                  // 用 React Hook Form 中的 register 撰寫 input 表單驗證內容
+                  {...register("email",{  // 這行的 "email" 是 input 的 name 屬性值
+                    required: "Email 欄位必填",  // 必填錯誤訊息
                     pattern: {
-                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: "Email 格式錯誤"
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,  // email 格式驗證
+                      message: "Email 格式錯誤"  // 格式驗證錯誤訊息
                     }
                   })} 
                   type="email" 
+                  // 用 React Hook Form 中的 formState 裡的 errors 判斷送出值是否有錯誤，有就在 className 加入 bs 的表單驗證樣式 is-invalid ，其他 mb-1 mb-6 border-primary-50 為調整版面用
                   className={`form-control rounded-1 fs-6 py-1 mt-1 ${errors.email ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="account" placeholder="您的電子信箱" aria-label="Account" autoComplete="email"/>
 
+                  {/* 用 React Hook Form 中的 formState 裡的 errors 判斷送出值是否有錯誤，有就帶入錯誤訊息內容到 p 標籤 */}
                   {errors.email && <p className="text-danger mb-6">{errors.email.message}</p>}
 
                   <label htmlFor="loginPassword" className="fs-6">密碼：</label>
@@ -195,6 +200,7 @@ function LoginModal({
               </div>
             </>
           ) : (
+          // 註冊的 Modal
           <>
             <div className="modal-body py-0 px-14">
               <h5 className="modal-title text-center mb-4" id="logInModalToggleLabel">註冊</h5>

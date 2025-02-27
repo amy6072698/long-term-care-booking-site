@@ -92,6 +92,13 @@ export default function ProductPage() {
       transition: Zoom,
     });
   };
+
+  //從立即預訂點選下一步跳轉到產品頁 byJack
+  const selectedProductId = localStorage.getItem("selectedProductId");
+  useEffect(() => {
+    console.log("選中的商品 ID:", selectedProductId);
+  }, []);
+  
   return (
     <main>
       {/* 彈跳視窗 */}

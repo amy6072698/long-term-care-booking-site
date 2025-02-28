@@ -80,7 +80,7 @@ export default function ProductPage() {
     e.preventDefault();
     try {
       await axios.post(
-        `${BASE_URL}/664/carts`,
+        `${BASE_URL}/600/carts`,
         {
           productId: id,
           userId: myUserId,

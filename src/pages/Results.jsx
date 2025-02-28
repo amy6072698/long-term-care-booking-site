@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
+import Banner from "../components/Banner";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function Results() {
   const [products, setProducts] = useState([]);
@@ -47,46 +48,32 @@ export default function Results() {
     );
   };
 
+  //限制卡片出現5筆資料
+
+  const [currentPage, setCurrentPage] = useState(1); //當前頁數
+  const itemsPerPage = 5; //每頁顯示5筆資料
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayProducts = products.slice(startIndex, endIndex);
+
+  //切換分頁
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    //滾動到頁面頂部
+    window.scrollTo({ top: 500, behavior: "smooth" });
+  };
+
   return (
     <>
       <div className="main">
-        {/* banner部分 */}
-        <section className="index-banner">
-          <div className="card border-0 rounded-0">
-            <div
-              className="banner-image d-md-inline-block d-none "
-              style={{
-                backgroundImage: `url("/src/assets/images/Cover-lg.png")`,
-                height: "624px",
-              }}
-            ></div>
-            <div
-              className="banner-image d-md-none d-inline-block"
-              style={{
-                backgroundImage: `url("/src/assets/images/Cover-sm.png")`,
-                height: "644px",
-              }}
-            ></div>
-            <div className="container-lg container-fluid card-img-overlay py-10">
-              <h1 className="banner-title pb-9 px-lg-0 px-md-2 px-0">
-                長照不煩惱，
-                <br />
-                好厝邊陪你找
-              </h1>
-              <p className="banner-subtitle fs-lg-4 fs-md-6 fs-8 px-lg-0 px-md-2 px-0">
-                找機構跟訂飯店<span className="d-xl-inline d-none">，</span>
-                <br className="d-xl-none d-block" />
-                一樣簡單！
-              </p>
-            </div>
-          </div>
-        </section>
+        <Banner />
 
         {/* 搜尋結果卡片 */}
-        <div className="content pt-12 mt-md-14 result-content">
+        <div className="content pt-12 pt-md-14 result-content">
           <div className="container">
             <div className="row d-flex flex-column gy-7 gy-lg-9">
-              {products.map((product) => (
+              {displayProducts.map((product) => (
                 <div className="col" key={product.id}>
                   <div className="cards shadow rounded">
                     <div className="card mb-3">
@@ -96,6 +83,7 @@ export default function Results() {
                             className="card-img img-fluid result-card"
                             src={product?.thumbs?.[0]}
                             alt="building"
+                            style={{ height: "290px" }}
                           />
                           <HeartCard />
                         </div>
@@ -196,36 +184,60 @@ export default function Results() {
                 </div>
               ))}
             </div>
-
-            <div className="pagnation d-lg-flex py-8 justify-content-center d-none">
-              <div className="left d-flex align-items-center">
-                <a className="d-flex align-items-center" href="#">
-                  <span className="material-symbols-outlined text-secondary-80 ">
-                    <img
-                      src="./src/assets/images/Icon/IconSecondary/VectorLeft-S-80.svg"
-                      alt="left"
-                    />
-                  </span>
-                </a>
-              </div>
-
-              <div className="pagnation-num px-6">
-                <p className="text-secondary-50">1/20</p>
-              </div>
-
-              <div className="right d-flex align-items-center">
-                <a className="d-flex align-items-center" href="#">
-                  <span className="material-symbols-outlined text-secondary-80">
-                    <img
-                      src="./src/assets/images/Icon/IconSecondary/VectorRight-S-80.svg"
-                      alt="left"
-                    />
-                  </span>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
+
+        {/* 分頁 */}
+        <nav aria-label="...">
+          {/* 上一頁 */}
+          <ul className="pagination d-lg-flex py-8 justify-content-center ">
+            <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+              <button
+                className={`page-link ${currentPage === 1 && "disabled"} `}
+                style={{ background: "transparent", border: "none" }}
+                onClick={() => handlePageChange(currentPage - 1)}
+              >
+                <img
+                  src="./src/assets/images/Icon/IconSecondary/VectorLeft-S-80.svg"
+                  alt="left"
+                />
+              </button>
+            </li>
+            {/* 頁數 */}
+
+            {Array.from({ length: itemsPerPage }).map((_, index) => (
+              <li
+                key={index}
+                className={`page-item ${
+                  currentPage === index + 1 ? "active " : ""
+                }`}
+              >
+                <button
+                  className="page-link text-secondary-50"
+                  style={{ background: "transparent", border: "none" }}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+
+            <li className={`page-item `}>
+              <button
+                className={`page-link ${
+                  currentPage === products.length / itemsPerPage && "disabled"
+                }`}
+                style={{ background: "transparent", border: "none" }}
+                onClick={() => handlePageChange(currentPage + 1)}
+              >
+                <img
+                  src="./src/assets/images/Icon/IconSecondary/VectorRight-S-80.svg"
+                  alt="left"
+                />
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );

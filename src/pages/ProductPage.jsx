@@ -4,7 +4,7 @@ import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
 import { ToastContainer, toast, Zoom } from "react-toastify";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 import "swiper/css";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 export default function ProductPage() {
   const { id: productId } = useParams();
@@ -30,9 +31,9 @@ export default function ProductPage() {
   }, []);
 
   // 到畫面最上方
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useLayoutEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
   //取得產品資料
   const getProducts = async () => {
     try {

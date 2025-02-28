@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,13 +10,16 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css";
+import { UserContext } from "./FrontLayout";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+let token;
+let myUserId;
 
 export default function ProductPage() {
+  const { isLogin } = useContext(UserContext); // 用來判斷是否登入
   const { id: productId } = useParams();
-
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -24,16 +27,35 @@ export default function ProductPage() {
   const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
   const bannerRefNum = useRef(0);
   const thumbsRefNum = useRef(0);
+  const { setIsLoginModalOpen } = useContext(UserContext);
+  const {setLoginModalMode} = useContext(UserContext);
+
+  //取得token和登入id
+  const getToken = () => {
+    //取得cookie中的token和useId
+    document.cookie = "myToken";
+    token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    myUserId = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+  };
+
+  //登入狀態變動時觸發取得token
+  useEffect(() => {
+    if (isLogin) {
+      getToken();
+    }
+  }, [isLogin]);
 
   //畫面渲染完成觸發取得產品
   useEffect(() => {
     getProducts();
   }, []);
 
-  // 到畫面最上方
-  // useLayoutEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
   //取得產品資料
   const getProducts = async () => {
     try {
@@ -48,23 +70,39 @@ export default function ProductPage() {
     }
   };
 
-  //加入預約購物車
+  //加入預約留床
   const addCartItem = async (e, id) => {
+    if(!isLogin){
+      setLoginModalMode('login')
+      setIsLoginModalOpen(true);
+      return
+    }
     e.preventDefault();
     try {
-      await axios.post(`${BASE_URL}/carts`, {
-        productId: id,
-      });
+      await axios.post(
+        `${BASE_URL}/664/carts`,
+        {
+          productId: id,
+          userId: myUserId,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setIsLoading(true);
       showSuccessMessage();
       setTimeout(() => {
         setIsLoading(false);
       }, 3000);
     } catch (error) {
+      console.log(error);
       showErrorMessage();
     }
   };
-  //加入預訂成功觸發彈跳視窗
+
+  //加入預約成功觸發彈跳視窗
   const showSuccessMessage = () => {
     toast.success(`加入預約成功👋\n請去立即預訂查看`, {
       position: "top-center",
@@ -79,7 +117,8 @@ export default function ProductPage() {
       style: { whiteSpace: "pre-line" },
     });
   };
-  //加入預訂成功觸發彈跳視窗
+
+  //加入預約成功觸發彈跳視窗
   const showErrorMessage = () => {
     toast.error("預訂失敗", {
       position: "top-center",
@@ -281,10 +320,11 @@ export default function ProductPage() {
                 type="button"
                 onClick={(e) => {
                   addCartItem(e, product.id);
+                  
                 }}
                 className="btn btn-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
               >
-                預約留床
+                預定留床
                 {isLoading && (
                   <ReactLoading
                     type={"spin"}

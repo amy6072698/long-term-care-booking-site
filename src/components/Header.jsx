@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import LoginModal from "./LoginModal";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 // 將 FrontLayout 中的 UserContext 匯入
 import { UserContext } from "../pages/FrontLayout";
@@ -80,14 +80,14 @@ function Header() {
       <header className="header sticky-top fixedTopControl">
         <nav className="navbar navbar-expand-lg py-0 bg-primary-110">
           <div className="container-lg container-fluid px-lg-4 px-0">
-            <Link className="navbar-brand py-lg-2 py-0 ms-6" to="/">
+            <NavLink className="navbar-brand py-lg-2 py-0 ms-6" to="/">
               <img
                 src="src/assets/images/Logo/LB-Color.svg"
                 alt="logo"
                 className="d-inline-block w-100"
                 style={{ width: "196px", height: "70px" }}
               />
-            </Link>
+            </NavLink>
             <button
               className="navbar-toggler me-6 border-0 p-0 scrollControl"
               type="button"
@@ -118,7 +118,7 @@ function Header() {
                 </button>
                 <div className="d-lg-flex gap-lg-5 gap-0">
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       to="news"
                       className="nav-link px-xl-5 px-lg-0"
                       href="#"
@@ -141,10 +141,10 @@ function Header() {
                         />
                       </svg>
                       <h5 className="d-inline align-middle">最新消息</h5>
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link to="other" className="nav-link px-xl-5 px-lg-0">
+                    <NavLink to="other" className="nav-link px-xl-5 px-lg-0">
                       <svg
                         className="d-inline edit-icon me-xl-4 me-lg-0 me-3"
                         width="24"
@@ -171,12 +171,12 @@ function Header() {
                         />
                       </svg>
                       <h5 className="d-inline align-middle">其他功能</h5>
-                    </Link>
+                    </NavLink>
                   </li>
                 </div>
                 <div className="d-lg-flex gap-lg-5 gap-0">
                   <li className="nav-item">
-                    <Link
+                    <NavLink
                       to="cart"
                       className="nav-link px-xl-5 px-lg-0"
                       href="order.html"
@@ -199,7 +199,7 @@ function Header() {
                         />
                       </svg>
                       <h5 className="d-inline align-middle">立即預訂</h5>
-                    </Link>
+                    </NavLink>
                   </li>
                   {/* 判斷是否登入若是顯示使用者姓名、否顯示註冊｜登入 */}
                   {isLogin ? (

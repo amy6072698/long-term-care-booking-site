@@ -947,6 +947,11 @@
       "productId": 1,
       "userId": "2",
       "id": 2
+    },
+    {
+      "productId": 1,
+      "userId": "1",
+      "id": 3
     }
   ]
 }

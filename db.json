@@ -8,6 +8,15 @@
       "birthday": "1999-09-09",
       "phone": "0911111111",
       "id": 1
+    },
+    {
+      "email": "1@mail.com",
+      "password": "$2a$10$.Qs1F.p8i/exNRcSMLPa8u04UnFFh0ZNMOQH/4rljYqgZP/T/9EZK",
+      "name": "Tom Holland",
+      "gender": "male",
+      "birthday": "1996-06-01",
+      "phone": "0912345678",
+      "id": 2
     }
   ],
   "products": [
@@ -931,15 +940,13 @@
   "carts": [
     {
       "productId": 1,
+      "userId": "3",
       "id": 1
     },
     {
       "productId": 1,
+      "userId": "2",
       "id": 2
-    },
-    {
-      "productId": 1,
-      "id": 3
     }
   ]
 }

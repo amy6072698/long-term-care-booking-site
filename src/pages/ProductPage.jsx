@@ -1,21 +1,25 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
 import { ToastContainer, toast, Zoom } from "react-toastify";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css";
+import { UserContext } from "./FrontLayout";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export default function ProductPage() {
-  const { id: productId } = useParams();
+let token;
+let myUserId;
 
+export default function ProductPage() {
+  const { isLogin } = useContext(UserContext); // 用來判斷是否登入
+  const { id: productId } = useParams();
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -23,16 +27,35 @@ export default function ProductPage() {
   const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
   const bannerRefNum = useRef(0);
   const thumbsRefNum = useRef(0);
+  const { setIsLoginModalOpen } = useContext(UserContext);
+  const {setLoginModalMode} = useContext(UserContext);
+
+  //取得token和登入id
+  const getToken = () => {
+    //取得cookie中的token和useId
+    document.cookie = "myToken";
+    token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    myUserId = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+  };
+
+  //登入狀態變動時觸發取得token
+  useEffect(() => {
+    if (isLogin) {
+      getToken();
+    }
+  }, [isLogin]);
 
   //畫面渲染完成觸發取得產品
   useEffect(() => {
     getProducts();
   }, []);
 
-  // 到畫面最上方
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   //取得產品資料
   const getProducts = async () => {
     try {
@@ -47,23 +70,39 @@ export default function ProductPage() {
     }
   };
 
-  //加入預約購物車
+  //加入預約留床
   const addCartItem = async (e, id) => {
+    if(!isLogin){
+      setLoginModalMode('login')
+      setIsLoginModalOpen(true);
+      return
+    }
     e.preventDefault();
     try {
-      await axios.post(`${BASE_URL}/carts`, {
-        productId: id,
-      });
+      await axios.post(
+        `${BASE_URL}/600/carts`,
+        {
+          productId: id,
+          userId: myUserId,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setIsLoading(true);
       showSuccessMessage();
       setTimeout(() => {
         setIsLoading(false);
       }, 3000);
     } catch (error) {
+      console.log(error);
       showErrorMessage();
     }
   };
-  //加入預訂成功觸發彈跳視窗
+
+  //加入預約成功觸發彈跳視窗
   const showSuccessMessage = () => {
     toast.success(`加入預約成功👋\n請去立即預訂查看`, {
       position: "top-center",
@@ -78,7 +117,8 @@ export default function ProductPage() {
       style: { whiteSpace: "pre-line" },
     });
   };
-  //加入預訂成功觸發彈跳視窗
+
+  //加入預約成功觸發彈跳視窗
   const showErrorMessage = () => {
     toast.error("預訂失敗", {
       position: "top-center",
@@ -100,7 +140,7 @@ export default function ProductPage() {
       </div>
 
       {/* mobile */}
-      <div className="d-lg-none mb-7">
+      <section className="d-lg-none mb-7">
         <Swiper
           style={{
             "--swiper-navigation-color": "var(--swiper-primary)",
@@ -127,11 +167,11 @@ export default function ProductPage() {
             );
           })}
         </Swiper>
-      </div>
+      </section>
 
       {/* header */}
 
-      <div className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
+      <section className="container pt-lg-14 pb-lg-14 pb-11 pt-0">
         <div className="d-lg-flex column-gap-2  d-none swiper-banner justify-content-center">
           {bannerIsLoading && thumbsIsLoading && (
             <>
@@ -229,7 +269,7 @@ export default function ProductPage() {
                   <span id="intro-like">{product.like}</span>
                 </div>
               </div>
-              <h3 className="mb-2"></h3>
+              <h3 className="mb-2">{product.name}</h3>
               <div className="d-flex mb-5 gap-1">
                 <i
                   className="bi bi-geo-alt-fill"
@@ -280,10 +320,11 @@ export default function ProductPage() {
                 type="button"
                 onClick={(e) => {
                   addCartItem(e, product.id);
+                  
                 }}
                 className="btn btn-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
               >
-                預約留床
+                預定留床
                 {isLoading && (
                   <ReactLoading
                     type={"spin"}
@@ -296,10 +337,10 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* <!-- service --> */}
-      <div className="bg-primary-10">
+      <section className="bg-primary-10">
         <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
           <h4 className="mb-2">服務內容</h4>
           <div className="fs-7 mb-7 text-secondary-90">
@@ -392,10 +433,10 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* <!-- 房型費用 start--> */}
-      <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
+      <section className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
         <h4 className="mb-1">房型費用</h4>
         <div className="fs-8 text-secondary-90 mb-7">
           ＊房型費用不含保證金、耗材及其他相關費用。價格以服務契約為準。
@@ -442,10 +483,10 @@ export default function ProductPage() {
             );
           })}
         </Swiper>
-      </div>
+      </section>
 
       {/* 機構評價 */}
-      <div className="bg-primary-80">
+      <section className="bg-primary-80">
         <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
           <h4 className="mb-9 text-primary-10">機構評價</h4>
           <div className="row g-7">
@@ -495,9 +536,9 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
       {/* 貼心提醒 */}
-      <div className="bg-primary-10">
+      <section className="bg-primary-10">
         <div className="container pt-lg-14 pb-lg-11 text-primary-100 pt-12 pb-12">
           <h4 className="mb-9">貼心提醒！</h4>
           <ul
@@ -515,7 +556,7 @@ export default function ProductPage() {
             </li>
           </ul>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

@@ -20,11 +20,13 @@ function LoginModal({
 }){
 
   // 用 useRef 取得要控制的 Modal DOM 元素 
-  const loginModalRef = useRef(null);
+  // const loginModalRef = useRef(null);
 
   // 用 useContext 引入 setIsLogin, setUserName
   const { setIsLogin } = useContext(UserContext);
   const { setUserName } = useContext(UserContext);
+  const { loginModalRef } = useContext(UserContext);
+
 
   // 建立 LoginModal 實例
   useEffect(() => {

@@ -1,17 +1,23 @@
+import { useNavigate } from "react-router";
 import BannerNoSearch from "../components/BannerNoSearch";
 import { useForm } from "react-hook-form";
+
 
 export default function Checkout() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // reset,
+    reset,
   } = useForm({
     mode: "onChange",
   });
 
-  const onSubmit = (data) => {
+  const navigate = useNavigate();
+
+  const onSubmit = (data, e) => {
+    e.preventDefault();
+    reset();
     console.log(data);
   };
 
@@ -47,12 +53,13 @@ export default function Checkout() {
                       <div className="fs-7">新北市板橋區中山路Ｆ</div>
                     </div>
                     <div className="d-flex gap-4 justify-content-between  align-items-center">
-                      <div
+                      <label
                         style={{ width: "52px" }}
                         className="fs-8 flex-shrink-0 text-nowrap"
+                        htmlFor="checkInDate"
                       >
                         入住日期
-                      </div>
+                      </label>
                       <div className="input-group mb-3">
                         <input
                           {...register("checkInDate", {
@@ -68,6 +75,7 @@ export default function Checkout() {
                             },
                           })}
                           type="date"
+                          id="checkInDate"
                           className="form-control  py-4 checkout-border-primary"
                           aria-describedby="basic-addon1"
                         />
@@ -79,15 +87,17 @@ export default function Checkout() {
                       </small>
                     )}
                     <div className="d-flex gap-4 justify-content-between align-items-center">
-                      <div
+                      <label
                         style={{ width: "52px" }}
-                        className=" flex-shrink-0 fs-8  text-nowrap "
+                        className=" flex-shrink-0 fs-8  text-nowrap"
+                        htmlFor="roomType"
                       >
                         房型
-                      </div>
+                      </label>
                       <select
-                        {...register("option", { required: "請選擇一個選項" })}
+                        {...register("roomType", { required: "請選擇一個房型" })}
                         defaultValue=""
+                        id="roomType"
                         className="form-select py-5 checkout-border-primary"
                         aria-label="Default select example"
                       >
@@ -99,9 +109,9 @@ export default function Checkout() {
                         <option value="六人房">六人房</option>
                       </select>
                     </div>
-                    {errors.option && (
+                    {errors.roomType && (
                       <small className="text-danger">
-                        {errors.option.message}
+                        {errors.roomType.message}
                       </small>
                     )}
                     <div>
@@ -127,50 +137,51 @@ export default function Checkout() {
                   {/* 姓名 */}
                   <div className="d-flex gap-5 justify-content-between">
                     <div className="w-50">
-                      <label htmlFor="name" className="form-label">
+                      <label htmlFor="fullName" className="form-label">
                         姓名<span className="text-danger">*</span>
                       </label>
                       <div className="input-group">
                         <input
-                          {...register("name", {
+                        
+                          {...register("fullName", {
                             required: "請填寫姓名",
                           })}
+                          id="fullName"
                           placeholder="您的大名"
                           type="text"
                           className="form-control px-2 py-2 checkout-border-primary"
-                          id="name"
                           aria-describedby="basic-addon3 basic-addon4"
                         />
                       </div>
-                      {errors.name && (
+                      {errors.fullName && (
                         <p className="text-danger my-2">
-                          {errors.name?.message}
+                          {errors.fullName?.message}
                         </p>
                       )}
                     </div>
                     <div className="w-50">
-                      <label htmlFor="phone" className="form-label">
+                      <label htmlFor="mobilePhone" className="form-label">
                         行動電話<span className="text-danger">*</span>
                       </label>
                       <div className="input-group">
                         <input
-                         {...register("tel", {
-                          required: "電話必填",
-                          pattern: {
-                            value: /^(0[2-8]\d{7}|09\d{2}-\d{3}-\d{3})$/,
-                            message: "電話格式錯誤",
-                          },
-                        })}
+                          {...register("mobilePhone", {
+                            required: "電話必填",
+                            pattern: {
+                              value: /^(0[2-8]\d{7}|09\d{2}-\d{3}-\d{3})$/,
+                              message: "電話格式錯誤",
+                            },
+                          })}
                           placeholder="09XX-XXX-XXX"
                           type="tel"
                           className="form-control px-2 py-2 checkout-border-primary"
-                          id="phone"
+                          id="mobilePhone"
                           aria-describedby="basic-addon3 basic-addon4"
                         />
                       </div>
-                      {errors.tel && (
+                      {errors.mobilePhone && (
                         <p className="text-danger my-2">
-                          {errors.tel?.message}
+                          {errors.mobilePhone?.message}
                         </p>
                       )}
                     </div>
@@ -200,12 +211,12 @@ export default function Checkout() {
                       )}
                     </div>
                     <div className="w-50">
-                      <label htmlFor="email" className="form-label">
+                      <label htmlFor="mail" className="form-label">
                         E-mail<span className="text-danger">*</span>
                       </label>
                       <div className="input-group">
                         <input
-                          {...register("email", {
+                          {...register("mail", {
                             required: {
                               value: true,
                               message: "email必填",
@@ -216,16 +227,16 @@ export default function Checkout() {
                               message: "email格式錯誤",
                             },
                           })}
+                          id="mail"
                           placeholder="example@email.com"
-                          type="text"
+                          type="email"
                           className="form-control px-2 py-2 checkout-border-primary"
-                          id="email"
                           aria-describedby="basic-addon3 basic-addon4"
                         />
                       </div>
-                      {errors.email && (
+                      {errors.mail && (
                         <p className="text-danger my-2">
-                          {errors.email?.message}
+                          {errors.mail?.message}
                         </p>
                       )}
                     </div>
@@ -242,7 +253,7 @@ export default function Checkout() {
                           placeholder="入住期間需要特別注意事項。"
                           type="text"
                           className="form-control px-2 py-2 checkout-border-primary"
-                          id="message"
+                          id="remark"
                           aria-describedby="basic-addon3 basic-addon4"
                         />
                       </div>
@@ -261,7 +272,7 @@ export default function Checkout() {
                 {/* 信用卡 */}
                 <div className="mb-5 d-flex gap-5 justify-content-between">
                   <div className="w-50">
-                    <label htmlFor="name" className="form-label">
+                    <label htmlFor="cardNumber" className="form-label">
                       信用卡號<span className="text-danger">*</span>
                     </label>
                     <div className="input-group">
@@ -275,10 +286,10 @@ export default function Checkout() {
                               "信用卡號碼格式不正確。請輸入16位或15位數字，並以XXXX-XXXX-XXXX-XXXX或XXXX-XXXX-XXXX-XXX的格式呈現",
                           },
                         })}
+                        id="cardNumber"
                         placeholder="0000-0000-0000-0000"
                         type="text"
                         className="form-control px-2 py-2 checkout-border-primary"
-                        id="name"
                         aria-describedby="basic-addon3 basic-addon4"
                       />
                     </div>
@@ -289,7 +300,7 @@ export default function Checkout() {
                     )}
                   </div>
                   <div className="w-50">
-                    <label htmlFor="phone" className="form-label">
+                    <label htmlFor="expiryDate" className="form-label">
                       有效日期<span className="text-danger">*</span>
                     </label>
                     <div className="input-group">
@@ -318,7 +329,7 @@ export default function Checkout() {
                         placeholder="DD/YY"
                         type="tel"
                         className="form-control px-2 py-2 checkout-border-primary"
-                        id="phone"
+                        id="expiryDate"
                         aria-describedby="basic-addon3 basic-addon4"
                       />
                     </div>
@@ -331,7 +342,7 @@ export default function Checkout() {
                 </div>
                 {/* 安全碼 */}
                 <div className="w-100 mb-11">
-                  <label htmlFor="phone" className="form-label">
+                  <label htmlFor="cvv" className="form-label">
                     安全碼<span className="text-danger">*</span>
                   </label>
                   <div className="input-group">
@@ -346,9 +357,9 @@ export default function Checkout() {
                         },
                       })}
                       placeholder="000"
-                      type="tel"
+                      type="text"
                       className="form-control px-2 py-2 checkout-border-primary"
-                      id="phone"
+                      id="cvv"
                       aria-describedby="basic-addon3 basic-addon4"
                     />
                   </div>
@@ -366,7 +377,9 @@ export default function Checkout() {
             <div className="d-flex gap-6">
               <button
                 type="button"
-                onClick={() => {}}
+                onClick={() => {
+                  navigate(-1);
+                }}
                 className="btn btn-outline-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
               >
                 上一步
@@ -374,7 +387,6 @@ export default function Checkout() {
 
               <button
                 type="submit"
-                // onClick={() => {}}
                 className="btn btn-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
               >
                 確定付款

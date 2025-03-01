@@ -109,11 +109,8 @@ export default function Cart() {
                   </div>
                   {/* 全選按鈕 */}
                   <div className="d-flex justify-content-end">
-                    <button
-                      type="button"
-                      className="btn btn-outline-dark all-font"
-                    >
-                      全選
+                    <button type="button" className="btn btn-outline-secondary-40 all-font">
+                      全部刪除
                     </button>
                   </div>
                 </div>
@@ -126,13 +123,22 @@ export default function Cart() {
                   >
                     <div className="row g-0">
                       <div className="col-lg-5">
-                        <div className="checkbox-relative ">
+                        <div className="checkbox-relative h-100">
                           <img
                             src={item.product.images[0]}
                             className="img-fluid card-img rounded-0"
                             alt="building"
                             style={{ height: "290px" }}
                           />
+                        <div className="checkbox-mobile">
+                          <input
+                            className="form-check-input custom-checkbox checkbox-absolute"
+                            type="checkbox"
+                            id="checkboxNoLabel"
+                            value=""
+                            aria-label="勾選框"
+                          />
+                        </div>
                         </div>
                       </div>
                       <div className="col-lg-7">
@@ -195,25 +201,6 @@ export default function Cart() {
                               </p>
                             </div>
                           </div>
-                          {/* information */}
-                          {/* <ul className="d-flex ps-0 mb-4 flex-wrap align-items-center">
-                    <li className="border border-dark rounded-pill me-3" >
-                      <p className="d-flex align-items-center py-1 px-2">
-                        <img className="me-1" src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/00a6b3aa21b3ca63af31bb2774763919bbd1b1bf/assets/images/Icon/IconBlack/Doctor-B.svg" alt="Doctor-B"/>機構內門診</p>
-                    </li>
-                    <li className="border border-dark rounded-pill me-3 mt-md-0">
-                      <p className="d-flex align-items-center py-1 px-2 ">
-                        <img className="me-1" src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/00a6b3aa21b3ca63af31bb2774763919bbd1b1bf/assets/images/Icon/IconBlack/Shower-B.svg" alt="Shower-B"/>特殊沐浴設備</p>
-                    </li>
-                    <li className="border border-dark rounded-pill me-3 mt-3 mt-md-0">
-                      <p className="d-flex align-items-center py-1 px-2 ">
-                        <img className="me-1" src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/00a6b3aa21b3ca63af31bb2774763919bbd1b1bf/assets/images/Icon/IconBlack/Bus-B.svg" alt="Bus-B"/>門診接送</p>
-                    </li>
-                    <li className="border border-dark rounded-pill me-3 mt-3 mt-md-0">
-                      <p className="d-flex align-items-center py-1 px-2 ">
-                        <img className="me-1" src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/00a6b3aa21b3ca63af31bb2774763919bbd1b1bf/assets/images/Icon/IconBlack/Bandaid-B.svg" alt="Bandaid-B"/>大傷口照顧</p>
-                    </li>
-                  </ul> */}
                           <ul className="d-flex ps-0 mb-4 flex-wrap align-items-center gap-2">
                             {item.product.services?.map((service, index) => (
                               <li
@@ -249,7 +236,6 @@ export default function Cart() {
                               </p>
                             </div>
                           </div>
-
                           {/* Button trigger modal */}
                           <div className="d-flex justify-content-end">
                             <button
@@ -304,11 +290,8 @@ export default function Cart() {
                   </div>
                   {/* 全選按鈕 */}
                   <div className="d-flex justify-content-end">
-                    <button
-                      type="button"
-                      className="btn btn-outline-dark all-font"
-                    >
-                      全選
+                    <button type="button" className="btn btn-outline-secondary-40 all-font">
+                      全部刪除
                     </button>
                   </div>
                 </div>

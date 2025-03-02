@@ -3,7 +3,7 @@ import { Modal } from 'bootstrap';
 import { Link } from "react-router";
 import axios from "axios";
 import BannerNoSearch from "../components/BannerNoSearch";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 

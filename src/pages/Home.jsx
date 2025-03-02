@@ -1,14 +1,9 @@
 import { Link } from "react-router";
-import Banner from "../components/Banner";
-// import axios from "axios";
-
 
 export default function Home() {
   return (
     <>
-      <main className="index">
-        <Banner />
-
+      <div className="index">
         {/* index 人氣機構精選區段 */}
         <section className="index-hots pb-lg-14 pb-0">
           <div className="hots-container">
@@ -133,7 +128,7 @@ export default function Home() {
                         className="hots-card-image rounded-top-2"
                         style={{
                           backgroundImage:
-                            "url(https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-04.png?raw=true)",
+                            "url(https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-01.png?raw=true)",
                         }}
                       ></div>
                       <div className="px-7 pt-9 pb-11">
@@ -255,7 +250,7 @@ export default function Home() {
                         className="hots-card-image rounded-top-2"
                         style={{
                           backgroundImage:
-                            "url(https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-01.png?raw=true)",
+                            "url(https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-04.png?raw=true)",
                         }}
                       ></div>
                       <div className="px-7 pt-9 pb-11">
@@ -997,7 +992,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

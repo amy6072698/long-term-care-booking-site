@@ -4,6 +4,7 @@ import { Link } from "react-router";
 
 // 引入 ResultsLayout 中的 SearchContext
 import { SearchContext } from '../pages/ResultsLayout';
+import HeartCard from "../components/HeartCard";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -100,17 +101,12 @@ export default function ResultsSearch() {
     }
   }
 
-  
-
-  
   // 若 searchParams、currentPage 更新就觸發 handleSearchParams
   useEffect(() => {
     
     handleSearchParams();
 
   }, [searchParams, currentPage]);
-  
-
 
   //切換分頁
   const handlePageChange = (page) => {
@@ -118,38 +114,6 @@ export default function ResultsSearch() {
     //滾動到頁面頂部
     window.scrollTo({ top: 400, behavior: "smooth" });
   };
-
-
-  //點擊愛心改變-元件
-  const HeartCard = () => {
-    const [heart, setHeart] = useState(false);
-
-    return (
-      <>
-        <a
-          className="heart"
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            setHeart(!heart);
-          }}
-        >
-          <img
-            src={
-              heart
-                ? "src/assets/images/Interact Icon/Heard-02.svg"
-                : "src/assets/images/Interact Icon/Heard-01.svg"
-            }
-            alt="heart"
-            onClick={() => setHeart(!heart)}
-            style={{ cursor: "pointer" }}
-          />
-        </a>
-      </>
-    );
-  };
-
-  
 
   return (
     <>

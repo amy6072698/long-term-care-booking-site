@@ -42,20 +42,15 @@
     background-color: var(--bs-secondary-40);
     border: 2px solid var(--bs-secondary-40);
   }
-  .heart-icon{
-    width: 62.8px;
-    height: 62.8px;
+  .heart{
+    position: absolute;
+    right: 0;
+    top: 0;
     margin: 8px;
-    background-image: url("https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/5a854ec2c364c80e9f5cd08aadab09967823eea1/assets/images/Interact%20Icon/Heard-01.svg");
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
+    z-index: 2;
     &:hover{
       opacity: 0.9;
     }
-  }
-  .heartOn{
-    background-image: url("https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/5a854ec2c364c80e9f5cd08aadab09967823eea1/assets/images/Interact%20Icon/Heard-02.svg");
   }
 }
 

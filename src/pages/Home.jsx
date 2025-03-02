@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router";
+import HeartCard from "../components/HeartCard";
 
 export default function Home() {
+  const [heart, setHeart] = useState(false);
   return (
     <>
       <div className="index">
@@ -120,10 +123,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="kangLeLongTermCareCenter"
-                        className="heart-icon position-absolute end-0 top-0 z-2 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -157,10 +157,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="singFuLongTermCareCenter"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -194,10 +191,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="anKangLongTermCareCenter"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -242,10 +236,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="leKangRestHome"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -279,10 +270,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="yiRanRestHome"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -316,10 +304,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="siangHanRestHome"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -364,10 +349,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="kangFuNursingHome"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -401,10 +383,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="jingYiNursingHome"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -438,10 +417,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="yiKangNursingHome"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -486,10 +462,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="cingLangDayCareCenter"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -523,10 +496,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="chenSiDayCareCenter"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{
@@ -560,10 +530,7 @@ export default function Home() {
                       className="card-shadow card-hover-big rounded-2 position-relative"
                       style={{ width: "312px" }}
                     >
-                      <div
-                        id="nuanYangDayCareCenter"
-                        className="heart-icon position-absolute end-0 top-0 z-2"
-                      ></div>
+                      <HeartCard/>
                       <div
                         className="hots-card-image rounded-top-2"
                         style={{

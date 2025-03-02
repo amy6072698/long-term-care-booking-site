@@ -7,7 +7,9 @@ import ProductPage from "../pages/ProductPage";
 import News from "../pages/News";
 import Other from "../pages/Other";
 import Cart from "../pages/Cart";
+import ResultsLayout from "../pages/ResultsLayout";
 import Results from "../pages/Results";
+import ResultsSearch from "../pages/ResultsSearch";
 import Checkout from "../pages/Checkout";
 
 
@@ -19,7 +21,21 @@ const router = createHashRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <ResultsLayout />,
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+          // {
+          //   path: "results/search",
+          //   element: <Results />,
+          // },
+          {
+            path: "results/search",
+            element: <ResultsSearch />,
+          }
+        ]
       },
       {
         path: "product/:id",
@@ -37,10 +53,7 @@ const router = createHashRouter([
         path: "cart",
         element: <Cart />,
       },
-      {
-        path: "results",
-        element: <Results />,
-      },
+      
       {
         path: "checkout",
         element: <Checkout />,

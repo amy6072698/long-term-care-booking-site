@@ -1,14 +1,9 @@
 import { Link } from "react-router";
-import Banner from "../components/Banner";
-// import axios from "axios";
-
 
 export default function Home() {
   return (
     <>
-      <main className="index">
-        <Banner />
-
+      <div className="index">
         {/* index 人氣機構精選區段 */}
         <section className="index-hots pb-lg-14 pb-0">
           <div className="hots-container">
@@ -997,7 +992,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
+import { Modal } from 'bootstrap';
 import { Link } from "react-router";
 import axios from "axios";
 import BannerNoSearch from "../components/BannerNoSearch";
 import { useNavigate } from "react-router-dom";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 export default function Cart() {
   const [cartsData, setCartsData] = useState([]);
@@ -31,7 +33,6 @@ export default function Cart() {
   };
 
   //點擊下一步跳轉到ProductPage
-
   const navigate = useNavigate();
   const goToProductPage = () => {
     if (!selectId) {
@@ -40,6 +41,32 @@ export default function Cart() {
     }
     navigate(`/product/${selectId}`); //將選中的ID帶入網址
   };
+
+  //儲存預刪除的id
+  const [deleteId, setDeleteId] = useState(null);
+
+  //handleDeleteClick 方法
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+  };
+
+ //confirmDelete 方法&重新渲染
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`${BASE_URL}/carts/${deleteId}`);
+      setCartsData(cartsData.filter(item => item.id !== deleteId));
+      setDeleteId(null); // 關閉 Modal
+    } catch (error) {
+      console.error("刪除失敗", error);
+    }
+  };
+
+  // 清空購物車
+  const handleClearCart = () => {
+    setCartsData([]);
+  };
+
+
 
   return (
     <>
@@ -107,9 +134,9 @@ export default function Cart() {
                     <div className="line right-line"></div>
                     <div className="circle right-circle hollow-circle"></div>
                   </div>
-                  {/* 全選按鈕 */}
+                  {/* 全部刪除按鈕 */}
                   <div className="d-flex justify-content-end">
-                    <button type="button" className="btn btn-outline-secondary-40 all-font">
+                    <button type="button" className="btn btn-outline-secondary-40 all-font" onClick={handleClearCart}>
                       全部刪除
                     </button>
                   </div>
@@ -236,13 +263,14 @@ export default function Cart() {
                               </p>
                             </div>
                           </div>
-                          {/* Button trigger modal */}
+                          {/* 單獨刪除按鈕 */}
                           <div className="d-flex justify-content-end">
                             <button
                               type="button"
                               className="btn btn-outline-secondary-40"
                               data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
+                              data-bs-target="#deleteConfirmModal"
+                              onClick={() => handleDeleteClick(item.id)}
                             >
                               <i className="bi bi-x-lg"></i>
                               <span className="fs-6">刪除</span>
@@ -270,6 +298,45 @@ export default function Cart() {
                 </div>
               </div>
 
+              {/* ModalHeader提示框 */}
+              <div className="modal fade" id="deleteConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    {/* ModalHeader */}
+                    <div className="modal-header mx-auto none-border">
+                      <div className="d-flex flex-column align-items-center">
+                        <svg className="d-black" width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clipPath="url(#clip0_1599_1465)">
+                          <path d="M48.4336 8.96671V53.3C48.4336 53.9189 48.1878 54.5124 47.7502 54.95C47.3126 55.3875 46.7191 55.6334 46.1003 55.6334H11.1003C10.4815 55.6334 9.88797 55.3875 9.45039 54.95C9.0128 54.5124 8.76697 53.9189 8.76697 53.3V8.96671H48.4336Z" fill="#F7E2D9"/>
+                          <path d="M8.76697 8.96671H48.4336V15.9667H8.76697V8.96671Z" fill="#EEC2B0"/>
+                          <path d="M48.4336 8.96671V53.3C48.4336 53.9189 48.1878 54.5124 47.7502 54.95C47.3126 55.3875 46.7191 55.6334 46.1003 55.6334H11.1003C10.4815 55.6334 9.88797 55.3875 9.45039 54.95C9.0128 54.5124 8.76697 53.9189 8.76697 53.3V8.96671H48.4336Z" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M18.1 8.96668V4.30001C18.1 3.68117 18.3458 3.08768 18.7834 2.65009C19.221 2.21251 19.8145 1.96667 20.4333 1.96667H36.7666C37.3855 1.96667 37.979 2.21251 38.4166 2.65009C38.8541 3.08768 39.1 3.68117 39.1 4.30001V8.96668" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M1.76685 8.96671H55.4335" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M18.1 17.1333V45.1333" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M28.6 17.1333V45.1333" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M39.1 17.1333V45.1333" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0_1599_1465">
+                          <rect width="56" height="56" fill="white" transform="translate(0.599976 0.799988)"/>
+                          </clipPath>
+                          </defs>
+                          </svg>
+                        <h5 className="modal-title text-secondary-70">刪除機構</h5>
+                      </div>
+                    </div>
+                    {/* ModalBody */}
+                    <div className="modal-body">
+                      <p className="text-center fs-6" style={{color:" #B0B0B0"}}>請問確認刪除勾選的機構嗎？</p>
+                    </div>
+                    <div className="modal-footer d-flex justify-content-center none-border">
+                      <button type="button" className="btn modal-btn btn-secondary-40 fs-6 modal-me" data-bs-dismiss="modal" onClick={confirmDelete}>刪除</button>
+                      <button type="button" className="btn modal-btn btn-outline-secondary-40 fs-6" data-bs-dismiss="modal">保留</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* visit內容 */}
               <div
                 className="tab-pane fade"
@@ -288,7 +355,7 @@ export default function Cart() {
                     <div className="line left-line"></div>
                     <div className="circle right-circle"></div>
                   </div>
-                  {/* 全選按鈕 */}
+                  {/* 全部刪除按鈕 */}
                   <div className="d-flex justify-content-end">
                     <button type="button" className="btn btn-outline-secondary-40 all-font">
                       全部刪除

@@ -14,11 +14,40 @@
   }
   .banner-subtitle{
     color: #ffffff;
-    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.75);
   }
 }
 
-// index 各區段 RWD 調整(768px以上)
+// banner-no-search
+.banner-no-search{
+  .banner-image{
+    width: 100%;
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: top 0 left 50%;
+  }
+  .banner-title{
+    color: #ffffff;
+    margin-top: 0;
+    font-size: 31px;
+    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  }
+  .banner-subtitle{
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.75);
+  }
+}
+
+// // RWD 調整(576px以上)
+// @media (min-width: 576px) {
+//   .banner-no-search{
+//     .banner-image{
+//       background-position: top 17% right 20%;
+//     }
+//   }
+// }
+
+// RWD 調整(768px以上)
 @media (min-width: 768px) {
   // banner 區段
   .banner{
@@ -26,9 +55,14 @@
       background-position: top 50% right 35%;
     }
   }
+  .banner-no-search{
+    .banner-image{
+      background-position: top 50% right 35%;
+    }
+  }
 }
 
-// index 各區段 RWD 調整(992px以上)
+// RWD 調整(992px以上)
 @media (min-width: 992px) {
   // banner 區段
   .banner{
@@ -37,6 +71,21 @@
     }
     .banner-title{
       margin-top: 52px;
+      font-size: 64px;
+      line-height: 1.39;
+    }
+    .banner-subtitle{
+      color: #444444;
+      letter-spacing: 0.16em;
+      text-shadow: 0px 4px 4px rgba(255,255,255,0.5);
+    }
+  }
+  .banner-no-search{
+    .banner-image{
+      background-position: center;
+    }
+    .banner-title{
+      margin-top: 26px;
       font-size: 64px;
       line-height: 1.39;
     }

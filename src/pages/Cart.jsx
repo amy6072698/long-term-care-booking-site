@@ -1,45 +1,82 @@
-import { useEffect, useState ,useRef} from "react";
-import { Modal } from 'bootstrap';
-import { Link } from "react-router";
+import { useEffect, useState, useContext } from "react";
+import { Modal } from "bootstrap";
 import axios from "axios";
 import BannerNoSearch from "../components/BannerNoSearch";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+import { UserContext } from "./FrontLayout";
 
+let token;
+let myUserId;
 
 export default function Cart() {
   const [cartsData, setCartsData] = useState([]);
+  const { setIsLoginModalOpen } = useContext(UserContext);
+  const { setLoginModalMode } = useContext(UserContext);
 
-  //請求購物車資料
+  //取得cookie中的token和useId
+  const getToken = () => {
+    document.cookie = "myToken";
+    token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    myUserId = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+  };
+
+  //請求個人use購物車資料
   useEffect(() => {
+    getToken();
     try {
       (async () => {
-        const { data } = await axios.get(`${BASE_URL}/carts?_expand=product`);
+        const { data } = await axios.get(
+          `${BASE_URL}/carts?userId=${myUserId}&_expand=product`
+        );
         setCartsData(data);
-        console.log(data);
       })();
     } catch (error) {
-      console.log(error);
+      alert("請求購物車資料失敗");
     }
   }, []);
 
   //一次只選取一張卡片
   const [selectId, setSelectId] = useState(null);
 
-  //存放產品資訊到localStorage
-  const handleCheckboxChange = (id) => {
-    setSelectId(selectId === id ? null : id);
-    localStorage.setItem("selectProductId", id); //存入localStorage
-  };
+  //登入狀態
+  const { isLogin } = useContext(UserContext); // 用來判斷是否登入
+
+  //判斷pathname是否等於cart，如果是且未登入則跳出登入modal
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (pathname === "/cart") {
+      if (!isLogin) {
+        setLoginModalMode("login");
+        setIsLoginModalOpen(true);
+      }
+    }
+  }, [pathname]);
 
   //點擊下一步跳轉到ProductPage
   const navigate = useNavigate();
   const goToProductPage = () => {
+    const result = cartsData.find((item) => {
+      return item.id === selectId;
+    });
     if (!selectId) {
       alert("請選擇一間機構！");
       return;
     }
-    navigate(`/product/${selectId}`); //將選中的ID帶入網址
+    // json-server-auth 預設 1 小時 token 失效，宣告失效時間變數 expired，並做時間處理
+    const expired = new Date();
+    expired.setTime(expired.getTime() + 60 * 60 * 1000);
+    //存入localStorage
+    localStorage.setItem("selectProductId", selectId);
+    document.cookie = `selectProductId=${selectId}; expires=${expired.toUTCString()}; path=/;`;
+    //將選中的ID帶入網址
+    navigate(`/checkout/${result.productId}`); 
   };
 
   //儲存預刪除的id
@@ -50,11 +87,11 @@ export default function Cart() {
     setDeleteId(id);
   };
 
- //confirmDelete 方法&重新渲染
+  //confirmDelete 方法&重新渲染
   const confirmDelete = async () => {
     try {
       await axios.delete(`${BASE_URL}/carts/${deleteId}`);
-      setCartsData(cartsData.filter(item => item.id !== deleteId));
+      setCartsData(cartsData.filter((item) => item.id !== deleteId));
       setDeleteId(null); // 關閉 Modal
     } catch (error) {
       console.error("刪除失敗", error);
@@ -65,8 +102,6 @@ export default function Cart() {
   const handleClearCart = () => {
     setCartsData([]);
   };
-
-
 
   return (
     <>
@@ -136,7 +171,11 @@ export default function Cart() {
                   </div>
                   {/* 全部刪除按鈕 */}
                   <div className="d-flex justify-content-end">
-                    <button type="button" className="btn btn-outline-secondary-40 all-font" onClick={handleClearCart}>
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary-40 all-font"
+                      onClick={handleClearCart}
+                    >
                       全部刪除
                     </button>
                   </div>
@@ -157,15 +196,15 @@ export default function Cart() {
                             alt="building"
                             style={{ height: "290px" }}
                           />
-                        <div className="checkbox-mobile">
-                          <input
-                            className="form-check-input custom-checkbox checkbox-absolute"
-                            type="checkbox"
-                            id="checkboxNoLabel"
-                            value=""
-                            aria-label="勾選框"
-                          />
-                        </div>
+                          <div className="checkbox-mobile">
+                            <input
+                              className="form-check-input custom-checkbox checkbox-absolute"
+                              type="checkbox"
+                              id="checkboxNoLabel"
+                              value=""
+                              aria-label="勾選框"
+                            />
+                          </div>
                         </div>
                       </div>
                       <div className="col-lg-7">
@@ -284,9 +323,6 @@ export default function Cart() {
                 {/* 頁籤尾頁 */}
                 <div className="tab-footer d-flex justify-content-center justify-content-md-end mt-3">
                   <div className="flex-column">
-                    <p className="text-end">
-                      總金額：<span className="fs-5">10,000</span>元
-                    </p>
                     <button
                       type="button"
                       className="btn next-btn next-btn-size fs-5 btn-primary-40"
@@ -299,39 +335,121 @@ export default function Cart() {
               </div>
 
               {/* ModalHeader提示框 */}
-              <div className="modal fade" id="deleteConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div
+                className="modal fade"
+                id="deleteConfirmModal"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
                 <div className="modal-dialog">
                   <div className="modal-content">
                     {/* ModalHeader */}
                     <div className="modal-header mx-auto none-border">
                       <div className="d-flex flex-column align-items-center">
-                        <svg className="d-black" width="57" height="57" viewBox="0 0 57 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          className="d-black"
+                          width="57"
+                          height="57"
+                          viewBox="0 0 57 57"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <g clipPath="url(#clip0_1599_1465)">
-                          <path d="M48.4336 8.96671V53.3C48.4336 53.9189 48.1878 54.5124 47.7502 54.95C47.3126 55.3875 46.7191 55.6334 46.1003 55.6334H11.1003C10.4815 55.6334 9.88797 55.3875 9.45039 54.95C9.0128 54.5124 8.76697 53.9189 8.76697 53.3V8.96671H48.4336Z" fill="#F7E2D9"/>
-                          <path d="M8.76697 8.96671H48.4336V15.9667H8.76697V8.96671Z" fill="#EEC2B0"/>
-                          <path d="M48.4336 8.96671V53.3C48.4336 53.9189 48.1878 54.5124 47.7502 54.95C47.3126 55.3875 46.7191 55.6334 46.1003 55.6334H11.1003C10.4815 55.6334 9.88797 55.3875 9.45039 54.95C9.0128 54.5124 8.76697 53.9189 8.76697 53.3V8.96671H48.4336Z" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M18.1 8.96668V4.30001C18.1 3.68117 18.3458 3.08768 18.7834 2.65009C19.221 2.21251 19.8145 1.96667 20.4333 1.96667H36.7666C37.3855 1.96667 37.979 2.21251 38.4166 2.65009C38.8541 3.08768 39.1 3.68117 39.1 4.30001V8.96668" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M1.76685 8.96671H55.4335" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M18.1 17.1333V45.1333" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M28.6 17.1333V45.1333" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M39.1 17.1333V45.1333" stroke="#B43900" strokeWidth="2.304" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path
+                              d="M48.4336 8.96671V53.3C48.4336 53.9189 48.1878 54.5124 47.7502 54.95C47.3126 55.3875 46.7191 55.6334 46.1003 55.6334H11.1003C10.4815 55.6334 9.88797 55.3875 9.45039 54.95C9.0128 54.5124 8.76697 53.9189 8.76697 53.3V8.96671H48.4336Z"
+                              fill="#F7E2D9"
+                            />
+                            <path
+                              d="M8.76697 8.96671H48.4336V15.9667H8.76697V8.96671Z"
+                              fill="#EEC2B0"
+                            />
+                            <path
+                              d="M48.4336 8.96671V53.3C48.4336 53.9189 48.1878 54.5124 47.7502 54.95C47.3126 55.3875 46.7191 55.6334 46.1003 55.6334H11.1003C10.4815 55.6334 9.88797 55.3875 9.45039 54.95C9.0128 54.5124 8.76697 53.9189 8.76697 53.3V8.96671H48.4336Z"
+                              stroke="#B43900"
+                              strokeWidth="2.304"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M18.1 8.96668V4.30001C18.1 3.68117 18.3458 3.08768 18.7834 2.65009C19.221 2.21251 19.8145 1.96667 20.4333 1.96667H36.7666C37.3855 1.96667 37.979 2.21251 38.4166 2.65009C38.8541 3.08768 39.1 3.68117 39.1 4.30001V8.96668"
+                              stroke="#B43900"
+                              strokeWidth="2.304"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M1.76685 8.96671H55.4335"
+                              stroke="#B43900"
+                              strokeWidth="2.304"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M18.1 17.1333V45.1333"
+                              stroke="#B43900"
+                              strokeWidth="2.304"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M28.6 17.1333V45.1333"
+                              stroke="#B43900"
+                              strokeWidth="2.304"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M39.1 17.1333V45.1333"
+                              stroke="#B43900"
+                              strokeWidth="2.304"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
                           </g>
                           <defs>
-                          <clipPath id="clip0_1599_1465">
-                          <rect width="56" height="56" fill="white" transform="translate(0.599976 0.799988)"/>
-                          </clipPath>
+                            <clipPath id="clip0_1599_1465">
+                              <rect
+                                width="56"
+                                height="56"
+                                fill="white"
+                                transform="translate(0.599976 0.799988)"
+                              />
+                            </clipPath>
                           </defs>
-                          </svg>
-                        <h5 className="modal-title text-secondary-70">刪除機構</h5>
+                        </svg>
+                        <h5 className="modal-title text-secondary-70">
+                          刪除機構
+                        </h5>
                       </div>
                     </div>
                     {/* ModalBody */}
                     <div className="modal-body">
-                      <p className="text-center fs-6" style={{color:" #B0B0B0"}}>請問確認刪除勾選的機構嗎？</p>
+                      <p
+                        className="text-center fs-6"
+                        style={{ color: " #B0B0B0" }}
+                      >
+                        請問確認刪除勾選的機構嗎？
+                      </p>
                     </div>
                     <div className="modal-footer d-flex justify-content-center none-border">
-                      <button type="button" className="btn modal-btn btn-secondary-40 fs-6 modal-me" data-bs-dismiss="modal" onClick={confirmDelete}>刪除</button>
-                      <button type="button" className="btn modal-btn btn-outline-secondary-40 fs-6" data-bs-dismiss="modal">保留</button>
+                      <button
+                        type="button"
+                        className="btn modal-btn btn-secondary-40 fs-6 modal-me"
+                        data-bs-dismiss="modal"
+                        onClick={confirmDelete}
+                      >
+                        刪除
+                      </button>
+                      <button
+                        type="button"
+                        className="btn modal-btn btn-outline-secondary-40 fs-6"
+                        data-bs-dismiss="modal"
+                      >
+                        保留
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -357,7 +475,10 @@ export default function Cart() {
                   </div>
                   {/* 全部刪除按鈕 */}
                   <div className="d-flex justify-content-end">
-                    <button type="button" className="btn btn-outline-secondary-40 all-font">
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary-40 all-font"
+                    >
                       全部刪除
                     </button>
                   </div>
@@ -1068,6 +1189,7 @@ export default function Cart() {
                     <button
                       type="button"
                       className="btn next-btn next-btn-size fs-5 btn-primary-40"
+                      onClick={() => {}}
                     >
                       下一步
                     </button>

@@ -5,12 +5,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import { useParams } from "react-router";
+import { UserContext } from "./FrontLayout";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css";
-import { UserContext } from "./FrontLayout";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -28,7 +28,7 @@ export default function ProductPage() {
   const bannerRefNum = useRef(0);
   const thumbsRefNum = useRef(0);
   const { setIsLoginModalOpen } = useContext(UserContext);
-  const {setLoginModalMode} = useContext(UserContext);
+  const { setLoginModalMode } = useContext(UserContext);
 
   //取得token和登入id
   const getToken = () => {
@@ -72,13 +72,30 @@ export default function ProductPage() {
 
   //加入預約留床
   const addCartItem = async (e, id) => {
-    if(!isLogin){
-      setLoginModalMode('login')
-      setIsLoginModalOpen(true);
-      return
-    }
     e.preventDefault();
+    if (!isLogin) {
+      setLoginModalMode("login");
+      setIsLoginModalOpen(true);
+      return;
+    }
     try {
+
+      // const res = await axios.get(`${BASE_URL}/600/carts`, {
+      //   headers: {
+      //     authorization: `Bearer ${token}`,
+      //   },
+      // });
+      // const duplicates = res.data.find((item) => {
+      //   return item.productId === Number(id);
+      // });
+      // console.log(duplicates);
+      // // //如果有重複選取則跳出
+      // if (duplicates) {
+      //   console.log(duplicates)
+      //   return;
+      // }
+      
+      //如果沒跳出就新增
       await axios.post(
         `${BASE_URL}/600/carts`,
         {
@@ -133,12 +150,6 @@ export default function ProductPage() {
     });
   };
 
-  //從立即預訂點選下一步跳轉到產品頁 byJack
-  const selectedProductId = localStorage.getItem("selectedProductId");
-  useEffect(() => {
-    console.log("選中的商品 ID:", selectedProductId);
-  }, []);
-  
   return (
     <main>
       {/* 彈跳視窗 */}
@@ -307,7 +318,6 @@ export default function ProductPage() {
                 disabled={isLoading}
                 type="button"
                 onClick={(e) => {
-                  // addCartItem(e, product.id);
                   e.preventDefault();
                 }}
                 className="btn btn-outline-primary-40  py-4 w-100  intro-btn d-flex justify-content-center align-items-center gap-2"
@@ -326,8 +336,8 @@ export default function ProductPage() {
                 disabled={isLoading}
                 type="button"
                 onClick={(e) => {
+                  // checkDuplicateBooking(e, product.id);
                   addCartItem(e, product.id);
-                  
                 }}
                 className="btn btn-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
               >

@@ -1,9 +1,18 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import BannerNoSearch from "../components/BannerNoSearch";
 import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+let token;
+let myUserId;
+let selectProductId;
 
 export default function Checkout() {
+  const { id: productId } = useParams();
+  const navigate = useNavigate();
+  const [checkoutData, setCheckoutData] = useState({});
   const {
     register,
     handleSubmit,
@@ -13,12 +22,59 @@ export default function Checkout() {
     mode: "onChange",
   });
 
-  const navigate = useNavigate();
+  //取得token和登入id、selectProductId
+  const getToken = () => {
+    document.cookie = "myToken";
+    token = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    myUserId = document.cookie.replace(
+      /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+    selectProductId = document.cookie.replace(
+      /(?:(?:^|.*;\s*)selectProductId\s*\=\s*([^;]*).*$)|^.*$/,
+      "$1"
+    );
+  };
 
+  //元件渲染完後觸發請求id
+  //使用600無法的原因可能是products資料表中沒有userId做辨認
+  useEffect(() => {
+    getToken();
+    try {
+      (async () => {
+        const { data } = await axios.get(`${BASE_URL}/products/${productId}`);
+        setCheckoutData(data);
+      })();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  //處理提交
   const onSubmit = (data, e) => {
     e.preventDefault();
-    reset();
-    console.log(data);
+    handleCheckoutSuccess();
+  };
+
+  //處理結帳
+  const handleCheckoutSuccess = () => {
+    
+    try {
+      (async () => {
+        await axios.delete(`${BASE_URL}/600/carts/${selectProductId}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+      })();
+      navigate("/checkoutSuccess");
+      reset();
+    } catch (error) {
+      alert("結帳失敗");
+    }
   };
 
   return (
@@ -28,6 +84,17 @@ export default function Checkout() {
         onSubmit={handleSubmit(onSubmit)}
         className="container py-11 bg-white"
       >
+        <div className="row justify-content-center  ">
+          {/* 進度條 */}
+          <div className="col-6 d-flex align-items-center px-4 py-11">
+            <div className="circle left-circle"></div>
+            <div className="line left-line"></div>
+            <div className="circle middle-circle"></div>
+            <div className="line left-line"></div>
+            <div className="circle middle-circle"></div>
+          </div>
+        </div>
+
         <div className="row justify-content-center ">
           <div className="col-md-10 col-12">
             {/* 訂單資訊 */}
@@ -40,17 +107,17 @@ export default function Checkout() {
                 <div className="d-flex flex-wrap flex-lg-nowrap gap-7">
                   <img
                     className="w-100"
-                    src="src/assets/images/Building/B-01.png"
+                    src={checkoutData?.thumbs?.[0]}
                     alt="機構照片"
                   />
                   <div className="d-flex flex-column row-gap-5 pt-7 px-7 px-lg-0 pb- py-lg-7 pe-lg-7 w-100">
-                    <h5>康福護理苑</h5>
+                    <h5>{checkoutData?.name}</h5>
                     <div className="d-flex">
                       <i
                         className="bi bi-geo-alt-fill"
                         style={{ color: "#ea8c55" }}
                       ></i>
-                      <div className="fs-7">新北市板橋區中山路Ｆ</div>
+                      <div className="fs-7">{checkoutData?.address}</div>
                     </div>
                     <div className="d-flex gap-4 justify-content-between  align-items-center">
                       <label
@@ -95,7 +162,9 @@ export default function Checkout() {
                         房型
                       </label>
                       <select
-                        {...register("roomType", { required: "請選擇一個房型" })}
+                        {...register("roomType", {
+                          required: "請選擇一個房型",
+                        })}
                         defaultValue=""
                         id="roomType"
                         className="form-select py-5 checkout-border-primary"
@@ -142,7 +211,6 @@ export default function Checkout() {
                       </label>
                       <div className="input-group">
                         <input
-                        
                           {...register("fullName", {
                             required: "請填寫姓名",
                           })}

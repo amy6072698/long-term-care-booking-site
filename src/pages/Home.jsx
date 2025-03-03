@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import HeartCard from "../components/HeartCard";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function Home() {
   const [heart, setHeart] = useState(false);
@@ -686,7 +691,148 @@ export default function Home() {
             </h6>
           </div>
           {/* Swiper 用戶評價卡片 */}
-          <div className="reviewSwiper-container">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={30}
+            slidesPerView={3}
+            navigation
+            pagination={{ clickable: true }}
+          >
+            <SwiperSlide>
+              <div className="card reviews-card d-flex flex-column justify-content-between">
+                <div>
+                  <h5 className="card-title text-secondary-70 mb-1 mx-2">
+                    便捷預約機構
+                  </h5>
+                  <div className="stars-icon mb-7"></div>
+                  <p className="card-text text-start fs-6">
+                    長照預約服務網讓我能輕鬆找到適合的長照機構，省去了繁瑣的現場詢問。網站操作簡單，預約流程流暢，非常方便！
+                  </p>
+                </div>
+                <div className="users d-flex justify-content-end align-items-center mt-auto">
+                  <img
+                    className="d-block me-2"
+                    src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-04.png?raw=true"
+                    style={{ width: "44px", height: "44px" }}
+                    alt="user picture"
+                  />
+                  <p className="card-text text-white-100 me-4">郭先生</p>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card reviews-card d-flex flex-column justify-content-between">
+                <div>
+                  <h5 className="card-title text-secondary-70 mb-1 mx-2">
+                    資訊透明
+                  </h5>
+                  <div className="stars-icon mb-7"></div>
+                  <p className="card-text text-start fs-6">
+                    使用這個預約網後，我發現各機構的服務詳情和評價都很清楚，讓我能夠仔細比較，選擇最適合的長照服務，感覺很安心。
+                  </p>
+                </div>
+                <div className="users d-flex justify-content-end align-items-center mt-auto">
+                  <img
+                    className="d-block me-2"
+                    src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-05.png?raw=true"
+                    style={{ width: "44px", height: "44px" }}
+                    alt="user picture"
+                  />
+                  <p className="card-text text-white-100 me-4">李小姐</p>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card reviews-card d-flex flex-column justify-content-between">
+                <div>
+                  <h5 className="card-title text-secondary-70 mb-1 mx-2">
+                    即時更新
+                  </h5>
+                  <div className="stars-icon mb-7"></div>
+                  <p className="card-text text-start fs-6">
+                    預約服務網的即時更新功能非常好，讓我隨時能夠掌握各機構的最新服務和床位情況。這樣的靈活性讓我感到很放心！
+                  </p>
+                </div>
+                <div className="users d-flex justify-content-end align-items-center mt-auto">
+                  <img
+                    className="d-block me-2"
+                    src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-03.png?raw=true"
+                    style={{ width: "44px", height: "44px" }}
+                    alt="user picture"
+                  />
+                  <p className="card-text text-white-100 me-4">王先生</p>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card reviews-card d-flex flex-column justify-content-between">
+                <div>
+                  <h5 className="card-title text-secondary-70 mb-1 mx-2">
+                    貼心解答 安心選擇
+                  </h5>
+                  <div className="stars-icon mb-7"></div>
+                  <p className="card-text text-start fs-6">
+                    客服非常耐心，回答了我很多疑問，最終選擇的長照機構也非常滿意，感謝這個平台！
+                  </p>
+                </div>
+                <div className="users d-flex justify-content-end align-items-center mt-auto">
+                  <img
+                    className="d-block me-2"
+                    src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-01.png?raw=true"
+                    style={{ width: "44px", height: "44px" }}
+                    alt="user picture"
+                  />
+                  <p className="card-text text-white-100 me-4">張先生</p>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card reviews-card d-flex flex-column justify-content-between">
+                <div>
+                  <h5 className="card-title text-secondary-70 mb-1 mx-2">
+                    快速確認
+                  </h5>
+                  <div className="stars-icon mb-7"></div>
+                  <p className="card-text text-start fs-6">
+                    整個預約過程很順利，選擇多樣,，約後很快就收到確認通知，家人都覺得很安心。
+                  </p>
+                </div>
+                <div className="users d-flex justify-content-end align-items-center mt-auto">
+                  <img
+                    className="d-block me-2"
+                    src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-02.png?raw=true"
+                    style={{ width: "44px", height: "44px" }}
+                    alt="user picture"
+                  />
+                  <p className="card-text text-white-100 me-4">林小姐</p>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="card reviews-card d-flex flex-column justify-content-between">
+                <div>
+                  <h5 className="card-title text-secondary-70 mb-1 mx-2">
+                    找到理想護理之家
+                  </h5>
+                  <div className="stars-icon mb-7"></div>
+                  <p className="card-text text-start fs-6">
+                    這個預約網讓我找到了一家非常適合的護理之家，服務周到，網站使用也非常方便。
+                  </p>
+                </div>
+                <div className="users d-flex justify-content-end align-items-center mt-auto">
+                  <img
+                    className="d-block me-2"
+                    src="https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-07.png?raw=true"
+                    style={{ width: "44px", height: "44px" }}
+                    alt="user picture"
+                  />
+                  <p className="card-text text-white-100 me-4">黃太太</p>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+
+          {/* <div className="reviewSwiper-container">
             <div className="swiper indexReviewSwiper">
               <div className="swiper-wrapper">
                 <div className="swiper-slide">
@@ -823,9 +969,9 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* Swiper next、prev、pagination 底下頁面控制按鈕 */}
-          <div className="container d-none d-lg-block">
+          {/* <div className="container d-none d-lg-block">
             <div
               className="d-flex justify-content-center gap-6"
               style={{ width: "100%", height: "30px" }}
@@ -834,7 +980,7 @@ export default function Home() {
               <div className="swiper-pagination mx-0 d-flex justify-content-center align-items-center gap-6"></div>
               <div className="swiper-next me-auto"></div>
             </div>
-          </div>
+          </div> */}
         </section>
         {/* index 常見問題 Ｑ＆Ａ 區段 */}  
         <section className="index-faq bg-primary-30" id="faq">

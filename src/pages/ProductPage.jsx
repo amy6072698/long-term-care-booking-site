@@ -3,7 +3,7 @@ import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
-import { ToastContainer, toast, Zoom } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useParams } from "react-router";
 import { UserContext } from "./FrontLayout";
 import "swiper/css/free-mode";
@@ -11,11 +11,10 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css";
+import Booking from "../components/Booking";
+import getToken from '../assets/js/getTokenFromCookie';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-let token;
-let myUserId;
 
 export default function ProductPage() {
   const { isLogin } = useContext(UserContext); // 用來判斷是否登入
@@ -27,22 +26,9 @@ export default function ProductPage() {
   const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
   const bannerRefNum = useRef(0);
   const thumbsRefNum = useRef(0);
-  const { setIsLoginModalOpen } = useContext(UserContext);
-  const { setLoginModalMode } = useContext(UserContext);
 
   //取得token和登入id
-  const getToken = () => {
-    //取得cookie中的token和useId
-    document.cookie = "myToken";
-    token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    myUserId = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-  };
+  const { token, myUserId } = getToken();
 
   //登入狀態變動時觸發取得token
   useEffect(() => {
@@ -54,6 +40,7 @@ export default function ProductPage() {
   //畫面渲染完成觸發取得產品
   useEffect(() => {
     getProducts();
+    getToken();
   }, []);
 
   //取得產品資料
@@ -68,86 +55,6 @@ export default function ProductPage() {
     } catch (error) {
       alert("取得產品資料失敗");
     }
-  };
-
-  //加入預約留床
-  const addCartItem = async (e, id) => {
-    e.preventDefault();
-    //如果未登入則跳出登入modal
-    if (!isLogin) {
-      setLoginModalMode("login");
-      setIsLoginModalOpen(true);
-      return;
-    }
-    try {
-      //使用路由600有可能會因carts中無使用者id而無法get
-      const { data } = await axios.get(`${BASE_URL}/640/carts`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      //篩選ussr是否有預訂資料
-      const hasDuplicateBooking = data.find((item) => {
-        return item.productId === id;
-      });
-      // 如果user有預訂過則跳出函式
-      if (hasDuplicateBooking) {
-        showErrorMessage("您已重複預約，請至立即預訂查看");
-        return;
-      }
-      //將此筆資料加入留床
-      await axios.post(
-        `${BASE_URL}/600/carts`,
-        {
-          productId: Number(id),
-          userId: Number(myUserId),
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsLoading(true);
-      showSuccessMessage();
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
-    } catch (error) {
-      const { data } = error.response;
-      showErrorMessage(data);
-    }
-  };
-
-  //預約成功彈跳視窗
-  const showSuccessMessage = () => {
-    toast.success(`加入預約成功👋\n請去立即預訂查看`, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-      style: { whiteSpace: "pre-line" },
-    });
-  };
-
-  //預約失敗彈跳視窗
-  const showErrorMessage = (message) => {
-    toast.error(message, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-    });
   };
 
   return (
@@ -323,25 +230,14 @@ export default function ProductPage() {
                 className="btn btn-outline-primary-40  py-4 w-100  intro-btn d-flex justify-content-center align-items-center gap-2"
               >
                 預約參訪
-                {isLoading && (
-                  <ReactLoading
-                    type={"spin"}
-                    color={"#000"}
-                    height={"1.5rem"}
-                    width={"1.5rem"}
-                  />
-                )}
               </button>
-              <button
-                disabled={isLoading}
-                type="button"
-                onClick={(e) => {
-                  // checkDuplicateBooking(e, product.id);
-                  addCartItem(e, product.id);
-                }}
-                className="btn btn-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
+              <Booking
+                product={product}
+                token={token}
+                myUserId={myUserId}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
               >
-                預定留床
                 {isLoading && (
                   <ReactLoading
                     type={"spin"}
@@ -350,7 +246,7 @@ export default function ProductPage() {
                     width={"1.5rem"}
                   />
                 )}
-              </button>
+              </Booking>
             </div>
           </div>
         </div>

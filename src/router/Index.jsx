@@ -12,6 +12,10 @@ import Results from "../pages/Results";
 import ResultsSearch from "../pages/ResultsSearch";
 import CheckoutSuccess from "../pages/checkoutSuccess";
 import Checkout from "../pages/Checkout";
+import AccountIndex from "../pages/AccountIndex";
+import AccountLayout from "../pages/AccountLayout";
+import AccountProfile from "../pages/AccountProfile";
+import AccountPurchase from "../pages/AccountPurchase";
 
 const router = createHashRouter([
   {
@@ -19,6 +23,24 @@ const router = createHashRouter([
     path: "/",
     element: <FrontLayout />,
     children: [
+      {
+        path: "account",
+        element: <AccountIndex />,
+      },
+      {
+        path: "account/inner",
+        element: <AccountLayout />,
+        children: [
+          {
+            path: "profile",
+            element: <AccountProfile />
+          },
+          {
+            path: "purchase",
+            element: <AccountPurchase />
+          }
+        ]
+      },
       {
         path: "",
         element: <ResultsLayout />,

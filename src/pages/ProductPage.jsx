@@ -83,11 +83,13 @@ export default function ProductPage() {
           {product?.images?.map((thumb, index) => {
             return (
               <SwiperSlide key={index}>
-                <img
-                  src={thumb}
-                  alt="機構圖片"
-                  className=" w-100 h-100 object-fit-cover"
-                />
+                <div style={{ width: "1076px", height: "535px", overflow: "hidden" }}>
+                  <img
+                    src={thumb}
+                    alt="機構圖片"
+                    className=" w-100 h-100 object-fit-cover"
+                  />
+                </div>
               </SwiperSlide>
             );
           })}
@@ -123,18 +125,19 @@ export default function ProductPage() {
             {product?.images?.map((imageUrl, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <img
-                    className="object-fit-cover"
-                    style={{ height: "535px" }}
-                    src={imageUrl}
-                    alt="機構圖片"
-                    onLoad={() => {
-                      bannerRefNum.current++;
-                      bannerRefNum.current === product.images.length
-                        ? setBannerIsLoading(false)
-                        : null;
-                    }}
-                  />
+                  <div style={{ width: "1076px", height: "535px", overflow: "hidden" }}>
+                    <img
+                      className="object-fit-cover w-100 h-100"
+                      src={imageUrl}
+                      alt="機構圖片"
+                      onLoad={() => {
+                        bannerRefNum.current++;
+                        bannerRefNum.current === product.images.length
+                          ? setBannerIsLoading(false)
+                          : null;
+                      }}
+                    />
+                  </div>
                 </SwiperSlide>
               );
             })}
@@ -160,17 +163,19 @@ export default function ProductPage() {
             {product?.thumbs?.map((thumb, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <img
-                    src={thumb}
-                    alt="機構圖片"
-                    className="h-100"
-                    onLoad={() => {
-                      thumbsRefNum.current++;
-                      thumbsRefNum.current === product.thumbs.length
-                        ? setThumbsIsLoading(false)
-                        : null;
-                    }}
-                  />
+                  <div style={{ width: "206.07px", height: "127.75px", overflow: "hidden" }}>
+                    <img
+                      src={thumb}
+                      alt="機構圖片"
+                      className="object-fit-cover w-100 h-100"
+                      onLoad={() => {
+                        thumbsRefNum.current++;
+                        thumbsRefNum.current === product.thumbs.length
+                          ? setThumbsIsLoading(false)
+                          : null;
+                      }}
+                    />
+                  </div>
                 </SwiperSlide>
               );
             })}

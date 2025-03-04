@@ -940,34 +940,8 @@
   "carts": [
     {
       "productId": 1,
-      "id": 1
-    },
-    {
-      "productId": 2,
+      "userId": "2",
       "id": 2
-    },
-    {
-      "productId": 3,
-      "id": 3
-    },
-    {
-      "productId": 4,
-      "id": 4
-    },
-    {
-      "productId": 1,
-      "userId": "2",
-      "id": 5
-    },
-    {
-      "productId": 1,
-      "userId": "2",
-      "id": 6
-    },
-    {
-      "productId": 1,
-      "userId": "2",
-      "id": 7
     }
   ]
 }

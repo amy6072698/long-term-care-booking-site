@@ -13,6 +13,7 @@ export default function Cart() {
   const [cartsData, setCartsData] = useState([]);
   const { setIsLoginModalOpen } = useContext(UserContext);
   const { setLoginModalMode } = useContext(UserContext);
+  const { isLogin } = useContext(UserContext); // 用來判斷是否登入
 
   //取得cookie中的token和useId
   const getToken = () => {
@@ -28,23 +29,46 @@ export default function Cart() {
   };
 
   //請求個人use購物車資料
+  //如果登入則會取token+請求個人購物車資料
+  //如無登入則跳登入modal
   useEffect(() => {
-    getToken();
-    try {
-      (async () => {
-        const { data } = await axios.get(
-          `${BASE_URL}/carts?userId=${myUserId}&_expand=product`
-        );
-        setCartsData(data);
-      })();
-    } catch (error) {
-      alert("請求購物車資料失敗");
+    const fetchCartData = () => {
+      try {
+        (async () => {
+          const { data } = await axios.get(
+            `${BASE_URL}/600/carts?userId=${myUserId}&_expand=product`,
+            {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setCartsData(data);
+        })();
+      } catch (error) {
+        alert("請求購物車資料失敗");
+      }
+    };
+
+    const handleLoginModal = () => {
+      setLoginModalMode("login");
+      setIsLoginModalOpen(true);
+    };
+
+    if (isLogin) {
+      getToken();
+      fetchCartData();
+    } else {
+      handleLoginModal();
     }
-  }, []);
+  }, [isLogin]);
 
   //一次只選取一張卡片
   const [selectId, setSelectId] = useState(null);
 
+<<<<<<< HEAD
+  //點擊下一步跳轉到ProductPage
+=======
   //登入狀態
   const { isLogin } = useContext(UserContext); // 用來判斷是否登入
 
@@ -60,6 +84,7 @@ export default function Cart() {
   }, [pathname]);
 
   //點擊下一步跳轉到結帳頁面
+>>>>>>> dev
   const navigate = useNavigate();
   const goToProductPage = () => {
     const result = cartsData.find((item) => {
@@ -72,8 +97,7 @@ export default function Cart() {
     // json-server-auth 預設 1 小時 token 失效，宣告失效時間變數 expired，並做時間處理
     const expired = new Date();
     expired.setTime(expired.getTime() + 60 * 60 * 1000);
-    //存入localStorage
-    localStorage.setItem("selectProductId", selectId);
+    //存入cookie
     document.cookie = `selectProductId=${selectId}; expires=${expired.toUTCString()}; path=/;`;
     //將選中的ID帶入網址
     navigate(`/checkout/${result.productId}`);

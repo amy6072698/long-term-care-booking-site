@@ -73,34 +73,34 @@ export default function ProductPage() {
   //加入預約留床
   const addCartItem = async (e, id) => {
     e.preventDefault();
+    //如果未登入則跳出登入modal
     if (!isLogin) {
       setLoginModalMode("login");
       setIsLoginModalOpen(true);
       return;
     }
     try {
-
-      // const res = await axios.get(`${BASE_URL}/600/carts`, {
-      //   headers: {
-      //     authorization: `Bearer ${token}`,
-      //   },
-      // });
-      // const duplicates = res.data.find((item) => {
-      //   return item.productId === Number(id);
-      // });
-      // console.log(duplicates);
-      // // //如果有重複選取則跳出
-      // if (duplicates) {
-      //   console.log(duplicates)
-      //   return;
-      // }
-      
-      //如果沒跳出就新增
+      //使用路由600有可能會因carts中無使用者id而無法get
+      const { data } = await axios.get(`${BASE_URL}/640/carts`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      //篩選ussr是否有預訂資料
+      const hasDuplicateBooking = data.find((item) => {
+        return item.productId === id;
+      });
+      // 如果user有預訂過則跳出函式
+      if (hasDuplicateBooking) {
+        showErrorMessage("您已重複預約，請至立即預訂查看");
+        return;
+      }
+      //將此筆資料加入留床
       await axios.post(
         `${BASE_URL}/600/carts`,
         {
-          productId: id,
-          userId: myUserId,
+          productId: Number(id),
+          userId: Number(myUserId),
         },
         {
           headers: {
@@ -114,12 +114,12 @@ export default function ProductPage() {
         setIsLoading(false);
       }, 3000);
     } catch (error) {
-      console.log(error);
-      showErrorMessage();
+      const { data } = error.response;
+      showErrorMessage(data);
     }
   };
 
-  //加入預約成功觸發彈跳視窗
+  //預約成功彈跳視窗
   const showSuccessMessage = () => {
     toast.success(`加入預約成功👋\n請去立即預訂查看`, {
       position: "top-center",
@@ -135,9 +135,9 @@ export default function ProductPage() {
     });
   };
 
-  //加入預約成功觸發彈跳視窗
-  const showErrorMessage = () => {
-    toast.error("預訂失敗", {
+  //預約失敗彈跳視窗
+  const showErrorMessage = (message) => {
+    toast.error(message, {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,

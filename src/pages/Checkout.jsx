@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import BannerNoSearch from "../components/BannerNoSearch";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -13,11 +13,14 @@ export default function Checkout() {
   const { id: productId } = useParams();
   const navigate = useNavigate();
   const [checkoutData, setCheckoutData] = useState({});
+  const [price, setPrice] = useState(0);
+  const [roomType, setRoomType] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm({
     mode: "onChange",
   });
@@ -46,7 +49,11 @@ export default function Checkout() {
     try {
       (async () => {
         const { data } = await axios.get(`${BASE_URL}/products/${productId}`);
+        console.log(data);
         setCheckoutData(data);
+        //放入第一筆價格
+        setPrice(data.roomCards[0].price);
+        setRoomType(data.roomCards[0].roomType);
       })();
     } catch (error) {
       console.log(error);
@@ -61,7 +68,6 @@ export default function Checkout() {
 
   //處理結帳
   const handleCheckoutSuccess = () => {
-    
     try {
       (async () => {
         await axios.delete(`${BASE_URL}/600/carts/${selectProductId}`, {
@@ -76,6 +82,23 @@ export default function Checkout() {
       alert("結帳失敗");
     }
   };
+  
+  //監聽表單roomType，如有更動則賦予值到selectedRoomType
+  const selectedRoomType = useWatch({
+    control,
+    name: "roomType",
+  });
+
+  // 尋找房型中符合的項目並賦予值到price中
+  useEffect(() => {
+    console.log(selectedRoomType);
+    if (selectedRoomType) {
+      const result = checkoutData.roomCards.find((item) => {
+        return item.roomType === selectedRoomType;
+      });
+      setPrice(result.price);
+    }
+  }, [selectedRoomType]);
 
   return (
     <main className="checkout">
@@ -161,21 +184,29 @@ export default function Checkout() {
                       >
                         房型
                       </label>
+                      {/* {
+                        JSON.stringify(
+                          checkoutData?.roomCards?.[0]?.roomType
+                        )
+                      } */}
                       <select
                         {...register("roomType", {
                           required: "請選擇一個房型",
                         })}
-                        defaultValue=""
+                        defaultValue={checkoutData?.roomCards?.[0]?.roomType}
                         id="roomType"
-                        className="form-select py-5 checkout-border-primary"
-                        aria-label="Default select example"
+                        className="form-select py-5
+                              checkout-border-primary"
+                        aria-label="Default
+                              select example"
                       >
-                        <option value="" disabled>
-                          選擇房型
-                        </option>
-                        <option value="三人房">三人房</option>
-                        <option value="單人房">單人房</option>
-                        <option value="六人房">六人房</option>
+                        {checkoutData?.roomCards?.map((item) => {
+                          return (
+                            <option key={item.id} value={item.roomType}>
+                              {item.roomType}
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
                     {errors.roomType && (
@@ -185,12 +216,12 @@ export default function Checkout() {
                     )}
                     <div>
                       <div className="fs-8 d-flex justify-content-end">
-                        單人房型
+                        {roomType}
                       </div>
                       <div className="d-flex gap-1 gap-lg-4 justify-content-between align-items-center">
                         <div className="fs-7 ">留床費用</div>
                         <div className="d-flex">
-                          <h5>NTD 5000</h5>
+                          <h5>NTD {price}</h5>
                         </div>
                       </div>
                     </div>
@@ -394,7 +425,7 @@ export default function Checkout() {
                             },
                           },
                         })}
-                        placeholder="DD/YY"
+                        placeholder="MM/YY"
                         type="tel"
                         className="form-control px-2 py-2 checkout-border-primary"
                         id="expiryDate"
@@ -437,7 +468,7 @@ export default function Checkout() {
                 </div>
                 <div className="d-flex gap-2  justify-content-end">
                   <div className="fs-7 align-self-end">付款金額</div>
-                  <h5>NTD 5,000</h5>
+                  <h5>NTD {price}</h5>
                 </div>
               </div>
             </div>

@@ -59,7 +59,7 @@ export default function Cart() {
     }
   }, [pathname]);
 
-  //點擊下一步跳轉到ProductPage
+  //點擊下一步跳轉到結帳頁面
   const navigate = useNavigate();
   const goToProductPage = () => {
     const result = cartsData.find((item) => {
@@ -76,7 +76,7 @@ export default function Cart() {
     localStorage.setItem("selectProductId", selectId);
     document.cookie = `selectProductId=${selectId}; expires=${expired.toUTCString()}; path=/;`;
     //將選中的ID帶入網址
-    navigate(`/checkout/${result.productId}`); 
+    navigate(`/checkout/${result.productId}`);
   };
 
   //儲存預刪除的id

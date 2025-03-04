@@ -12,6 +12,7 @@ import Results from "../pages/Results";
 import ResultsSearch from "../pages/ResultsSearch";
 import CheckoutSuccess from "../pages/checkoutSuccess";
 import Checkout from "../pages/Checkout";
+import Recordings from "../pages/Recording";
 
 const router = createHashRouter([
   {
@@ -34,8 +35,8 @@ const router = createHashRouter([
           {
             path: "results/search",
             element: <ResultsSearch />,
-          }
-        ]
+          },
+        ],
       },
       {
         path: "product/:id",
@@ -58,9 +59,13 @@ const router = createHashRouter([
         element: <Checkout />,
       },
       {
-        path:'checkoutSuccess',
-        element:<CheckoutSuccess/>
-      }
+        path: "checkoutSuccess",
+        element: <CheckoutSuccess />,
+      },
+      {
+        path: "recording",
+        element: <Recordings />,
+      },
     ],
   },
   {

@@ -1,5 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { Link as ScrollLink, scroller } from "react-scroll";
+
+import FooterLogo from "../assets/images/Logo/LB-White.svg?react";
 function Footer() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -34,15 +36,13 @@ function Footer() {
               className="navbar-brand py-xl-0 py-1 me-xl-9 me-0 align-self-center"
             >
               {/* 桌面版 logo */}
-              <img
-                src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/399576c7c8ec60e611e2d35218b94d8f6a92a78b/assets/images/Logo/LB-White.svg"
+              <FooterLogo
                 alt="logo"
                 className="d-xxl-inline-block d-none"
                 style={{ width: "360px", height: "107px" }}
               />
               {/* 手機版 logo */}
-              <img
-                src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/399576c7c8ec60e611e2d35218b94d8f6a92a78b/assets/images/Logo/LB-White.svg"
+              <FooterLogo
                 alt="logo"
                 className="d-xxl-none d-inline-block"
                 style={{ width: "230px", height: "100%" }}

@@ -66,25 +66,7 @@ export default function Cart() {
   //一次只選取一張卡片
   const [selectId, setSelectId] = useState(null);
 
-<<<<<<< HEAD
   //點擊下一步跳轉到ProductPage
-=======
-  //登入狀態
-  const { isLogin } = useContext(UserContext); // 用來判斷是否登入
-
-  //判斷pathname是否等於cart，如果是且未登入則跳出登入modal
-  const { pathname } = useLocation();
-  useEffect(() => {
-    if (pathname === "/cart") {
-      if (!isLogin) {
-        setLoginModalMode("login");
-        setIsLoginModalOpen(true);
-      }
-    }
-  }, [pathname]);
-
-  //點擊下一步跳轉到結帳頁面
->>>>>>> dev
   const navigate = useNavigate();
   const goToProductPage = () => {
     const result = cartsData.find((item) => {

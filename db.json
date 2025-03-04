@@ -17,6 +17,15 @@
       "birthday": "1999-06-22",
       "phone": "0975500680",
       "id": 2
+    },
+    {
+      "email": "1@mail.com",
+      "password": "$2a$10$.8mM2Y/X8WaAQOk4R5b/DeET9NKZdeWZlAm6TSBmsVdFpRPvJCW8a",
+      "name": "Chris",
+      "gender": "male",
+      "birthday": "2025-03-04",
+      "phone": "0911111111",
+      "id": 3
     }
   ],
   "products": [

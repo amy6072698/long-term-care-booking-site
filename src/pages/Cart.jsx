@@ -14,6 +14,8 @@ export default function Cart() {
   const { setIsLoginModalOpen } = useContext(UserContext);
   const { setLoginModalMode } = useContext(UserContext);
   const { isLogin } = useContext(UserContext); // 用來判斷是否登入
+  // const { setIsLogin } = useContext(UserContext);
+  // const { setUserName } = useContext(UserContext);
 
   //取得cookie中的token和useId
   const getToken = () => {
@@ -26,11 +28,21 @@ export default function Cart() {
       /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
+    if (!token) {
+      handleLoginModal();
+    }
   };
 
-  //請求個人use購物車資料
-  //如果登入則會取token+請求個人購物車資料
-  //如無登入則跳登入modal
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  //跳出登入視窗
+  const handleLoginModal = () => {
+    setLoginModalMode("login");
+    setIsLoginModalOpen(true);
+  };
+
   useEffect(() => {
     const fetchCartData = () => {
       try {
@@ -49,17 +61,10 @@ export default function Cart() {
         alert("請求購物車資料失敗");
       }
     };
-
-    const handleLoginModal = () => {
-      setLoginModalMode("login");
-      setIsLoginModalOpen(true);
-    };
-
+    //如果登入成功則重新取得token，
     if (isLogin) {
       getToken();
       fetchCartData();
-    } else {
-      handleLoginModal();
     }
   }, [isLogin]);
 

@@ -8,7 +8,6 @@ import News from "../pages/News";
 import Other from "../pages/Other";
 import Cart from "../pages/Cart";
 import ResultsLayout from "../pages/ResultsLayout";
-import Results from "../pages/Results";
 import ResultsSearch from "../pages/ResultsSearch";
 import CheckoutSuccess from "../pages/checkoutSuccess";
 import Checkout from "../pages/Checkout";

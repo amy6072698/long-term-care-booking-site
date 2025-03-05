@@ -21,7 +21,7 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
     }
     try {
       //使用路由600有可能會因carts中無使用者id而無法get
-      const { data } = await axios.get(`${BASE_URL}/640/carts`, {
+      const { data } = await axios.get(`${BASE_URL}/600/carts`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -75,6 +75,7 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
     });
   };
 
+  //預約成功彈跳視窗
   const showSuccessMessage = () => {
     toast.success(`加入預約成功👋\n請去立即預訂查看`, {
       position: "top-center",

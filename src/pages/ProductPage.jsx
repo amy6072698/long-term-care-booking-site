@@ -50,7 +50,6 @@ export default function ProductPage() {
       const productIndex = res.data.findIndex((item) => {
         return item.id === Number(productId);
       });
-
       setProduct(res.data[productIndex]);
     } catch (error) {
       alert("取得產品資料失敗");

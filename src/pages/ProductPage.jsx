@@ -3,7 +3,7 @@ import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
-import { ToastContainer, toast, Zoom } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useParams } from "react-router";
 import { UserContext } from "./FrontLayout";
 import "swiper/css/free-mode";
@@ -11,11 +11,10 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css";
+import Booking from "../components/Booking";
+import getToken from '../assets/js/getTokenFromCookie';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-let token;
-let myUserId;
 
 export default function ProductPage() {
   const { isLogin } = useContext(UserContext); // 用來判斷是否登入
@@ -27,22 +26,9 @@ export default function ProductPage() {
   const [thumbsIsLoading, setThumbsIsLoading] = useState(true);
   const bannerRefNum = useRef(0);
   const thumbsRefNum = useRef(0);
-  const { setIsLoginModalOpen } = useContext(UserContext);
-  const { setLoginModalMode } = useContext(UserContext);
 
   //取得token和登入id
-  const getToken = () => {
-    //取得cookie中的token和useId
-    document.cookie = "myToken";
-    token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    myUserId = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-  };
+  const { token, myUserId } = getToken();
 
   //登入狀態變動時觸發取得token
   useEffect(() => {
@@ -54,6 +40,7 @@ export default function ProductPage() {
   //畫面渲染完成觸發取得產品
   useEffect(() => {
     getProducts();
+    getToken();
   }, []);
 
   //取得產品資料
@@ -68,86 +55,6 @@ export default function ProductPage() {
     } catch (error) {
       alert("取得產品資料失敗");
     }
-  };
-
-  //加入預約留床
-  const addCartItem = async (e, id) => {
-    e.preventDefault();
-    if (!isLogin) {
-      setLoginModalMode("login");
-      setIsLoginModalOpen(true);
-      return;
-    }
-    try {
-
-      // const res = await axios.get(`${BASE_URL}/600/carts`, {
-      //   headers: {
-      //     authorization: `Bearer ${token}`,
-      //   },
-      // });
-      // const duplicates = res.data.find((item) => {
-      //   return item.productId === Number(id);
-      // });
-      // console.log(duplicates);
-      // // //如果有重複選取則跳出
-      // if (duplicates) {
-      //   console.log(duplicates)
-      //   return;
-      // }
-      
-      //如果沒跳出就新增
-      await axios.post(
-        `${BASE_URL}/600/carts`,
-        {
-          productId: id,
-          userId: myUserId,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setIsLoading(true);
-      showSuccessMessage();
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000);
-    } catch (error) {
-      console.log(error);
-      showErrorMessage();
-    }
-  };
-
-  //加入預約成功觸發彈跳視窗
-  const showSuccessMessage = () => {
-    toast.success(`加入預約成功👋\n請去立即預訂查看`, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-      style: { whiteSpace: "pre-line" },
-    });
-  };
-
-  //加入預約成功觸發彈跳視窗
-  const showErrorMessage = () => {
-    toast.error("預訂失敗", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-    });
   };
 
   return (
@@ -176,11 +83,13 @@ export default function ProductPage() {
           {product?.images?.map((thumb, index) => {
             return (
               <SwiperSlide key={index}>
-                <img
-                  src={thumb}
-                  alt="機構圖片"
-                  className=" w-100 h-100 object-fit-cover"
-                />
+                <div style={{ width: "1076px", height: "535px", overflow: "hidden" }}>
+                  <img
+                    src={thumb}
+                    alt="機構圖片"
+                    className=" w-100 h-100 object-fit-cover"
+                  />
+                </div>
               </SwiperSlide>
             );
           })}
@@ -216,18 +125,19 @@ export default function ProductPage() {
             {product?.images?.map((imageUrl, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <img
-                    className="object-fit-cover"
-                    style={{ height: "535px" }}
-                    src={imageUrl}
-                    alt="機構圖片"
-                    onLoad={() => {
-                      bannerRefNum.current++;
-                      bannerRefNum.current === product.images.length
-                        ? setBannerIsLoading(false)
-                        : null;
-                    }}
-                  />
+                  <div style={{ width: "1076px", height: "535px", overflow: "hidden" }}>
+                    <img
+                      className="object-fit-cover w-100 h-100"
+                      src={imageUrl}
+                      alt="機構圖片"
+                      onLoad={() => {
+                        bannerRefNum.current++;
+                        bannerRefNum.current === product.images.length
+                          ? setBannerIsLoading(false)
+                          : null;
+                      }}
+                    />
+                  </div>
                 </SwiperSlide>
               );
             })}
@@ -253,17 +163,19 @@ export default function ProductPage() {
             {product?.thumbs?.map((thumb, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <img
-                    src={thumb}
-                    alt="機構圖片"
-                    className="h-100"
-                    onLoad={() => {
-                      thumbsRefNum.current++;
-                      thumbsRefNum.current === product.thumbs.length
-                        ? setThumbsIsLoading(false)
-                        : null;
-                    }}
-                  />
+                  <div style={{ width: "206.07px", height: "127.75px", overflow: "hidden" }}>
+                    <img
+                      src={thumb}
+                      alt="機構圖片"
+                      className="object-fit-cover w-100 h-100"
+                      onLoad={() => {
+                        thumbsRefNum.current++;
+                        thumbsRefNum.current === product.thumbs.length
+                          ? setThumbsIsLoading(false)
+                          : null;
+                      }}
+                    />
+                  </div>
                 </SwiperSlide>
               );
             })}
@@ -323,25 +235,14 @@ export default function ProductPage() {
                 className="btn btn-outline-primary-40  py-4 w-100  intro-btn d-flex justify-content-center align-items-center gap-2"
               >
                 預約參訪
-                {isLoading && (
-                  <ReactLoading
-                    type={"spin"}
-                    color={"#000"}
-                    height={"1.5rem"}
-                    width={"1.5rem"}
-                  />
-                )}
               </button>
-              <button
-                disabled={isLoading}
-                type="button"
-                onClick={(e) => {
-                  // checkDuplicateBooking(e, product.id);
-                  addCartItem(e, product.id);
-                }}
-                className="btn btn-primary-40 py-4 w-100  d-flex justify-content-center align-items-center gap-2"
+              <Booking
+                product={product}
+                token={token}
+                myUserId={myUserId}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
               >
-                預定留床
                 {isLoading && (
                   <ReactLoading
                     type={"spin"}
@@ -350,7 +251,7 @@ export default function ProductPage() {
                     width={"1.5rem"}
                   />
                 )}
-              </button>
+              </Booking>
             </div>
           </div>
         </div>

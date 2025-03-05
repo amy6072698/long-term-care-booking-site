@@ -11,6 +11,7 @@ import Bell from "../assets/images/Header_Icon/Bell.svg?react";
 import Settings from "../assets/images/Header_Icon/Settings.svg?react";
 import HouseAdd from "../assets/images/Header_Icon/HouseAdd.svg?react";
 import LogOut from "../assets/images/Header_Icon/LogOut.svg?react";
+import HeaderLogo from "../assets/images/Logo/LB-Color.svg?react";
 
 import axios from "axios";
 
@@ -88,8 +89,7 @@ function Header() {
         <nav className="navbar navbar-expand-lg py-0 bg-primary-110">
           <div className="container-lg container-fluid px-lg-4 px-0">
             <NavLink className="navbar-brand py-lg-2 py-0 ms-6" to="/">
-              <img
-                src="src/assets/images/Logo/LB-Color.svg"
+              <HeaderLogo
                 alt="logo"
                 className="d-inline-block w-100"
                 style={{ width: "196px", height: "70px" }}

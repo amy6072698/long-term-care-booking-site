@@ -226,7 +226,7 @@ function Searchbar(){
 
   return (
 
-    <div className="searchbar container-lg container-fluid px-0">
+    <div className="searchbar container-lg container-fluid">
       <form onSubmit={handleSearchSubmit} className="search-wrapper d-flex flex-md-row flex-column" action="">
         <select 
         {...register("category")}

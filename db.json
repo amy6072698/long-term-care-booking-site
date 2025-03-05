@@ -41,7 +41,7 @@
       "city": "台北市",
       "region": "中正區",
       "address": "台北市中正區中正路",
-      "like": 5,
+      "like": 7,
       "comments": 15,
       "services": [
         {
@@ -206,7 +206,7 @@
       "city": "桃園市",
       "region": "桃園區",
       "address": "桃園市桃園區復興路",
-      "like": 7,
+      "like": 5,
       "comments": 15,
       "services": [
         {

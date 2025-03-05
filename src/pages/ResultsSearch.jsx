@@ -1,19 +1,37 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
+import Booking from "../components/Booking";
+//匯入使用者資料
+import { UserContext } from "../pages/FrontLayout";
+//帶入token
+import getToken from "../assets/js/getTokenFromCookie";
+import { ToastContainer, toast } from "react-toastify";
 
 // 引入 ResultsLayout 中的 SearchContext
-import { SearchContext } from '../pages/ResultsLayout';
+import { SearchContext } from "../pages/ResultsLayout";
 import HeartCard from "../components/HeartCard";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export default function ResultsSearch() {
+export default function ResultsSearch({ product }) {
   // 用於取出網址搜尋參數
   const { searchParams } = useContext(SearchContext);
 
   // 搜尋結果
-  const [ resultsSearch, setResultsSearch ] = useState([]);
+  const [resultsSearch, setResultsSearch] = useState([]);
+
+  // 用來判斷是否登入
+  const { isLogin } = useContext(UserContext);
+  //取得登入toekn
+  const { token, myUserId } = getToken();
+  const [isLoading, setIsLoading] = useState(false);
+  //登入狀態變動時觸發取得token
+  useEffect(() => {
+    if (isLogin) {
+      getToken();
+    }
+  }, [isLogin]);
 
   // 分頁
   const itemsPerPage = 5; //每頁顯示5筆資料
@@ -21,10 +39,12 @@ export default function ResultsSearch() {
   const [totalPages, setTotalPages] = useState(1);
 
   // 取得符合搜尋參數的 products
-  const getProductsSearch = async(param) => {
+  const getProductsSearch = async (param) => {
     try {
       // 帶入搜尋參數到 API 網址取得相應資料
-      const res = await axios.get(`${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}&${param.toString()}`);
+      const res = await axios.get(
+        `${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}&${param.toString()}`
+      );
 
       // 將符合的 products 資料更新到 resultsSearch
       setResultsSearch(res.data);
@@ -37,24 +57,24 @@ export default function ResultsSearch() {
     } catch (error) {
       alert("取得產品搜尋失敗");
     }
-
-  }
+  };
   // 取得所有 products
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}`);
+      const res = await axios.get(
+        `${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}`
+      );
       setResultsSearch(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       alert("取得產品失敗");
     }
   };
-  
 
   // 從網址取得搜尋參數，並判斷處理各項目搜尋參數
   const handleSearchParams = () => {
     const getParams = new URLSearchParams();
-    
+
     // 取得各項的搜尋參數值，getAll 用於有多項參數時
     const categoryParam = searchParams.get("category_like");
     const cityParam = searchParams.get("city_like");
@@ -64,48 +84,45 @@ export default function ResultsSearch() {
     const medicalServiceParams = searchParams.getAll("medicalService_like");
 
     // 把 categoryParam、cityParam、regionParam 的值加入 getParams
-    if(categoryParam){
+    if (categoryParam) {
       getParams.append("category_like", categoryParam);
     }
-    if(cityParam){
+    if (cityParam) {
       getParams.append("city_like", cityParam);
     }
-    if(regionParam){
+    if (regionParam) {
       getParams.append("region_like", regionParam);
     }
 
     // 把 caringItemParams、servicesParams、medicalServiceParams 的值一個個加入 getParams
-    if(caringItemParams){
-      
+    if (caringItemParams) {
       caringItemParams.forEach((item) => {
         getParams.append("caringItem_like", item);
       });
     }
-    if(servicesParams){
+    if (servicesParams) {
       servicesParams.forEach((item) => {
         getParams.append("services.id", item);
       });
-    } 
-    if(medicalServiceParams){
+    }
+    if (medicalServiceParams) {
       medicalServiceParams.forEach((item) => {
         getParams.append("medicalService_like", item);
       });
-    } 
+    }
 
     // 若 getParams 非空值取得符合搜尋參數的 products，是空值則取得所有 products
-    if(getParams){
+    if (getParams) {
       getProductsSearch(getParams);
       // console.log(resultsSearch);
     } else {
       getProducts();
     }
-  }
+  };
 
   // 若 searchParams、currentPage 更新就觸發 handleSearchParams
   useEffect(() => {
-    
     handleSearchParams();
-
   }, [searchParams, currentPage]);
 
   //切換分頁
@@ -117,6 +134,7 @@ export default function ResultsSearch() {
 
   return (
     <>
+      <ToastContainer />
       {/* 搜尋結果卡片 */}
       <div className="content pt-12 pt-md-14 result-content">
         <div className="container">
@@ -138,9 +156,7 @@ export default function ResultsSearch() {
                       <div className="col-md-7">
                         <div className="card-body">
                           <Link to={`/product/${product.id}`}>
-                            <h5 className="card-title mt-7">
-                              {product.name}
-                            </h5>
+                            <h5 className="card-title mt-7">{product.name}</h5>
                           </Link>
                           <div className="address d-flex align-items-center mb-4">
                             <svg
@@ -213,16 +229,23 @@ export default function ResultsSearch() {
                           <div className="buttons d-flex justify-content-between mt-2">
                             <button
                               type="button"
-                              className="btn book-btn fs-6 py-4 btn-outline-primary-40  me-3"
+                              className="btn book-btn fs-7 py-4 btn-outline-primary-40  me-3"
                             >
                               預約參訪
                             </button>
-                            <button
+                            {/* <button
                               type="button"
                               className="btn book-btn fs-6  py-4 btn-primary-40 "
                             >
                               預定留床
-                            </button>
+                            </button> */}
+                            <Booking
+                              product={product}
+                              token={token}
+                              myUserId={myUserId}
+                              isLoading={isLoading}
+                              setIsLoading={setIsLoading}
+                            ></Booking>
                           </div>
                         </div>
                       </div>
@@ -269,9 +292,15 @@ export default function ResultsSearch() {
               </li>
             ))}
 
-            <li className={`page-item ${currentPage === totalPages && "disabled"}`}>
+            <li
+              className={`page-item ${
+                currentPage === totalPages && "disabled"
+              }`}
+            >
               <button
-                className={`page-link ${currentPage === totalPages && "disabled"}`}
+                className={`page-link ${
+                  currentPage === totalPages && "disabled"
+                }`}
                 style={{ background: "transparent", border: "none" }}
                 onClick={() => handlePageChange(currentPage + 1)}
               >

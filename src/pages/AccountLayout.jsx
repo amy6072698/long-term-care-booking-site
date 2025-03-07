@@ -52,7 +52,6 @@ export default function AccountLayout() {
                 >
                   <div className="d-flex align-items-center">
                     {item.icon}
-
                     <h5>{item.title}</h5>
                   </div>
                 </Link>

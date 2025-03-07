@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 import axios from "axios";
 import PropTypes from "prop-types";
+import showSuccessMessage from "../assets/js/showSuccessMessage";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -66,7 +67,7 @@ const HeartCard = ({ productId, onRemove }) => {
         );
 
         setHeart(true);
-        console.log("收藏成功");
+        showSuccessMessage("收藏機構成功");
         setCollectId(response.data.id);
       } else {
         if (!collectId) throw new Error("收藏 ID 不存在，無法刪除");
@@ -77,7 +78,7 @@ const HeartCard = ({ productId, onRemove }) => {
 
         setHeart(false);
         setCollectId(null);
-        console.log("取消收藏成功");
+        showSuccessMessage("取消收藏機構成功");
         // **呼叫 onRemove，讓父組件更新**
         if (onRemove) {
           onRemove(productId);

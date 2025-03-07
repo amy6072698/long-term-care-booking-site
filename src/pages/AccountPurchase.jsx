@@ -108,7 +108,7 @@ export default function AccountPurchase() {
                           </div>
                           <div className="detail mt-2">
                             <Link
-                              to={`/product/${order.id}`}
+                              to="/account/inner/purchaseDetail"
                               style={{ width: "100%" }}
                             >
                               <button

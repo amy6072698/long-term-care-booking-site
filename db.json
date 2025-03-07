@@ -2248,14 +2248,14 @@
   "collects": [
     {
       "userId": "3",
-      "productId": 3,
-      "createdAt": "2025-03-31T07:24:13.842Z",
+      "productId": 2,
+      "createdAt": "2025-04-02T13:57:12.202Z",
       "id": 1
     },
     {
       "userId": "3",
-      "productId": 2,
-      "createdAt": "2025-03-31T07:24:14.930Z",
+      "productId": 3,
+      "createdAt": "2025-04-02T13:57:17.520Z",
       "id": 2
     }
   ]

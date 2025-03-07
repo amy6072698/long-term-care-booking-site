@@ -20,6 +20,7 @@ import AdminLProduct from "../pages/AdminProduct";
 import AdminOrderChart from "../pages/adminOrderChart";
 import AccountCollect from "../pages/AccountCollect";
 import AppLayout from "../pages/AppLayout";
+import OrderDetail from "../pages/OrderDetail";
 
 const router = createHashRouter([
   {
@@ -50,6 +51,10 @@ const router = createHashRouter([
               {
                 path: "purchase",
                 element: <AccountPurchase />,
+              },
+              {
+                path: "purchaseDetail",
+                element: <OrderDetail />,
               },
             ],
           },
@@ -120,9 +125,8 @@ const router = createHashRouter([
         path: "*",
         element: <NotFound />,
       },
-    ]
-  }
-  
+    ],
+  },
 ]);
 
 export default router;

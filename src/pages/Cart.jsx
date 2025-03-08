@@ -98,10 +98,41 @@ export default function Cart() {
     }
   };
 
-  // 清空購物車
-  const handleClearCart = () => {
-    setCartsData([]);
-  };
+ // 請求個人 user 購物車資料
+ const handleClearCart = async () => {
+  getToken(); // 取得 userId
+  if (!myUserId) {
+    alert("用戶未登入，無法清空購物車");
+    return;
+  }
+
+  // 取得當前使用者的購物車資料
+  const userCarts = cartsData.filter((item) => item.userId === myUserId);
+
+  if (userCarts.length === 0) {
+    alert("購物車已經是空的！");
+    return;
+  }
+
+  try {
+    // 產生 DELETE 請求清除當前使用者的購物車內容
+    const deleteRequests = userCarts.map((item) =>
+      axios.delete(`${BASE_URL}/carts/${item.id}`)
+    );
+
+    // 使用 Promise.all 讓請求並行發送，提高效率
+    await Promise.all(deleteRequests);
+
+    // 更新前端狀態，確保 UI 同步
+    setCartsData(cartsData.filter((item) => item.userId !== myUserId));
+    alert("購物車已清空！");
+  } catch (error) {
+    console.error("清空購物車失敗", error);
+    alert("清空購物車失敗，請稍後再試！");
+  }
+};
+
+
 
   return (
     <>

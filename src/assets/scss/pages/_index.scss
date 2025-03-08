@@ -68,10 +68,7 @@
     letter-spacing: 0.12em;
   }
   .stars-icon{
-    background-image: url('/assets/images/Icon/Stars-Change.svg');
     width: 168px;
-    height: 24px;
-    background-position: center;
   }
 
   // Swiper 調整
@@ -112,17 +109,37 @@
   .swiper-next{
     position: static;
     background-image: url('https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/31220b079029b96e577a43dc0e5fd57a61343a98/assets/images/Icon/IconSecondary/VectorRight-S-80.svg');
-    width: 12px;
-    height: 21px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 0;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
     margin: 4.5px 9px;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   .swiper-prev{
     position: static;
     background-image: url('https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/31220b079029b96e577a43dc0e5fd57a61343a98/assets/images/Icon/IconSecondary/VectorLeft-S-80.svg');
-    width: 12px;
-    height: 21px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 0;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
     margin: 4.5px 9px;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   .swiper-pagination{

@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Modal } from "bootstrap";
 import axios from "axios";
 import BannerNoSearch from "../components/BannerNoSearch";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import { UserContext } from "./FrontLayout";
 
@@ -44,22 +44,18 @@ export default function Cart() {
   };
 
   useEffect(() => {
-    const fetchCartData = () => {
+    const fetchCartData = async () => {
       try {
-        (async () => {
-          const { data } = await axios.get(
-            `${BASE_URL}/600/carts?userId=${myUserId}&_expand=product`,
-            {
-              headers: {
-                authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setCartsData(data);
-        })();
-      } catch (error) {
-        alert("請求購物車資料失敗");
-      }
+        const { data } = await axios.get(
+          `${BASE_URL}/600/carts?userId=${myUserId}&_expand=product`,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setCartsData(data);
+      } catch (error) {}
     };
     //如果登入成功則重新取得token，
     if (isLogin) {

@@ -44,45 +44,41 @@ export default function Checkout() {
 
   //元件渲染完後觸發請求id
   //使用600無法的原因可能是products資料表中沒有userId做辨認
+  //請求完資料後重設roomType的預設值
   useEffect(() => {
     getToken();
-    try {
-      (async () => {
+    (async () => {
+      try {
         const { data } = await axios.get(`${BASE_URL}/products/${productId}`);
-        console.log(data);
         setCheckoutData(data);
-        //放入第一筆價格
         setPrice(data.roomCards[0].price);
         setRoomType(data.roomCards[0].roomType);
-      })();
-    } catch (error) {
-      console.log(error);
-    }
+      } catch (error) {}
+    })();
   }, []);
 
   //處理提交
   const onSubmit = (data, e) => {
+    console.log(data);
     e.preventDefault();
     handleCheckoutSuccess();
   };
 
   //處理結帳
-  const handleCheckoutSuccess = () => {
+  const handleCheckoutSuccess = async () => {
     try {
-      (async () => {
-        await axios.delete(`${BASE_URL}/600/carts/${selectProductId}`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-      })();
+      await axios.delete(`${BASE_URL}/600/carts/${selectProductId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
       navigate("/checkoutSuccess");
       reset();
     } catch (error) {
       alert("結帳失敗");
     }
   };
-  
+
   //監聽表單roomType，如有更動則賦予值到selectedRoomType
   const selectedRoomType = useWatch({
     control,
@@ -91,12 +87,12 @@ export default function Checkout() {
 
   // 尋找房型中符合的項目並賦予值到price中
   useEffect(() => {
-    console.log(selectedRoomType);
     if (selectedRoomType) {
       const result = checkoutData.roomCards.find((item) => {
         return item.roomType === selectedRoomType;
       });
       setPrice(result.price);
+      setRoomType(result.roomType);
     }
   }, [selectedRoomType]);
 
@@ -127,13 +123,13 @@ export default function Checkout() {
               </div>
               {/* 機構資訊 */}
               <div>
-                <div className="d-flex flex-wrap flex-lg-nowrap gap-7">
+                <div className="d-flex justify-content-between  flex-wrap flex-lg-nowrap">
                   <img
-                    className="w-100"
+                    className="object-fit-cover checkout-thumb-img"
                     src={checkoutData?.thumbs?.[0]}
                     alt="機構照片"
                   />
-                  <div className="d-flex flex-column row-gap-5 pt-7 px-7 px-lg-0 pb- py-lg-7 pe-lg-7 w-100">
+                  <div className="checkout-input d-flex flex-column row-gap-5 pt-7 px-7 px-lg-0 pt-lg-7 pe-lg-7">
                     <h5>{checkoutData?.name}</h5>
                     <div className="d-flex">
                       <i
@@ -184,30 +180,28 @@ export default function Checkout() {
                       >
                         房型
                       </label>
-                      {/* {
-                        JSON.stringify(
-                          checkoutData?.roomCards?.[0]?.roomType
-                        )
-                      } */}
-                      <select
-                        {...register("roomType", {
-                          required: "請選擇一個房型",
-                        })}
-                        defaultValue={checkoutData?.roomCards?.[0]?.roomType}
-                        id="roomType"
-                        className="form-select py-5
-                              checkout-border-primary"
-                        aria-label="Default
-                              select example"
-                      >
-                        {checkoutData?.roomCards?.map((item) => {
-                          return (
-                            <option key={item.id} value={item.roomType}>
-                              {item.roomType}
-                            </option>
-                          );
-                        })}
-                      </select>
+                      {
+                      checkoutData.roomCards && (
+                        <select
+                          {...register("roomType", {
+                            required: "請選擇一個房型",
+                          })}
+                          defaultValue={checkoutData?.roomCards?.[0]?.roomType}
+                          id="roomType"
+                          className="form-select py-5
+                  checkout-border-primary"
+                          aria-label="Default
+                  select example"
+                        >
+                          {checkoutData?.roomCards?.map((item) => {
+                            return (
+                              <option key={item.id} value={item.roomType}>
+                                {item.roomType}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      )}
                     </div>
                     {errors.roomType && (
                       <small className="text-danger">
@@ -230,6 +224,7 @@ export default function Checkout() {
               </div>
 
               <hr />
+              {/*  */}
               {/* 請填寫入住者資料 */}
               <div className="pt-7 pb-11 px-8">
                 <div className="d-flex flex-column row-gap-5">
@@ -471,7 +466,10 @@ export default function Checkout() {
                   <h5>NTD {price}</h5>
                 </div>
               </div>
+              {/*  */}
             </div>
+
+            {/*  */}
             {/* 按鈕 */}
             <div className="d-flex gap-6">
               <button

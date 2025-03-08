@@ -6,6 +6,22 @@
   &-border-secondary {
     border: 1px outset #b0b0b0;
   }
+  &-test{
+    
+  }
+  &-thumb-img{
+    width: 100%;
+    @media (min-width: 992px) {
+      width: calc(30% - 24px)
+    }
+  }
+  &-input{
+    width: 100%;
+    @media (min-width: 992px) {
+      width: calc(70% - 24px)
+    }
+  }
+
 
   .btn {
     transform: scale(1);

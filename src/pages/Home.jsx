@@ -495,7 +495,7 @@ export default function Home() {
             </h6>
           </div>
             {/* Swiper 用戶評價卡片 */}
-          <div class="reviewSwiper-container">
+          <div className="reviewSwiper-container">
             <Swiper
               modules={[Navigation, Pagination]}
               cssMode={true}

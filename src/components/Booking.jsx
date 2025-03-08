@@ -11,7 +11,7 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
   const { setLoginModalMode } = useContext(UserContext);
 
   //加入預約留床
-  const addCartItem = async (e, id) => {
+  const addCartItem = async (e, productId) => {
     e.preventDefault();
     //如果未登入則跳出登入modal
     if (!isLogin) {
@@ -21,25 +21,27 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
     }
     try {
       //使用路由600有可能會因carts中無使用者id而無法get
-      const { data } = await axios.get(`${BASE_URL}/600/carts`, {
+      //使用640只會辨識有無token
+      const { data } = await axios.get(`${BASE_URL}/640/carts`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
-      //篩選ussr是否有預訂資料
+      //篩選user是否預定過此間機構的留床
       const hasDuplicateBooking = data.find((item) => {
-        return item.productId === id;
+        return item.userId === Number(myUserId) && item.productId === productId;
       });
-      // 如果user有預訂過則跳出函式
+
+      // 如果user有預訂留床過則跳出函式
       if (hasDuplicateBooking) {
         showErrorMessage("您已重複預約，請至立即預訂查看");
         return;
       }
-      //將此筆資料加入留床
+      //將此筆資料加入預訂留床
       await axios.post(
         `${BASE_URL}/600/carts`,
         {
-          productId: Number(id),
+          productId: Number(productId),
           userId: Number(myUserId),
         },
         {

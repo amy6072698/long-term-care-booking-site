@@ -55,9 +55,7 @@ export default function Cart() {
           }
         );
         setCartsData(data);
-      } catch (error) {
-        alert("請求購物車資料失敗");
-      }
+      } catch (error) {}
     };
     //如果登入成功則重新取得token，
     if (isLogin) {

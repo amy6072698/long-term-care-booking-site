@@ -106,7 +106,7 @@ export default function Cart() {
   };
 
  // 請求個人 user 購物車資料
- const handleClearCart = async () => {
+ const handleDeleteAllClick = async () => {
   getToken(); // 取得 userId
   if (!myUserId) {
     alert("用戶未登入，無法清空購物車");
@@ -114,7 +114,8 @@ export default function Cart() {
   }
 
   // 取得當前使用者的購物車資料
-  const userCarts = cartsData.filter((item) => item.userId === myUserId);
+  const userCarts = cartsData.filter((item) => item.userId == myUserId);
+  console.log(userCarts);
 
   if (userCarts.length === 0) {
     alert("購物車已經是空的！");
@@ -131,7 +132,7 @@ export default function Cart() {
     await Promise.all(deleteRequests);
 
     // 更新前端狀態，確保 UI 同步
-    setCartsData(cartsData.filter((item) => item.userId !== myUserId));
+    setCartsData(cartsData.filter((item) => item.userId != myUserId));
     alert("購物車已清空！");
   } catch (error) {
     console.error("清空購物車失敗", error);
@@ -212,7 +213,7 @@ export default function Cart() {
                     <button
                       type="button"
                       className="btn btn-outline-secondary-40 all-font"
-                      onClick={handleClearCart}
+                      onClick={handleDeleteAllClick}
                     >
                       全部刪除
                     </button>

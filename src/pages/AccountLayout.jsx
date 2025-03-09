@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router";
+import { Outlet, Link, useNavigate } from "react-router";
 
 // 安裝 vite-plugin-svgr 讓 icon svg 檔可以作為元件引入使用，安裝引入方法請看 vite.config
 import Profile from "../assets/images/Account_Icon/profile.svg?react";
@@ -30,14 +30,15 @@ const accountInnerTab = [
 ];
 
 export default function AccountLayout() {
+  const navigate = useNavigate();
   return (
     <>
       <div
-        className="account-layout container pt-12"
+        className="account-layout container pt-lg-12 pt-8"
         style={{ paddingBottom: "96px" }}
       >
         <div className="row">
-          <div className="col-4 d-grid">
+          <div className="col-4 d-lg-grid d-none">
             <div
               className="btn-group-vertical"
               role="group"
@@ -58,7 +59,12 @@ export default function AccountLayout() {
               ))}
             </div>
           </div>
-          <div className="col-8">
+          <div className="col-lg-8 col">
+            <button onClick={() => navigate("/account")} className="d-block d-lg-none btn btn-link p-0 link-primary-50 mb-3 fs-6">
+              
+              <i class="bi bi-chevron-left"></i>返回會員中心
+              
+            </button>
             <Outlet />
           </div>
         </div>

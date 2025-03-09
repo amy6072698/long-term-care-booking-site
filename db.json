@@ -2,12 +2,13 @@
   "users": [
     {
       "email": "123@mail.com",
-      "password": "$2a$10$9YH6eodSpmozYiWxt0ZPs.SU18FB1O88QxIWk2grRyoh/TIckzvd6",
-      "name": "陳小玲",
+      "password": "$2a$10$21AmIsoqSNGmXgYX2L6kQ.2JzQ.7Z4wTvOIXuRXOPI342AcBsyrvq",
+      "name": "Amy Chen",
       "gender": "female",
       "birthday": "1999-09-09",
-      "phone": "0911111111",
-      "id": 1
+      "phone": "0912345678",
+      "id": 1,
+      "address": "台中市太平區中興路50號"
     },
     {
       "email": "1@mail.com",

@@ -18,6 +18,15 @@
       "birthday": "1996-06-01",
       "phone": "0912345678",
       "id": 2
+    },
+    {
+      "email": "jim3470022@gmail.com",
+      "password": "$2a$10$y9f3k88Gdbd/FaxN.nugieiHz00hg86SDrXxZsTrleY/7p6QKSNvC",
+      "name": "Jack",
+      "gender": "male",
+      "birthday": "1999-06-22",
+      "phone": "0975500680",
+      "id": 3
     }
   ],
   "products": [

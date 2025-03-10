@@ -145,13 +145,15 @@ export default function ResultsSearch({ product }) {
                   <div className="card mb-3">
                     <div className="row g-0">
                       <div className="col-md-5 ">
-                        <img
-                          className="card-img img-fluid result-card"
-                          src={product?.thumbs?.[0]}
-                          alt="building"
-                          style={{ height: "290px" }}
-                        />
-                        <HeartCard />
+                        <div className="image">
+                          <img
+                            className="card-img img-fluid result-card"
+                            src={product?.thumbs?.[0]}
+                            alt="building"
+                            style={{ height: "290px" }}
+                          />
+                          <HeartCard />
+                        </div>
                       </div>
                       <div className="col-md-7">
                         <div className="card-body">

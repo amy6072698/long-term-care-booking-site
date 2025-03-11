@@ -38,7 +38,7 @@ export default function AccountLayout() {
         style={{ paddingBottom: "96px" }}
       >
         <div className="row">
-          <div className="col-4 d-lg-grid d-none">
+          <div className="col-4 d-lg-flex flex-column d-none">
             <div
               className="btn-group-vertical"
               role="group"

@@ -17,8 +17,8 @@ const HeartCard = () => {
         <img
           src={
             heart
-              ? "src/assets/images/Interact Icon/Heard-02.svg"
-              : "src/assets/images/Interact Icon/Heard-01.svg"
+              ? "public/images/Interact Icon/Heard-02.svg"
+              : "public/images/Interact Icon/Heard-01.svg"
           }
           alt="heart"
           onClick={() => setHeart(!heart)}

@@ -17,8 +17,8 @@ const HeartCard = () => {
         <img
           src={
             heart
-              ? "public/images/Interact Icon/Heard-02.svg"
-              : "public/images/Interact Icon/Heard-01.svg"
+              ? `https://raw.githubusercontent.com/Jack-Xiao-2024/ReactC5/a442977a25033104ad6b0fdb00c77acbcfc2c59a/public/images/Interact%20Icon/Heard-02.svg`
+              : `https://raw.githubusercontent.com/Jack-Xiao-2024/ReactC5/a442977a25033104ad6b0fdb00c77acbcfc2c59a/public/images/Interact%20Icon/Heard-01.svg`
           }
           alt="heart"
           onClick={() => setHeart(!heart)}

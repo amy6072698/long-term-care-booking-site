@@ -272,7 +272,7 @@ export default function ResultsSearch({ product }) {
                 onClick={() => handlePageChange(currentPage - 1)}
               >
                 <img
-                  src="./src/assets/images/Icon/IconSecondary/VectorLeft-S-80.svg"
+                  src="https://raw.githubusercontent.com/Jack-Xiao-2024/ReactC5/a442977a25033104ad6b0fdb00c77acbcfc2c59a/src/assets/images/Icon/IconSecondary/VectorLeft-S-80.svg"
                   alt="left"
                 />
               </button>
@@ -307,7 +307,7 @@ export default function ResultsSearch({ product }) {
                 onClick={() => handlePageChange(currentPage + 1)}
               >
                 <img
-                  src="./src/assets/images/Icon/IconSecondary/VectorRight-S-80.svg"
+                  src="https://raw.githubusercontent.com/Jack-Xiao-2024/ReactC5/a442977a25033104ad6b0fdb00c77acbcfc2c59a/src/assets/images/Icon/IconSecondary/VectorRight-S-80.svg"
                   alt="left"
                 />
               </button>

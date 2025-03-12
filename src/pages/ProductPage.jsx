@@ -215,7 +215,7 @@ export default function ProductPage() {
                       className="border border-dark rounded-2 py-1 px-2"
                     >
                       <img
-                        src={`./src/assets/images/Icon/tag/${service.name}.svg`}
+                        src={`https://raw.githubusercontent.com/Jack-Xiao-2024/ReactC5/ed70683e88e44a1c0854ab9849a0f2dbc072916e/src/assets/images/Icon/tag/${service.name}.svg`}
                         alt={service.name}
                       />
                       {service.name}

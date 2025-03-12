@@ -992,14 +992,9 @@
   ],
   "carts": [
     {
-      "productId": 1,
-      "userId": "2",
+      "productId": 3,
+      "userId": 2,
       "id": 1
-    },
-    {
-      "productId": 1,
-      "userId": "2",
-      "id": 2
     }
   ]
 }

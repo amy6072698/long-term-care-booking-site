@@ -65,13 +65,34 @@ export default function Checkout() {
 
   //處理提交
   const onSubmit = (data, e) => {
-    setTimeout(() => {
-      e.preventDefault();
-      console.log(data);
-      handleCheckoutSuccess();
-    }, 0);
+    // setTimeout(() => {
+    e.preventDefault();
+    console.log(data);
+    handleCheckoutSuccess();
+    addOrderItem(data);
+    // }, 0);
   };
 
+  const addOrderItem = async (data) => {
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/600/orders`,
+        {
+          productId: Number(productId),
+          userId: Number(myUserId),
+          data: data,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //處理結帳
   const handleCheckoutSuccess = async () => {
     try {

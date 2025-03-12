@@ -13,9 +13,9 @@
     {
       "email": "1@mail.com",
       "password": "$2a$10$.Qs1F.p8i/exNRcSMLPa8u04UnFFh0ZNMOQH/4rljYqgZP/T/9EZK",
-      "name": "Tom Holland",
+      "name": "ChrisChen",
       "gender": "male",
-      "birthday": "1996-06-01",
+      "birthday": "2012-01-01",
       "phone": "0912345678",
       "id": 2
     },
@@ -112,7 +112,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 1
@@ -188,7 +188,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 2
@@ -268,7 +268,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -345,7 +345,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 1
@@ -425,7 +425,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 2
@@ -505,7 +505,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -585,7 +585,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 1
@@ -666,7 +666,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -742,7 +742,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -822,7 +822,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -899,7 +899,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -975,7 +975,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -990,15 +990,40 @@
       ]
     }
   ],
-  "carts": [
+  "carts": [],
+  "orders": [
     {
-      "productId": 1,
-      "userId": "2",
+      "productId": 3,
+      "userId": 2,
+      "data": {
+        "checkInDate": "2025-03-28",
+        "fullName": "12",
+        "mobilePhone": "0919 291 929",
+        "address": "123",
+        "mail": "1212@mail.com",
+        "message": "",
+        "creditCard": "4003 0103 0103 0101",
+        "expiryDate": "12/29",
+        "cvv": "122",
+        "roomType": "六人房"
+      },
       "id": 1
     },
     {
-      "productId": 1,
-      "userId": "2",
+      "productId": 3,
+      "userId": 2,
+      "data": {
+        "checkInDate": "2025-03-20",
+        "fullName": "唐納川普",
+        "mobilePhone": "0912 222 222",
+        "address": "1600 Pennsylvania Avenue NW, Washington, DC 20500美國",
+        "mail": "1@mail.com",
+        "message": "123",
+        "creditCard": "4030 0013 0030 3030",
+        "expiryDate": "02/29",
+        "cvv": "222",
+        "roomType": "單人房"
+      },
       "id": 2
     }
   ]

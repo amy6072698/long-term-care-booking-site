@@ -4,6 +4,8 @@ import { useForm, useWatch } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+import Cleave from "cleave.js/react";
+import "cleave.js/dist/addons/cleave-phone.TW";
 
 let token;
 let myUserId;
@@ -21,6 +23,10 @@ export default function Checkout() {
     formState: { errors },
     reset,
     control,
+    setValue,
+    setError,
+    trigger,
+    clearErrors,
   } = useForm({
     mode: "onChange",
   });
@@ -59,11 +65,34 @@ export default function Checkout() {
 
   //處理提交
   const onSubmit = (data, e) => {
-    console.log(data);
+    // setTimeout(() => {
     e.preventDefault();
+    console.log(data);
     handleCheckoutSuccess();
+    addOrderItem(data);
+    // }, 0);
   };
 
+  const addOrderItem = async (data) => {
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/600/orders`,
+        {
+          productId: Number(productId),
+          userId: Number(myUserId),
+          data: data,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //處理結帳
   const handleCheckoutSuccess = async () => {
     try {
@@ -95,6 +124,29 @@ export default function Checkout() {
       setRoomType(result.roomType);
     }
   }, [selectedRoomType]);
+
+  // 判斷哪間發行信用卡並將規則回傳
+  function getCreditCardType(cardNumber) {
+    const visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+    const mastercardPattern = /^5[1-5][0-9]{14}$/;
+    const amexPattern = /^3[47][0-9]{13}$/;
+    const discoverPattern = /^6(?:011|5[0-9]{2})[0-9]{12}$/;
+    const jcbPattern = /^(?:2131|1800|35\d{3})\d{11}$/;
+
+    if (visaPattern.test(cardNumber)) {
+      return { type: "Visa", length: 16 };
+    } else if (mastercardPattern.test(cardNumber)) {
+      return { type: "Mastercard", length: 16 };
+    } else if (amexPattern.test(cardNumber)) {
+      return { type: "American Express", length: 15 };
+    } else if (discoverPattern.test(cardNumber)) {
+      return { type: "Discover", length: 16 };
+    } else if (jcbPattern.test(cardNumber)) {
+      return { type: "JCB", length: 16 };
+    } else {
+      return { type: "Unknown", length: null };
+    }
+  }
 
   return (
     <main className="checkout">
@@ -180,8 +232,7 @@ export default function Checkout() {
                       >
                         房型
                       </label>
-                      {
-                      checkoutData.roomCards && (
+                      {checkoutData.roomCards && (
                         <select
                           {...register("roomType", {
                             required: "請選擇一個房型",
@@ -189,9 +240,9 @@ export default function Checkout() {
                           defaultValue={checkoutData?.roomCards?.[0]?.roomType}
                           id="roomType"
                           className="form-select py-5
-                  checkout-border-primary"
+      checkout-border-primary"
                           aria-label="Default
-                  select example"
+      select example"
                         >
                           {checkoutData?.roomCards?.map((item) => {
                             return (
@@ -215,7 +266,7 @@ export default function Checkout() {
                       <div className="d-flex gap-1 gap-lg-4 justify-content-between align-items-center">
                         <div className="fs-7 ">留床費用</div>
                         <div className="d-flex">
-                          <h5>NTD {price}</h5>
+                          <h5>NTD {price?.toLocaleString()}</h5>
                         </div>
                       </div>
                     </div>
@@ -258,18 +309,38 @@ export default function Checkout() {
                         行動電話<span className="text-danger">*</span>
                       </label>
                       <div className="input-group">
-                        <input
+                        <Cleave
+                          options={{
+                            phone: true,
+                            // 格式設為台灣
+                            phoneRegionCode: "TW",
+                          }}
                           {...register("mobilePhone", {
-                            required: "電話必填",
-                            pattern: {
-                              value: /^(0[2-8]\d{7}|09\d{2}-\d{3}-\d{3})$/,
-                              message: "電話格式錯誤",
-                            },
+                            required: "請輸入行動電話",
                           })}
-                          placeholder="09XX-XXX-XXX"
+                          onChange={(e) => {
+                            const input = e.target;
+                            //清理非數字格式並賦予值到formattedValue
+                            const formattedValue = input.value.replace(
+                              /\D/g,
+                              ""
+                            );
+                            // 如果formattedValue長度大於10則跳轉
+                            if (formattedValue.length >= 10) {
+                              const nextInput =
+                                document.getElementById("address");
+                              if (nextInput) {
+                                nextInput.focus();
+                              }
+                            }
+                            setValue("mobilePhone", e.target.value);
+                            // 手動驗證此欄位
+                            trigger("mobilePhone");
+                          }}
+                          placeholder="0912 345 678"
+                          id="mobilePhone"
                           type="tel"
                           className="form-control px-2 py-2 checkout-border-primary"
-                          id="mobilePhone"
                           aria-describedby="basic-addon3 basic-addon4"
                         />
                       </div>
@@ -366,30 +437,52 @@ export default function Checkout() {
                 {/* 信用卡 */}
                 <div className="mb-5 d-flex gap-5 justify-content-between">
                   <div className="w-50">
-                    <label htmlFor="cardNumber" className="form-label">
+                    <label htmlFor="creditCard" className="form-label">
                       信用卡號<span className="text-danger">*</span>
                     </label>
                     <div className="input-group">
-                      <input
-                        {...register("cardNumber", {
-                          required: "請輸入信用卡號",
-                          pattern: {
-                            value:
-                              /^(\d{4}-){3}\d{4}$|^(\d{4}-){2}\d{4}-\d{3}$/,
-                            message:
-                              "信用卡號碼格式不正確。請輸入16位或15位數字，並以XXXX-XXXX-XXXX-XXXX或XXXX-XXXX-XXXX-XXX的格式呈現",
-                          },
+                      <Cleave
+                        options={{
+                          creditCard: true, // 自動套用信用卡格式
+                          delimiter: " ", // 使用空格作為分隔符
+                        }}
+                        {...register("creditCard", {
+                          required: "請輸入正確信用卡號碼",
                         })}
-                        id="cardNumber"
-                        placeholder="0000-0000-0000-0000"
+                        onChange={(e) => {
+                          const input = e.target;
+                          // 清理非數字格式並賦予值到formattedValue
+                          const formattedValue = input.value.replace(/\D/g, "");
+                          //判斷該卡長度及類型
+                          const cardInfo = getCreditCardType(formattedValue);
+                          // 如果該卡存在且輸入長度大於該卡長度則自動跳轉至下一格
+                          if (
+                            cardInfo.length &&
+                            formattedValue.length >= cardInfo.length
+                          ) {
+                            const nextInput =
+                              document.getElementById("expiryDate");
+                            if (nextInput) {
+                              nextInput.focus();
+                            }
+                            setValue("creditCard", e.target.value);
+                            trigger("creditCard");
+                          } else {
+                            //當input長度小於該卡長度時，則清空creditCard
+                            setValue("creditCard", "");
+                            trigger("creditCard");
+                          }
+                        }}
+                        placeholder="1234 5678 9012 3456"
+                        id="creditCard"
                         type="text"
                         className="form-control px-2 py-2 checkout-border-primary"
                         aria-describedby="basic-addon3 basic-addon4"
                       />
                     </div>
-                    {errors.cardNumber && (
+                    {errors.creditCard && (
                       <p className="text-danger my-2">
-                        {errors.cardNumber.message}
+                        {errors.creditCard.message}
                       </p>
                     )}
                   </div>
@@ -398,32 +491,54 @@ export default function Checkout() {
                       有效日期<span className="text-danger">*</span>
                     </label>
                     <div className="input-group">
-                      <input
+                      <Cleave
+                        options={{
+                          date: true,
+                          datePattern: ["m", "y"],
+                        }}
                         {...register("expiryDate", {
-                          required: "請輸入有效日期",
-                          pattern: {
-                            // 格式為 MM/YY，月份為 01-12，年份為兩位數
-                            value: /^(0[1-9]|1[0-2])\/([0-9]{2})$/,
-                            message: "請以 MM/YY 格式輸入有效日期",
-                          },
-                          validate: {
-                            // 驗證日期是否已過期
-                            notExpired: (value) => {
-                              const [month, year] = value.split("/");
-                              const expiryDate = new Date(
-                                2000 + parseInt(year),
-                                parseInt(month) - 1,
-                                1
-                              );
-                              const today = new Date();
-                              return expiryDate > today || "信用卡已過期";
-                            },
-                          },
+                          required: "請輸入有效期限",
                         })}
+                        onChange={(e) => {
+                          const input = e.target;
+                          const expiryDate = input.value;
+                          let [month, year] = expiryDate.split("/");
+                          // 獲取當前年份
+                          const currentYear = new Date().getFullYear();
+                          // 獲取當前月
+                          const currentMonth = new Date().getMonth() + 1;
+                          // 輸入年份
+                          const chooseYear = parseInt(year) + 2000;
+                          // 欲跳轉的input
+                          const cvv = document.querySelector("#cvv");
+
+                          // 輸入長度不滿5則值為空
+                          if (expiryDate.length != 5) {
+                            setValue("expiryDate", "");
+                            // 判斷有效日期是否到期
+                            return;
+                          }
+                          // 判斷是否過期
+                          if (
+                            chooseYear < currentYear ||
+                            (currentYear == chooseYear && currentMonth >= month)
+                          ) {
+                            setError("expiryDate", {
+                              type: "manual",
+                              message: "信用卡已過期",
+                            });
+                            return;
+                          }
+                          cvv.focus();
+                          // 未到期才寫入值
+                          setValue("expiryDate", e.target.value);
+                          // 手動驗證expiryDate
+                          trigger("expiryDate");
+                        }}
                         placeholder="MM/YY"
-                        type="tel"
-                        className="form-control px-2 py-2 checkout-border-primary"
                         id="expiryDate"
+                        type="text"
+                        className="form-control px-2 py-2 checkout-border-primary"
                         aria-describedby="basic-addon3 basic-addon4"
                       />
                     </div>
@@ -463,7 +578,7 @@ export default function Checkout() {
                 </div>
                 <div className="d-flex gap-2  justify-content-end">
                   <div className="fs-7 align-self-end">付款金額</div>
-                  <h5>NTD {price}</h5>
+                  <h5>NTD {price.toLocaleString()}</h5>
                 </div>
               </div>
               {/*  */}

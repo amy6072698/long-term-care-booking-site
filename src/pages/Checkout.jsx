@@ -67,7 +67,6 @@ export default function Checkout() {
   const onSubmit = (data, e) => {
     // setTimeout(() => {
     e.preventDefault();
-    console.log(data);
     handleCheckoutSuccess();
     addOrderItem(data);
     // }, 0);
@@ -88,9 +87,7 @@ export default function Checkout() {
           },
         }
       );
-      console.log(res);
     } catch (error) {
-      console.log(error);
     }
   };
   //處理結帳
@@ -473,7 +470,7 @@ export default function Checkout() {
                             trigger("creditCard");
                           }
                         }}
-                        placeholder="1234 5678 9012 3456"
+                        placeholder="XXXX-XXXX-XXXX-XXXX"
                         id="creditCard"
                         type="text"
                         className="form-control px-2 py-2 checkout-border-primary"

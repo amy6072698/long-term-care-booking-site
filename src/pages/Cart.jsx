@@ -332,9 +332,7 @@ export default function Cart() {
                             <div className="beds fs-7">
                               剩餘床位：
                               <span className="last-bed">
-                                {item.product.roomCards[0].availableBeds +
-                                  item.product.roomCards[1].availableBeds +
-                                  item.product.roomCards[2].availableBeds}
+                                {item.product.roomCards[0].availableBeds}
                               </span>
                             </div>
                             <div className="room-info text-end">

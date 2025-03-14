@@ -13,9 +13,9 @@
     {
       "email": "1@mail.com",
       "password": "$2a$10$.Qs1F.p8i/exNRcSMLPa8u04UnFFh0ZNMOQH/4rljYqgZP/T/9EZK",
-      "name": "Tom Holland",
+      "name": "ChrisChen",
       "gender": "male",
-      "birthday": "1996-06-01",
+      "birthday": "2012-01-01",
       "phone": "0912345678",
       "id": 2
     },
@@ -97,11 +97,7 @@
         "如廁訓練",
         "延緩失能"
       ],
-      "allowance": [
-        "老人補助（低收、中低收）",
-        "身心障礙",
-        "喘息服務"
-      ],
+      "allowance": ["老人補助（低收、中低收）", "身心障礙", "喘息服務"],
       "roomCards": [
         {
           "id": 1,
@@ -112,7 +108,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 1
@@ -165,19 +161,9 @@
       ],
       "description": "幸福頤養園致力於提供長者溫馨舒適的生活環境。我們的設施包括專業護理病房,確保長者健康;康復訓練區,幫助長者維持和提升體能。",
       "age": "60 歲以上",
-      "caringItem": [
-        "認知障礙（失智）",
-        "氣切管",
-        "氧氣"
-      ],
-      "medicalService": [
-        "腫瘤照顧",
-        "洗腎接送",
-        "營養評估"
-      ],
-      "allowance": [
-        "喘息服務"
-      ],
+      "caringItem": ["認知障礙（失智）", "氣切管", "氧氣"],
+      "medicalService": ["腫瘤照顧", "洗腎接送", "營養評估"],
+      "allowance": ["喘息服務"],
       "roomCards": [
         {
           "id": 1,
@@ -188,7 +174,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 2
@@ -245,19 +231,9 @@
       ],
       "description": "安康長青之家提供全面的長期照護服務,專為長者設計。我們擁有全天候護理中心,確保長者隨時能獲得專業照顧;健康膳食區,提供營養均衡的餐點。",
       "age": "65 歲以上",
-      "caringItem": [
-        "復健照護",
-        "腫瘤照護（癌症）",
-        "透析照護（洗腎）"
-      ],
-      "medicalService": [
-        "術後照顧",
-        "生活照顧",
-        "傷口照顧"
-      ],
-      "allowance": [
-        "老人補助（低收、中低收）"
-      ],
+      "caringItem": ["復健照護", "腫瘤照護（癌症）", "透析照護（洗腎）"],
+      "medicalService": ["術後照顧", "生活照顧", "傷口照顧"],
+      "allowance": ["老人補助（低收、中低收）"],
       "roomCards": [
         {
           "id": 1,
@@ -268,7 +244,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -287,7 +263,7 @@
       "name": "樂康頤和園",
       "category": "安養中心",
       "images": [
-        "https://img.freepik.com/free-photo/building_1127-3187.jpg?t=st=1740926708~exp=1740930308~hmac=984de1995baf27efd17304edc1856930b608cc20b8db65208a60e85d2ab55eb8&w=1800",
+        "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-04.png?raw=true",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Intro-B/IntroB-01.png",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Intro-C/IntroC-01.png",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Intro-D/IntroD-01.png",
@@ -321,20 +297,9 @@
       ],
       "description": "樂康頤和園專為銀髮族打造,提供溫馨的安養服務。我們設有舒適的居住空間,讓長者享受如家般的溫暖。",
       "age": "60 歲以上",
-      "caringItem": [
-        "鼻胃管",
-        "導尿管",
-        "精神照護"
-      ],
-      "medicalService": [
-        "如廁訓練",
-        "延緩失能",
-        "營養評估"
-      ],
-      "allowance": [
-        "身心障礙",
-        "喘息服務"
-      ],
+      "caringItem": ["鼻胃管", "導尿管", "精神照護"],
+      "medicalService": ["如廁訓練", "延緩失能", "營養評估"],
+      "allowance": ["身心障礙", "喘息服務"],
       "roomCards": [
         {
           "id": 1,
@@ -345,7 +310,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 1
@@ -402,19 +367,9 @@
       ],
       "description": "怡然頤養居提供全方位的安養服務,讓長者安心養老。我們設有專業的護理單位,確保每位住民的健康需求得到滿足。",
       "age": "65 歲以上",
-      "caringItem": [
-        "認知障礙（失智）",
-        "氣切管",
-        "氧氣"
-      ],
-      "medicalService": [
-        "術後照顧",
-        "生活照顧",
-        "傷口照顧"
-      ],
-      "allowance": [
-        "老人補助（低收、中低收）"
-      ],
+      "caringItem": ["認知障礙（失智）", "氣切管", "氧氣"],
+      "medicalService": ["術後照顧", "生活照顧", "傷口照顧"],
+      "allowance": ["老人補助（低收、中低收）"],
       "roomCards": [
         {
           "id": 1,
@@ -425,7 +380,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 2
@@ -444,7 +399,7 @@
       "name": "祥和樂年苑",
       "category": "安養中心",
       "images": [
-        "https://img.freepik.com/free-photo/building-with-white-walls_1127-2272.jpg?t=st=1740926794~exp=1740930394~hmac=484a110c5e5504a989b085b104bc4ac66d60b9e59ad8f267f3f9ac69c3f97f94&w=2000",
+        "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/Building/B-05.png?raw=true",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Intro-B/IntroB-01.png",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Intro-C/IntroC-01.png",
         "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Intro-D/IntroD-01.png",
@@ -482,19 +437,9 @@
       ],
       "description": "祥和樂年苑致力於營造一個舒適、健康、快樂的安養環境。我們提供先進的護理設施,全天候照護長者的身體健康。",
       "age": "60 歲以上",
-      "caringItem": [
-        "復健照護",
-        "腫瘤照護（癌症）",
-        "透析照護（洗腎）"
-      ],
-      "medicalService": [
-        "如廁訓練",
-        "延緩失能",
-        "營養評估"
-      ],
-      "allowance": [
-        "身心障礙"
-      ],
+      "caringItem": ["復健照護", "腫瘤照護（癌症）", "透析照護（洗腎）"],
+      "medicalService": ["如廁訓練", "延緩失能", "營養評估"],
+      "allowance": ["身心障礙"],
       "roomCards": [
         {
           "id": 1,
@@ -505,7 +450,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -562,19 +507,9 @@
       ],
       "description": "康福護理苑提供專業的長期護理服務,致力於守護長者的健康與生活質量。我們設有高規格的醫護照護室,全天候提供專業的醫療支援。",
       "age": "65 歲以上",
-      "caringItem": [
-        "鼻胃管",
-        "導尿管",
-        "精神照護"
-      ],
-      "medicalService": [
-        "醫師巡診",
-        "鄰近醫院",
-        "藥師評估"
-      ],
-      "allowance": [
-        "喘息服務"
-      ],
+      "caringItem": ["鼻胃管", "導尿管", "精神照護"],
+      "medicalService": ["醫師巡診", "鄰近醫院", "藥師評估"],
+      "allowance": ["喘息服務"],
       "roomCards": [
         {
           "id": 1,
@@ -585,7 +520,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 1
@@ -642,20 +577,9 @@
       ],
       "description": "靜怡護理家園為長者提供安寧舒適的護理服務。我們擁有設備完善的病房,讓長者在安全舒適的環境中休養。",
       "age": "60 歲以上",
-      "caringItem": [
-        "認知障礙（失智）",
-        "氣切管",
-        "氧氣"
-      ],
-      "medicalService": [
-        "腫瘤照顧",
-        "洗腎接送",
-        "營養評估"
-      ],
-      "allowance": [
-        "老人補助（低收、中低收）",
-        "身心障礙"
-      ],
+      "caringItem": ["認知障礙（失智）", "氣切管", "氧氣"],
+      "medicalService": ["腫瘤照顧", "洗腎接送", "營養評估"],
+      "allowance": ["老人補助（低收、中低收）", "身心障礙"],
       "roomCards": [
         {
           "id": 1,
@@ -666,7 +590,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -719,19 +643,9 @@
       ],
       "description": "頤康護理居致力於提供全方位的護理服務,讓長者享受高品質的生活。我們設有先進的醫療護理站,隨時守護長者的健康。",
       "age": "65 歲以上",
-      "caringItem": [
-        "復健照護",
-        "腫瘤照護（癌症）",
-        "透析照護（洗腎）"
-      ],
-      "medicalService": [
-        "術後照顧",
-        "生活照顧",
-        "傷口照顧"
-      ],
-      "allowance": [
-        "喘息服務"
-      ],
+      "caringItem": ["復健照護", "腫瘤照護（癌症）", "透析照護（洗腎）"],
+      "medicalService": ["術後照顧", "生活照顧", "傷口照顧"],
+      "allowance": ["喘息服務"],
       "roomCards": [
         {
           "id": 1,
@@ -742,7 +656,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -799,19 +713,9 @@
       ],
       "description": "晴朗日間照護中心為長者提供安心的日間照護服務。我們設有溫馨的休息區,讓長者在日間舒適放鬆。",
       "age": "60 歲以上",
-      "caringItem": [
-        "鼻胃管",
-        "導尿管",
-        "精神照護"
-      ],
-      "medicalService": [
-        "如廁訓練",
-        "延緩失能",
-        "營養評估"
-      ],
-      "allowance": [
-        "老人補助（低收、中低收）"
-      ],
+      "caringItem": ["鼻胃管", "導尿管", "精神照護"],
+      "medicalService": ["如廁訓練", "延緩失能", "營養評估"],
+      "allowance": ["老人補助（低收、中低收）"],
       "roomCards": [
         {
           "id": 1,
@@ -822,7 +726,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -875,20 +779,9 @@
       ],
       "description": "晨曦安養日間中心提供長者溫馨的日間照護環境。我們擁有設備齊全的護理站,隨時提供健康護理。",
       "age": "65 歲以上",
-      "caringItem": [
-        "認知障礙（失智）",
-        "氣切管",
-        "氧氣"
-      ],
-      "medicalService": [
-        "術後照顧",
-        "生活照顧",
-        "傷口照顧"
-      ],
-      "allowance": [
-        "身心障礙",
-        "喘息服務"
-      ],
+      "caringItem": ["認知障礙（失智）", "氣切管", "氧氣"],
+      "medicalService": ["術後照顧", "生活照顧", "傷口照顧"],
+      "allowance": ["身心障礙", "喘息服務"],
       "roomCards": [
         {
           "id": 1,
@@ -899,7 +792,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -952,19 +845,9 @@
       ],
       "description": "暖陽日間關懷中心致力於為長者提供全方位的日間照護服務。我們設有專業護理區,確保每位長者的健康得到悉心照顧。",
       "age": "60 歲以上",
-      "caringItem": [
-        "復健照護",
-        "腫瘤照護（癌症）",
-        "透析照護（洗腎）"
-      ],
-      "medicalService": [
-        "醫師巡診",
-        "鄰近醫院",
-        "藥師評估"
-      ],
-      "allowance": [
-        "老人補助（低收、中低收）"
-      ],
+      "caringItem": ["復健照護", "腫瘤照護（癌症）", "透析照護（洗腎）"],
+      "medicalService": ["醫師巡診", "鄰近醫院", "藥師評估"],
+      "allowance": ["老人補助（低收、中低收）"],
       "roomCards": [
         {
           "id": 1,
@@ -975,7 +858,7 @@
         },
         {
           "id": 2,
-          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-15.png",
+          "imgUrl": "https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/refs/heads/dev/assets/images/Building/B-16.png",
           "roomType": "三人房",
           "price": 36000,
           "availableBeds": 3
@@ -993,13 +876,438 @@
   "carts": [
     {
       "productId": 1,
-      "userId": "2",
+      "userId": 3,
+      "id": 1
+    }
+  ],
+  "orders": [
+    {
+      "productId": 3,
+      "userId": 2,
+      "data": {
+        "checkInDate": "2025-03-28",
+        "fullName": "12",
+        "mobilePhone": "0919 291 929",
+        "address": "123",
+        "mail": "1212@mail.com",
+        "message": "",
+        "creditCard": "4003 0103 0103 0101",
+        "expiryDate": "12/29",
+        "cvv": "122",
+        "roomType": "六人房"
+      },
       "id": 1
     },
     {
-      "productId": 1,
-      "userId": "2",
+      "productId": 3,
+      "userId": 2,
+      "data": {
+        "checkInDate": "2025-03-20",
+        "fullName": "唐納川普",
+        "mobilePhone": "0912 222 222",
+        "address": "1600 Pennsylvania Avenue NW, Washington, DC 20500美國",
+        "mail": "1@mail.com",
+        "message": "123",
+        "creditCard": "4030 0013 0030 3030",
+        "expiryDate": "02/29",
+        "cvv": "222",
+        "roomType": "單人房"
+      },
       "id": 2
+    },
+    {
+      "productId": 2,
+      "userId": 3,
+      "data": {
+        "checkInDate": "2026-05-29",
+        "fullName": "Jack Xiao",
+        "mobilePhone": "0975 500 680",
+        "address": "13F.-7, No. 168, Sec. 2, Bo'ai Rd",
+        "mail": "jim3470022@gmail.com",
+        "message": "",
+        "creditCard": "4000 4000 4000 4000",
+        "expiryDate": "03/29",
+        "cvv": "123",
+        "roomType": "單人房"
+      },
+      "id": 3
+    },
+    {
+      "productId": 2,
+      "userId": 3,
+      "data": {
+        "checkInDate": "2025-06-30",
+        "fullName": "Jack Xiao",
+        "mobilePhone": "0975 500 680",
+        "address": "13F.-7, No. 168, Sec. 2, Bo'ai Rd",
+        "mail": "jim3470022@gmail.com",
+        "message": "",
+        "creditCard": "4000 4000 4000 1234",
+        "expiryDate": "04/30",
+        "cvv": "123",
+        "roomType": "單人房"
+      },
+      "id": 4
+    }
+  ],
+  "taiwancitys": [
+    {
+      "name": "台北市",
+      "regions": [
+        "中正區",
+        "大同區",
+        "中山區",
+        "萬華區",
+        "信義區",
+        "松山區",
+        "大安區",
+        "南港區",
+        "北投區",
+        "內湖區",
+        "士林區",
+        "文山區"
+      ]
+    },
+    {
+      "name": "新北市",
+      "regions": [
+        "板橋區",
+        "新莊區",
+        "泰山區",
+        "林口區",
+        "淡水區",
+        "金山區",
+        "八里區",
+        "萬里區",
+        "石門區",
+        "三芝區",
+        "瑞芳區",
+        "汐止區",
+        "平溪區",
+        "貢寮區",
+        "雙溪區",
+        "深坑區",
+        "石碇區",
+        "新店區",
+        "坪林區",
+        "烏來區",
+        "中和區",
+        "永和區",
+        "土城區",
+        "三峽區",
+        "樹林區",
+        "鶯歌區",
+        "三重區",
+        "蘆洲區",
+        "五股區"
+      ]
+    },
+    {
+      "name": "基隆市",
+      "regions": [
+        "仁愛區",
+        "中正區",
+        "信義區",
+        "中山區",
+        "安樂區",
+        "暖暖區",
+        "七堵區"
+      ]
+    },
+    {
+      "name": "桃園市",
+      "regions": [
+        "桃園區",
+        "中壢區",
+        "平鎮區",
+        "八德區",
+        "楊梅區",
+        "蘆竹區",
+        "龜山區",
+        "龍潭區",
+        "大溪區",
+        "大園區",
+        "觀音區",
+        "新屋區",
+        "復興區"
+      ]
+    },
+    {
+      "name": "新竹縣",
+      "regions": [
+        "竹北市",
+        "竹東鎮",
+        "新埔鎮",
+        "關西鎮",
+        "峨眉鄉",
+        "寶山鄉",
+        "北埔鄉",
+        "橫山鄉",
+        "芎林鄉",
+        "湖口鄉",
+        "新豐鄉",
+        "尖石鄉",
+        "五峰鄉"
+      ]
+    },
+    {
+      "name": "新竹市",
+      "regions": ["東區", "北區", "香山區"]
+    },
+    {
+      "name": "苗栗縣",
+      "regions": [
+        "苗栗市",
+        "通霄鎮",
+        "苑裡鎮",
+        "竹南鎮",
+        "頭份鎮",
+        "後龍鎮",
+        "卓蘭鎮",
+        "西湖鄉",
+        "頭屋鄉",
+        "公館鄉",
+        "銅鑼鄉",
+        "三義鄉",
+        "造橋鄉",
+        "三灣鄉",
+        "南庄鄉",
+        "大湖鄉",
+        "獅潭鄉",
+        "泰安鄉"
+      ]
+    },
+    {
+      "name": "台中市",
+      "regions": [
+        "中區",
+        "東區",
+        "南區",
+        "西區",
+        "北區",
+        "北屯區",
+        "西屯區",
+        "南屯區",
+        "太平區",
+        "大里區",
+        "霧峰區",
+        "烏日區",
+        "豐原區",
+        "后里區",
+        "東勢區",
+        "石岡區",
+        "新社區",
+        "和平區",
+        "神岡區",
+        "潭子區",
+        "大雅區",
+        "大肚區",
+        "龍井區",
+        "沙鹿區",
+        "梧棲區",
+        "清水區",
+        "大甲區",
+        "外埔區",
+        "大安區"
+      ]
+    },
+    {
+      "name": "南投縣",
+      "regions": [
+        "南投市",
+        "埔里鎮",
+        "草屯鎮",
+        "竹山鎮",
+        "集集鎮",
+        "名間鄉",
+        "鹿谷鄉",
+        "中寮鄉",
+        "魚池鄉",
+        "國姓鄉",
+        "水里鄉",
+        "信義鄉",
+        "仁愛鄉"
+      ]
+    },
+    {
+      "name": "彰化縣",
+      "regions": [
+        "彰化市",
+        "員林鎮",
+        "和美鎮",
+        "鹿港鎮",
+        "溪湖鎮",
+        "二林鎮",
+        "田中鎮",
+        "北斗鎮",
+        "花壇鄉",
+        "芬園鄉",
+        "大村鄉",
+        "永靖鄉",
+        "伸港鄉",
+        "線西鄉",
+        "福興鄉",
+        "秀水鄉",
+        "埔心鄉",
+        "埔鹽鄉",
+        "大城鄉",
+        "芳苑鄉",
+        "竹塘鄉",
+        "社頭鄉",
+        "二水鄉",
+        "田尾鄉",
+        "埤頭鄉",
+        "溪州鄉"
+      ]
+    },
+    {
+      "name": "高雄市",
+      "regions": [
+        "楠梓區",
+        "左營區",
+        "鼓山區",
+        "三民區",
+        "鹽埕區",
+        "前金區",
+        "新興區",
+        "苓雅區",
+        "前鎮區",
+        "小港區",
+        "旗津區",
+        "鳳山區",
+        "大寮區",
+        "鳥松區",
+        "林園區",
+        "仁武區",
+        "大樹區",
+        "大社區",
+        "岡山區",
+        "路竹區",
+        "橋頭區",
+        "梓官區",
+        "彌陀區",
+        "永安區",
+        "燕巢區",
+        "田寮區",
+        "阿蓮區",
+        "茄萣區",
+        "湖內區",
+        "旗山區",
+        "美濃區",
+        "內門區",
+        "杉林區",
+        "甲仙區",
+        "六龜區",
+        "茂林區",
+        "桃源區",
+        "那瑪夏區"
+      ]
+    },
+    {
+      "name": "屏東縣",
+      "regions": [
+        "屏東市",
+        "潮州鎮",
+        "東港鎮",
+        "恆春鎮",
+        "萬丹鄉",
+        "長治鄉",
+        "麟洛鄉",
+        "九如鄉",
+        "里港鄉",
+        "鹽埔鄉",
+        "高樹鄉",
+        "萬巒鄉",
+        "內埔鄉",
+        "竹田鄉",
+        "新埤鄉",
+        "枋寮鄉",
+        "新園鄉",
+        "崁頂鄉",
+        "林邊鄉",
+        "南州鄉",
+        "佳冬鄉",
+        "琉球鄉",
+        "車城鄉",
+        "滿州鄉",
+        "枋山鄉",
+        "霧台鄉",
+        "瑪家鄉",
+        "泰武鄉",
+        "來義鄉",
+        "春日鄉",
+        "獅子鄉",
+        "牡丹鄉",
+        "三地門鄉"
+      ]
+    },
+    {
+      "name": "宜蘭縣",
+      "regions": [
+        "宜蘭市",
+        "羅東鎮",
+        "蘇澳鎮",
+        "頭城鎮",
+        "礁溪鄉",
+        "壯圍鄉",
+        "員山鄉",
+        "冬山鄉",
+        "五結鄉",
+        "三星鄉",
+        "大同鄉",
+        "南澳鄉"
+      ]
+    },
+    {
+      "name": "花蓮縣",
+      "regions": [
+        "花蓮市",
+        "鳳林鎮",
+        "玉里鎮",
+        "新城鄉",
+        "吉安鄉",
+        "壽豐鄉",
+        "秀林鄉",
+        "光復鄉",
+        "豐濱鄉",
+        "瑞穗鄉",
+        "萬榮鄉",
+        "富里鄉",
+        "卓溪鄉"
+      ]
+    },
+    {
+      "name": "台東縣",
+      "regions": [
+        "台東市",
+        "成功鎮",
+        "關山鎮",
+        "長濱鄉",
+        "海端鄉",
+        "池上鄉",
+        "東河鄉",
+        "鹿野鄉",
+        "延平鄉",
+        "卑南鄉",
+        "金峰鄉",
+        "大武鄉",
+        "達仁鄉",
+        "綠島鄉",
+        "蘭嶼鄉",
+        "太麻里鄉"
+      ]
+    },
+    {
+      "name": "澎湖縣",
+      "regions": ["馬公市", "湖西鄉", "白沙鄉", "西嶼鄉", "望安鄉", "七美鄉"]
+    },
+    {
+      "name": "金門縣",
+      "regions": ["金城鎮", "金湖鎮", "金沙鎮", "金寧鄉", "烈嶼鄉", "烏坵鄉"]
+    },
+    {
+      "name": "連江縣",
+      "regions": ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
     }
   ]
 }

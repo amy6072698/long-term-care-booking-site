@@ -13,7 +13,7 @@ export default function Cart() {
   const [cartsData, setCartsData] = useState([]);
   const { setIsLoginModalOpen } = useContext(UserContext);
   const { setLoginModalMode } = useContext(UserContext);
-  const { isLogin } = useContext(UserContext); // 用來判斷是否登入
+  const { isLogin } = useContext(UserContext); // 判斷是否登入
   // const { setIsLogin } = useContext(UserContext);
   // const { setUserName } = useContext(UserContext);
 
@@ -105,7 +105,7 @@ export default function Cart() {
     }
   };
 
- // 請求個人 user 購物車資料
+ // 清空購物車
  const handleDeleteAllClick = async () => {
   getToken(); // 取得 userId
   if (!myUserId) {
@@ -115,7 +115,6 @@ export default function Cart() {
 
   // 取得當前使用者的購物車資料
   const userCarts = cartsData.filter((item) => item.userId == myUserId);
-  console.log(userCarts);
 
   if (userCarts.length === 0) {
     alert("購物車已經是空的！");
@@ -239,7 +238,13 @@ export default function Cart() {
                             <input
                               className="form-check-input custom-checkbox checkbox-absolute"
                               type="checkbox"
-                              id="checkboxNoLabel"
+                              id={`checkbox-${item.id}`}
+                              checked={selectId === item.id}
+                              onChange={() =>
+                                setSelectId(
+                                  selectId === item.id ? null : item.id
+                                )
+                              }
                               value=""
                               aria-label="勾選框"
                             />
@@ -315,7 +320,7 @@ export default function Cart() {
                                 <p className="d-flex align-items-center py-1 px-2">
                                   <img
                                     className="me-1"
-                                    src={`src/assets/images/Icon/IconBlack/${service.name}.svg`}
+                                    src={`https://raw.githubusercontent.com/Jack-Xiao-2024/ReactC5/ed70683e88e44a1c0854ab9849a0f2dbc072916e/src/assets/images/Icon/tag/${service.name}.svg`}
                                   />
                                   {service.name || "載入中..."}
                                 </p>

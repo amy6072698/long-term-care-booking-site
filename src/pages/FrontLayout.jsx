@@ -10,6 +10,7 @@ export const UserContext = createContext({});
 export default function FrontLayout() {
   const [isLogin, setIsLogin] = useState(false);
   const [userName, setUserName] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const loginModalRef = useRef(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [loginModalMode, setLoginModalMode] = useState("");
@@ -22,6 +23,8 @@ export default function FrontLayout() {
           setIsLogin,
           userName,
           setUserName,
+          isAdmin,
+          setIsAdmin,
           loginModalRef,
           isLoginModalOpen,
           setIsLoginModalOpen,

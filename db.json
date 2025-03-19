@@ -8,7 +8,8 @@
       "birthday": "1999-09-09",
       "phone": "0912345678",
       "id": 1,
-      "address": "台中市太平區中興路50號"
+      "address": "台中市太平區中興路50號",
+      "role": "admin"
     },
     {
       "email": "1@mail.com",
@@ -17,7 +18,8 @@
       "gender": "male",
       "birthday": "2012-01-01",
       "phone": "0912345678",
-      "id": 2
+      "id": 2,
+      "role": "admin"
     },
     {
       "email": "jim3470022@gmail.com",
@@ -26,7 +28,8 @@
       "gender": "male",
       "birthday": "1999-06-22",
       "phone": "0975500680",
-      "id": 3
+      "id": 3,
+      "role": "admin"
     }
   ],
   "products": [

@@ -26,6 +26,7 @@ function LoginModal({
   const { setIsLogin } = useContext(UserContext);
   const { setUserName } = useContext(UserContext);
   const { loginModalRef } = useContext(UserContext);
+  const { isAdmin, setIsAdmin } = useContext(UserContext); // 判斷使用者是否為管理者
 
 
   // 建立 LoginModal 實例
@@ -94,6 +95,7 @@ function LoginModal({
       const id = res.data.user.id; // 使用者的 id
       const token = res.data.accessToken; // 使用者的 token
       const name = res.data.user.name; // 使用者的 name
+      const role = res.data.user.role; // 使用者的 role
 
       // json-server-auth 預設 1 小時 token 失效，宣告失效時間變數 expired，並做時間處理
       const expired = new Date();
@@ -108,6 +110,11 @@ function LoginModal({
 
       // 把使用者的 name 更新到 userName
       setUserName(name);
+      
+      // 判斷使用者是否為管理者
+      if(role === "admin"){
+        setIsAdmin(true);
+      }
 
       // 登入後刷新清空表單內容
       reset();

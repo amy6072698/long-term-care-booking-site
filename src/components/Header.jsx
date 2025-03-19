@@ -200,7 +200,7 @@ function Header() {
                         <li>
                           <Link 
                             onClick={() => setIsCollapseOpen(false)}
-                            to="/" 
+                            to="/admin" 
                             className="dropdown-item mb-1">
                             進入管理後台
                           </Link>

@@ -4,7 +4,7 @@ import axios from "axios";
 import BannerNoSearch from "../components/BannerNoSearch";
 import { useNavigate } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-import { UserContext } from "./FrontLayout";
+import { UserContext }  from "../contexts/UserContext";
 
 let token;
 let myUserId;

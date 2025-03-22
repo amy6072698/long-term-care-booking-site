@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
 import { ToastContainer } from "react-toastify";
 import { useParams } from "react-router";
-import { UserContext } from "./FrontLayout";
+import { UserContext }  from "../contexts/UserContext";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";

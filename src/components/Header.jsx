@@ -1,9 +1,9 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import LoginModal from "./LoginModal";
 import { Link, NavLink, useNavigate } from "react-router";
 
 // 將 FrontLayout 中的 UserContext 匯入
-import { UserContext } from "../pages/FrontLayout";
+import { UserContext }  from "../contexts/UserContext";
 
 // 安裝 vite-plugin-svgr 讓 icon svg 檔可以作為元件引入使用，安裝引入方法請看 vite.config
 import Profile from "../assets/images/Account_Icon/profile.svg?react";
@@ -23,24 +23,16 @@ import { Collapse } from "bootstrap";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function Header() {
-  // const [ isLoginModalOpen, setIsLoginModalOpen ] = useState(false);
-  const { isLoginModalOpen, setIsLoginModalOpen } = useContext(UserContext);
-
-  // const [loginModalMode, setLoginModalMode] = useState("");
-  const {loginModalMode, setLoginModalMode} = useContext(UserContext);
-
   // 用 useContext 引入 isLogin, setIsLogin, userName, setUserName
   const { isLogin, setIsLogin } = useContext(UserContext); // 用來判斷是否登入
   const { userName, setUserName } = useContext(UserContext); // 用來記錄使用者姓名
+  const { handleLoginModalOpen } = useContext(UserContext); // 判斷開啟登入還是註冊 modal
+
   const { isAdmin, setIsAdmin } = useContext(UserContext); // 判斷使用者是否為管理者
 
-  const navigate = useNavigate();
+  const { isCollapseOpen, setIsCollapseOpen } = useContext(UserContext); // 判斷手機板漢堡選單開關
 
-  const handleLoginModalOpen = (mode) => {
-    setLoginModalMode(mode);
-    setIsLoginModalOpen(true);
-    setIsCollapseOpen(false);
-  };
+  const navigate = useNavigate();
 
   // 登出功能
   const handleLogout = () => {
@@ -58,10 +50,10 @@ function Header() {
   };
 
   // 取得cookie裡的token驗證是否還有效，是就維持登入狀態、否則自動登出
-  const checkLogin = async () => {
+  const checkLogin = useCallback(async () => {
     try {
       const token = document.cookie.replace(
-        /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
 
@@ -73,7 +65,7 @@ function Header() {
       axios.defaults.headers.common["Authorization"] = token;
 
       const id = document.cookie.replace(
-        /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)myUserId\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
 
@@ -90,7 +82,7 @@ function Header() {
       console.error("Token 驗證失敗，可能已過期", error);
       setIsLogin(false);
     }
-  };
+  },[setIsLogin, setIsAdmin, setUserName]);
 
   const collapseNavbarRef = useRef(null);
 
@@ -101,15 +93,16 @@ function Header() {
       });
     }
     checkLogin();
-  }, []);
+  }, [checkLogin]);
 
-  const [ isCollapseOpen, setIsCollapseOpen ] = useState(false);
+  
 
-  const handleCollapseNavbarToggle = () => {
-    const collapseInstance = Collapse.getOrCreateInstance(collapseNavbarRef.current);
-    isCollapseOpen ? collapseInstance.show() : collapseInstance.hide();
-  }
+  
   useEffect(() => {
+    const handleCollapseNavbarToggle = () => {
+      const collapseInstance = Collapse.getOrCreateInstance(collapseNavbarRef.current);
+      isCollapseOpen ? collapseInstance.show() : collapseInstance.hide();
+    }
     handleCollapseNavbarToggle();
   }, [isCollapseOpen]);
 
@@ -245,12 +238,8 @@ function Header() {
       </header>
 
       {/* 引入寫在 Header 但需要在 LoginModal 中使用的內容 */}
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        setIsOpen={setIsLoginModalOpen}
-        handleLoginModalOpen={handleLoginModalOpen}
-        modalMode={loginModalMode}
-      />
+      {/* <LoginModal /> */}
+      <LoginModal />
     </>
   );
 }

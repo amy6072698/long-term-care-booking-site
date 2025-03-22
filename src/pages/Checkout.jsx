@@ -26,7 +26,6 @@ export default function Checkout() {
     setValue,
     setError,
     trigger,
-    clearErrors,
   } = useForm({
     mode: "onChange",
   });
@@ -59,7 +58,9 @@ export default function Checkout() {
         setCheckoutData(data);
         setPrice(data.roomCards[0].price);
         setRoomType(data.roomCards[0].roomType);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, []);
 
@@ -72,14 +73,17 @@ export default function Checkout() {
     // }, 0);
   };
 
+  // 結帳api
   const addOrderItem = async (data) => {
     try {
-      const res = await axios.post(
+      await axios.post(
         `${BASE_URL}/600/orders`,
         {
           productId: Number(productId),
           userId: Number(myUserId),
-          data: data,
+          orderName: checkoutData.name,
+          orderPrice: price,
+          orderData: data,
         },
         {
           headers: {
@@ -88,9 +92,10 @@ export default function Checkout() {
         }
       );
     } catch (error) {
+      console.log(error);
     }
   };
-  //處理結帳
+  //結帳後刪除立即預訂內容
   const handleCheckoutSuccess = async () => {
     try {
       await axios.delete(`${BASE_URL}/600/carts/${selectProductId}`, {
@@ -101,6 +106,7 @@ export default function Checkout() {
       navigate("/checkoutSuccess");
       reset();
     } catch (error) {
+      console.log(error);
       alert("結帳失敗");
     }
   };

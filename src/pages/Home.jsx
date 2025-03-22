@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import HeartCard from "../components/HeartCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -107,6 +107,7 @@ export default function Home() {
       const res = await axios.get(`${BASE_URL}/products?category_like=${encodeURIComponent(category)}&_sort=like&_order=desc&_start=0&_end=3`);
       setIndexHotsData(res.data);
     } catch (error) {
+      console.error(error);
       alert('取得人氣機構失敗');
     }
   }
@@ -114,11 +115,10 @@ export default function Home() {
   // 預設載入 "長期照顧中心"
   useEffect(() => {
     getIndexHotsData(clickedCategory);
-  }, []);
+  }, [clickedCategory]);
 
   const handleHotsTabClick = (category) => {
     setClickedCategory(category);
-    getIndexHotsData(category)
   }
 
   

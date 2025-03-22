@@ -43,7 +43,7 @@ export default function AccountIndex() {
         <p className="mb-lg-12 mb-8 ms-lg-0 ms-4">管理您的長照好厝邊使用體驗</p>
         <div className="row row-cols-lg-2 row-cols-1">        
           {accountIndexTab.map((item, index) => (
-            <div className="col d-grid">
+            <div key={index} className="col d-grid">
               <Link to={item.path} key={index} 
               className="account-index-btn btn px-11 py-9 my-3 text-start">
                 <div className="d-flex align-items-center">

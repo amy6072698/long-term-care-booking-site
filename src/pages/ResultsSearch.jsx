@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 import Booking from "../components/Booking";
 //匯入使用者資料
-import { UserContext } from "../pages/FrontLayout";
+import { UserContext }  from "../contexts/UserContext";
 //帶入token
 import getToken from "../assets/js/getTokenFromCookie";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 // 引入 ResultsLayout 中的 SearchContext
-import { SearchContext } from "../pages/ResultsLayout";
+import { SearchContext } from "../contexts/SearchContext";
 import HeartCard from "../components/HeartCard";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export default function ResultsSearch({ product }) {
+export default function ResultsSearch() {
   // 用於取出網址搜尋參數
   const { searchParams } = useContext(SearchContext);
 
@@ -23,7 +23,7 @@ export default function ResultsSearch({ product }) {
 
   // 用來判斷是否登入
   const { isLogin } = useContext(UserContext);
-  //取得登入toekn
+  //取得登入token
   const { token, myUserId } = getToken();
   const [isLoading, setIsLoading] = useState(false);
   //登入狀態變動時觸發取得token
@@ -39,7 +39,7 @@ export default function ResultsSearch({ product }) {
   const [totalPages, setTotalPages] = useState(1);
 
   // 取得符合搜尋參數的 products
-  const getProductsSearch = async (param) => {
+  const getProductsSearch = useCallback(async (param) => {
     try {
       // 帶入搜尋參數到 API 網址取得相應資料
       const res = await axios.get(
@@ -55,11 +55,12 @@ export default function ResultsSearch({ product }) {
       // 處理總頁數，用總資料數除以每頁顯示幾筆再用 Math.ceil 處理無條件進位
       setTotalPages(Math.ceil(totalCount / itemsPerPage));
     } catch (error) {
+      console.log(error);
       alert("取得產品搜尋失敗");
     }
-  };
+  },[currentPage]);
   // 取得所有 products
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     try {
       const res = await axios.get(
         `${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}`
@@ -67,12 +68,13 @@ export default function ResultsSearch({ product }) {
       setResultsSearch(res.data);
       // console.log(res.data);
     } catch (error) {
+      console.log(error);
       alert("取得產品失敗");
     }
-  };
+  },[currentPage]);
 
   // 從網址取得搜尋參數，並判斷處理各項目搜尋參數
-  const handleSearchParams = () => {
+  const handleSearchParams = useCallback(() => {
     const getParams = new URLSearchParams();
 
     // 取得各項的搜尋參數值，getAll 用於有多項參數時
@@ -118,12 +120,12 @@ export default function ResultsSearch({ product }) {
     } else {
       getProducts();
     }
-  };
+  },[searchParams, getProductsSearch, getProducts]);
 
   // 若 searchParams、currentPage 更新就觸發 handleSearchParams
   useEffect(() => {
     handleSearchParams();
-  }, [searchParams, currentPage]);
+  }, [searchParams, currentPage, handleSearchParams]);
 
   //切換分頁
   const handlePageChange = (page) => {

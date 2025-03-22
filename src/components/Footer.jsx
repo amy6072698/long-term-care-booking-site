@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router";
-import { Link as ScrollLink, scroller } from "react-scroll";
+import { scroller } from "react-scroll";
 
 import FooterLogo from "../assets/images/Logo/LB-White.svg?react";
 function Footer() {

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 // 匯入 Modal
@@ -7,26 +7,20 @@ import { Modal } from 'bootstrap';
 import axios from "axios";
 
 // 將 FrontLayout 中的 UserContext 匯入
-import { UserContext } from '../pages/FrontLayout';
+import { UserContext }  from "../contexts/UserContext";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-function LoginModal({
-  // 引入在 Header 寫的內容(名稱為自訂義)
-  isOpen,
-  setIsOpen,
-  modalMode,
-  handleLoginModalOpen
-}){
-
-  // 用 useRef 取得要控制的 Modal DOM 元素 
-  // const loginModalRef = useRef(null);
+function LoginModal(){
+  const { isLoginModalOpen, setIsLoginModalOpen } = useContext(UserContext);
+  const { loginModalMode } = useContext(UserContext);
 
   // 用 useContext 引入 setIsLogin, setUserName
   const { setIsLogin } = useContext(UserContext);
   const { setUserName } = useContext(UserContext);
   const { loginModalRef } = useContext(UserContext);
-  const { isAdmin, setIsAdmin } = useContext(UserContext); // 判斷使用者是否為管理者
+  const { setIsAdmin } = useContext(UserContext); // 判斷使用者是否為管理者
+  const { handleLoginModalOpen } = useContext(UserContext); // 判斷開啟登入還是註冊 modal
 
 
   // 建立 LoginModal 實例
@@ -34,21 +28,21 @@ function LoginModal({
     new Modal(loginModalRef.current, {
       backdrop: false
     })
-  },[])
+  },[loginModalRef])
 
   // LoginModal 開啟
   useEffect(() => {
-    if(isOpen){
+    if(isLoginModalOpen){
       const modalInstance = Modal.getInstance(loginModalRef.current)
       modalInstance.show();
     }
-  }, [isOpen])
+  }, [loginModalRef, isLoginModalOpen])
 
   // LoginModal 關閉
   const handleLoginModalClose = () => {
     const modalInstance = Modal.getInstance(loginModalRef.current)
     modalInstance.hide();
-    setIsOpen(false);
+    setIsLoginModalOpen(false);
   }
 
 
@@ -161,8 +155,8 @@ function LoginModal({
             <button type="button" className="btn-close" aria-label="Close" onClick={handleLoginModalClose}></button>
           </div>
 
-          {/* 用從 Header 引入的 modalMode 判斷要開啟哪個 Modal */}
-          {modalMode === "login" ? (
+          {/* 用 loginModalMode 判斷要開啟哪個 Modal */}
+          {loginModalMode === "login" ? (
             // 登入的 Modal
             <>
               <div className="modal-body py-0 px-14">

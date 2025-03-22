@@ -62,7 +62,7 @@ export default function AccountLayout() {
           <div className="col-lg-8 col">
             <button onClick={() => navigate("/account")} className="d-block d-lg-none btn btn-link p-0 link-primary-50 mb-3 fs-6">
               
-              <i class="bi bi-chevron-left"></i>返回會員中心
+              <i className="bi bi-chevron-left"></i>返回會員中心
               
             </button>
             <Outlet />

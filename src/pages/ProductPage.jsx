@@ -12,7 +12,7 @@ import "swiper/css/thumbs";
 import "swiper/css/pagination";
 import "swiper/css";
 import Booking from "../components/Booking";
-import getToken from '../assets/js/getTokenFromCookie';
+import getToken from "../assets/js/getTokenFromCookie";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -52,6 +52,7 @@ export default function ProductPage() {
       });
       setProduct(res.data[productIndex]);
     } catch (error) {
+      console.log(error);
       alert("取得產品資料失敗");
     }
   };
@@ -82,7 +83,13 @@ export default function ProductPage() {
           {product?.images?.map((thumb, index) => {
             return (
               <SwiperSlide key={index}>
-                <div style={{ width: "1076px", height: "535px", overflow: "hidden" }}>
+                <div
+                  style={{
+                    width: "1076px",
+                    height: "535px",
+                    overflow: "hidden",
+                  }}
+                >
                   <img
                     src={thumb}
                     alt="機構圖片"
@@ -124,7 +131,13 @@ export default function ProductPage() {
             {product?.images?.map((imageUrl, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <div style={{ width: "1076px", height: "535px", overflow: "hidden" }}>
+                  <div
+                    style={{
+                      width: "1076px",
+                      height: "535px",
+                      overflow: "hidden",
+                    }}
+                  >
                     <img
                       className="object-fit-cover w-100 h-100"
                       src={imageUrl}
@@ -162,7 +175,13 @@ export default function ProductPage() {
             {product?.thumbs?.map((thumb, index) => {
               return (
                 <SwiperSlide key={index}>
-                  <div style={{ width: "206.07px", height: "127.75px", overflow: "hidden" }}>
+                  <div
+                    style={{
+                      width: "206.07px",
+                      height: "127.75px",
+                      overflow: "hidden",
+                    }}
+                  >
                     <img
                       src={thumb}
                       alt="機構圖片"

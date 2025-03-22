@@ -15,6 +15,12 @@ import AccountIndex from "../pages/AccountIndex";
 import AccountLayout from "../pages/AccountLayout";
 import AccountProfile from "../pages/AccountProfile";
 import AccountPurchase from "../pages/AccountPurchase";
+import AdminLOrder from "../pages/AdminOrder";
+import AdminLProduct from "../pages/AdminProduct";
+import AdminOrderChart from "../pages/adminOrderChart";
+
+
+
 
 const router = createHashRouter([
   {
@@ -89,7 +95,18 @@ const router = createHashRouter([
     path: "/admin",
     element: <AdminLayout />,
     children: [
-      // 尚未設置後台霧遊
+      {
+        path:'',
+        element:<AdminLOrder/>
+      },
+      {
+        path:'Product',
+        element:<AdminLProduct/>
+      },
+      {
+        path:'orderChart',
+        element:<AdminOrderChart/>
+      }
     ],
   },
   {

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate } from "react-router";
 
 // 引入 ResultsLayout 中的 SearchContext
-import { SearchContext } from "../pages/ResultsLayout";
+import { SearchContext } from "../contexts/SearchContext";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // 建立 機構類型 照護需求 醫療需求 的搜尋框下拉選項

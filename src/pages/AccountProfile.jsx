@@ -1,4 +1,4 @@
-import { useContext,useEffect,useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import axios from "axios";
@@ -7,20 +7,26 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default function AccountProfile() {
 
-  // const { isLogin, setIsLogin } = useContext(UserContext);
   const [ userInfo, setUserInfo ] = useState({});
   const [ editingKey, setEditingKey ] = useState(null);
 
-  
+  // 用 React Hook Form 驗證表單
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-  const getUserinfo = async() => {
+
+  const getUserinfo = useCallback( async() => {
     try {
       const id = document.cookie.replace(
-        /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)myUserId\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
       const token = document.cookie.replace(
-        /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
 
@@ -35,17 +41,17 @@ export default function AccountProfile() {
       console.log(error);
       alert("取得使用者資料失敗");
     }
-  }
+  },[setValue]);
 
   useEffect(() => {
     getUserinfo();
-  }, [])
+  }, [getUserinfo])
 
   // 修改資料API
   const patchUserinfo = async(key, value) => {
     try {
       const id = document.cookie.replace(
-        /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)myUserId\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
       await axios.patch(`${BASE_URL}/600/users/${id}`,{
@@ -57,15 +63,7 @@ export default function AccountProfile() {
     }
   }
 
-  // 用 React Hook Form 驗證表單
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useForm();
-
+  
 
   const handleEditClick = (e, key) => {
     e.preventDefault();

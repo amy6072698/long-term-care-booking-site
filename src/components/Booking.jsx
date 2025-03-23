@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useContext } from "react";
-import { toast, Zoom } from "react-toastify";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import ReactLoading from "react-loading";
-import { UserContext } from "../pages/FrontLayout";
+import { UserContext }  from "../contexts/UserContext";
 
 function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
   const { isLogin } = useContext(UserContext); // 用來判斷是否登入
@@ -51,46 +50,15 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
         }
       );
       setIsLoading(true);
-      showSuccessMessage();
+      showSuccessMessage(`加入預約成功\n請去立即預訂查看`);
       setTimeout(() => {
         setIsLoading(false);
       }, 3000);
     } catch (error) {
-      console.log(error);
       const { data } = error.response;
+      console.log(error);
       showErrorMessage(data);
     }
-  };
-
-  //預約失敗彈跳視窗
-  const showErrorMessage = (message) => {
-    toast.error(message, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-    });
-  };
-
-  //預約成功彈跳視窗
-  const showSuccessMessage = () => {
-    toast.success(`加入預約成功👋\n請去立即預訂查看`, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Zoom,
-      style: { whiteSpace: "pre-line" },
-    });
   };
 
   return (

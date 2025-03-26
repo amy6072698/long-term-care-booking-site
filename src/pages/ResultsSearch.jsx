@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router";
 import Booking from "../components/Booking";
 //匯入使用者資料
-import { UserContext }  from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 //帶入token
 import getToken from "../assets/js/getTokenFromCookie";
 import { ToastContainer } from "react-toastify";
@@ -39,26 +39,29 @@ export default function ResultsSearch() {
   const [totalPages, setTotalPages] = useState(1);
 
   // 取得符合搜尋參數的 products
-  const getProductsSearch = useCallback(async (param) => {
-    try {
-      // 帶入搜尋參數到 API 網址取得相應資料
-      const res = await axios.get(
-        `${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}&${param.toString()}`
-      );
+  const getProductsSearch = useCallback(
+    async (param) => {
+      try {
+        // 帶入搜尋參數到 API 網址取得相應資料
+        const res = await axios.get(
+          `${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}&${param.toString()}`
+        );
 
-      // 將符合的 products 資料更新到 resultsSearch
-      setResultsSearch(res.data);
+        // 將符合的 products 資料更新到 resultsSearch
+        setResultsSearch(res.data);
 
-      // 取得 json server 存在 headers 的資料總筆數
-      const totalCount = res.headers["x-total-count"];
+        // 取得 json server 存在 headers 的資料總筆數
+        const totalCount = res.headers["x-total-count"];
 
-      // 處理總頁數，用總資料數除以每頁顯示幾筆再用 Math.ceil 處理無條件進位
-      setTotalPages(Math.ceil(totalCount / itemsPerPage));
-    } catch (error) {
-      console.log(error);
-      alert("取得產品搜尋失敗");
-    }
-  },[currentPage]);
+        // 處理總頁數，用總資料數除以每頁顯示幾筆再用 Math.ceil 處理無條件進位
+        setTotalPages(Math.ceil(totalCount / itemsPerPage));
+      } catch (error) {
+        console.log(error);
+        alert("取得產品搜尋失敗");
+      }
+    },
+    [currentPage]
+  );
   // 取得所有 products
   const getProducts = useCallback(async () => {
     try {
@@ -71,7 +74,7 @@ export default function ResultsSearch() {
       console.log(error);
       alert("取得產品失敗");
     }
-  },[currentPage]);
+  }, [currentPage]);
 
   // 從網址取得搜尋參數，並判斷處理各項目搜尋參數
   const handleSearchParams = useCallback(() => {
@@ -120,7 +123,7 @@ export default function ResultsSearch() {
     } else {
       getProducts();
     }
-  },[searchParams, getProductsSearch, getProducts]);
+  }, [searchParams, getProductsSearch, getProducts]);
 
   // 若 searchParams、currentPage 更新就觸發 handleSearchParams
   useEffect(() => {

@@ -18,7 +18,7 @@ const accountInnerTab = [
     icon: <Paste className="icon-color p-1 me-5" />,
   },
   {
-    path: "profile",
+    path: "collect",
     title: "收藏機構",
     icon: <Favorite className="icon-color p-1 me-5" />,
   },
@@ -60,10 +60,11 @@ export default function AccountLayout() {
             </div>
           </div>
           <div className="col-lg-8 col">
-            <button onClick={() => navigate("/account")} className="d-block d-lg-none btn btn-link p-0 link-primary-50 mb-3 fs-6">
-              
+            <button
+              onClick={() => navigate("/account")}
+              className="d-block d-lg-none btn btn-link p-0 link-primary-50 mb-3 fs-6"
+            >
               <i className="bi bi-chevron-left"></i>返回會員中心
-              
             </button>
             <Outlet />
           </div>

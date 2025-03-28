@@ -3,6 +3,10 @@ import { useContext } from "react";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import ReactLoading from "react-loading";
 import { UserContext }  from "../contexts/UserContext";
+import showSuccessMessage from "../assets/js/showSuccessMessage";
+import showErrorMessage from "../assets/js/showErrorMessage";
+
+
 
 function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
   const { isLogin } = useContext(UserContext); // 用來判斷是否登入

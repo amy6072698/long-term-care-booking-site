@@ -280,7 +280,9 @@ export default function ProductPage() {
         <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
           <h4 className="mb-2">服務內容</h4>
           <div className="fs-7 mb-7 text-secondary-90">
-            ＊入住者年齡限制：{product.age}歲
+            ＊入住者年齡限制：{
+              product.age
+            }
           </div>
           <div className="row g-7">
             <div

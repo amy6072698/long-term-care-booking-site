@@ -10,7 +10,7 @@ export default function ListGroup() {
     },
     {
       path: "/admin/product",
-      title: "產品管理",
+      title: "機構管理",
       // icon: <Paste className="icon-color p-1 me-5" />,
       description: "查看產品",
     },

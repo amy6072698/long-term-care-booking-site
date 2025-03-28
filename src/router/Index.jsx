@@ -18,9 +18,7 @@ import AccountPurchase from "../pages/AccountPurchase";
 import AdminLOrder from "../pages/AdminOrder";
 import AdminLProduct from "../pages/AdminProduct";
 import AdminOrderChart from "../pages/adminOrderChart";
-
-
-
+import AccountCollect from "../pages/AccountCollect";
 
 const router = createHashRouter([
   {
@@ -38,13 +36,17 @@ const router = createHashRouter([
         children: [
           {
             path: "profile",
-            element: <AccountProfile />
+            element: <AccountProfile />,
+          },
+          {
+            path: "collect",
+            element: <AccountCollect />,
           },
           {
             path: "purchase",
-            element: <AccountPurchase />
-          }
-        ]
+            element: <AccountPurchase />,
+          },
+        ],
       },
       {
         path: "",
@@ -85,9 +87,9 @@ const router = createHashRouter([
         element: <Checkout />,
       },
       {
-        path:'checkoutSuccess',
-        element:<CheckoutSuccess/>
-      }
+        path: "checkoutSuccess",
+        element: <CheckoutSuccess />,
+      },
     ],
   },
   {
@@ -96,17 +98,17 @@ const router = createHashRouter([
     element: <AdminLayout />,
     children: [
       {
-        path:'',
-        element:<AdminLOrder/>
+        path: "",
+        element: <AdminLOrder />,
       },
       {
-        path:'Product',
-        element:<AdminLProduct/>
+        path: "Product",
+        element: <AdminLProduct />,
       },
       {
-        path:'orderChart',
-        element:<AdminOrderChart/>
-      }
+        path: "orderChart",
+        element: <AdminOrderChart />,
+      },
     ],
   },
   {

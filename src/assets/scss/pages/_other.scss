@@ -1,0 +1,50 @@
+//reset
+
+ol, ul {
+	list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    max-width: 100%;
+}
+
+.other-content{
+    background-color: #FFFCF8;
+    padding-top: 56px;
+    padding-bottom: 48px;
+    margin: 0 auto;
+}
+
+//回首頁樣式
+.other-btn-style{
+    width: 200px;
+    height: 60px;
+}
+
+@media (max-width: 768px) {
+    .other-btn-style {
+        width: 100px;
+        height: 60px;
+    }
+  }
+
+.other-btn {
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    border: 3px solid transparent;
+    &:hover {
+        background-color: #ffdaa3;
+        border: 3px solid #fcf1e0;
+        transform: scale(1.03);
+        box-shadow: 0px 4px 9px 0px #0000001a;
+    }
+    &:focus {
+        outline: none;
+        background-color: #ffdaa3;
+        border: 3px solid #aa792f;
+    }
+}

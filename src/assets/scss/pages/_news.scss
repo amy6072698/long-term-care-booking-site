@@ -1,0 +1,64 @@
+//reset
+
+ol, ul {
+	list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    max-width: 100%;
+}
+
+.news-content{
+    background-color: #FFFCF8;
+    padding-top: 56px;
+    padding-bottom: 48px;
+    margin: 0 auto;
+}
+
+//回首頁樣式
+.news-btn-style{
+    width: 200px;
+    height: 60px;
+}
+
+@media (max-width: 768px) {
+    .news-btn-style {
+        width: 100px;
+        height: 60px;
+    }
+  }
+
+.news-btn {
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    border: 3px solid transparent;
+    &:hover {
+        background-color: #ffdaa3;
+        border: 3px solid #fcf1e0;
+        transform: scale(1.03);
+        box-shadow: 0px 4px 9px 0px #0000001a;
+    }
+    &:focus {
+        outline: none;
+        background-color: #ffdaa3;
+        border: 3px solid #aa792f;
+    }
+}
+
+// 圖片點擊行為
+.ease-in-out {
+    transition: transform 0.3s ease-in-out; /* 平滑動畫 */
+  }
+  
+.news-card{
+    &:hover {
+        transform: scale(1.03); /* 滑鼠懸停時放大 3% */
+      }
+    &:active {
+        transform: scale(1); /* 點擊時恢復原本大小 */
+      }
+}

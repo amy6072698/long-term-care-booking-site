@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ReactLoading from "react-loading";
 import { ToastContainer } from "react-toastify";
 import { useParams } from "react-router";
-import { UserContext }  from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
@@ -244,7 +244,7 @@ export default function ProductPage() {
               </div>
             </div>
             <div className="d-flex align-items-end col-lg-4 col-12 mb-7 gap-3">
-              <button
+              {/* <button
                 disabled={isLoading}
                 type="button"
                 onClick={(e) => {
@@ -253,7 +253,7 @@ export default function ProductPage() {
                 className="btn btn-outline-primary-40  py-4 w-100  intro-btn d-flex justify-content-center align-items-center gap-2"
               >
                 預約參訪
-              </button>
+              </button> */}
               <Booking
                 product={product}
                 token={token}
@@ -280,9 +280,7 @@ export default function ProductPage() {
         <div className="container pt-lg-14 pb-lg-11 pt-12 pb-12">
           <h4 className="mb-2">服務內容</h4>
           <div className="fs-7 mb-7 text-secondary-90">
-            ＊入住者年齡限制：{
-              product.age
-            }
+            ＊入住者年齡限制：{product.age}
           </div>
           <div className="row g-7">
             <div

@@ -233,13 +233,7 @@ export default function ResultsSearch() {
                               </h5>
                             </div>
                           </div>
-                          <div className="buttons d-flex justify-content-between mt-2">
-                            <button
-                              type="button"
-                              className="btn book-btn fs-7 py-4 btn-outline-primary-40  me-3"
-                            >
-                              預約參訪
-                            </button>
+                          <div className="buttons d-flex mt-2 justify-content-end">
                             {/* <button
                               type="button"
                               className="btn book-btn fs-6  py-4 btn-primary-40 "

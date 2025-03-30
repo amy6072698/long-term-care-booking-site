@@ -163,7 +163,7 @@ export default function AdminLOrder() {
     <>
       {/* toast */}
       <ToastContainer />
-      <div className="container pt-lg-12 pt-8">
+      <div className="container pt-12">
         <div className="row">
           <div className="col-3">
             <ListGroup />

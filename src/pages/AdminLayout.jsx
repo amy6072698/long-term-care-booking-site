@@ -8,7 +8,7 @@ export default function AdminLayout() {
       <AdminHeader/>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-2 px-0 vh-100" style={{backgroundColor: "#33240E"}}>
+          <div className="col-2 px-0" style={{backgroundColor: "#33240E"}}>
             <ListGroup/>
           </div>
           <div className="col-10 pt-8 px-8">

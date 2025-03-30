@@ -1,0 +1,13 @@
+.admin-list-group{
+  .list-group{
+    --bs-list-group-color: #fff;
+    --bs-list-group-bg: #33240E;
+    --bs-list-group-active-color: var(--bs-primary-110);
+    --bs-list-group-active-bg: var(--bs-primary-100);
+    border-radius: 0;
+  }
+  .list-group-item:hover{
+    color: var(--bs-primary-110);
+    background-color: var(--bs-primary-100);
+  }
+}

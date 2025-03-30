@@ -30,6 +30,15 @@
       "phone": "0975500680",
       "id": 3,
       "role": "admin"
+    },
+    {
+      "email": "komatsupei@gmail.com",
+      "password": "$2a$10$JPuAJTLUGOetc8eB7lOD1eXrLhLS2MOd6XNe.0A/42HhUEJ/lL45m",
+      "name": "Komatsu",
+      "gender": "male",
+      "birthday": "1988-11-02",
+      "phone": "0912345678",
+      "id": 4
     }
   ],
   "products": [

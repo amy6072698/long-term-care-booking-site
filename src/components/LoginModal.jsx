@@ -118,6 +118,7 @@ function LoginModal(){
 
       // 自動關閉登入的 Modal
       handleLoginModalClose();
+      window.location.reload(); // 刷新網頁
     } catch (error) {
       console.error(error);
       alert("登入失敗")

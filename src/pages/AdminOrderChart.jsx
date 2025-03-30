@@ -197,92 +197,83 @@ export default function AdminOrderChart() {
 
   return (
     <>
-      <div className="container pt-12">
-        <div className="row">
-          <div className="col-3">
-            <ListGroup></ListGroup>
+      <div className="d-flex justify-content-between align-items-center mb-10">
+        <div>
+          <h4 className="mb-2 text-primary-100">圖表分析</h4>
+          <p>分析訂單數量和機構所在地區</p>
+        </div>
+        <Select
+          onChange={handleInputChange}
+          options={chartOptions}
+          value={chartValues}
+        />
+      </div>
+      {chartValues.value != "countsByCity" && (
+        <div className="d-flex gap-2 align-items-center mb-10">
+          {/* 日期選擇 */}
+          <div className="input-group">
+            <label className="input-group-text" htmlFor="startDate">
+              開始日期
+            </label>
+            <input
+              onChange={handleStartDateChange}
+              value={startDate}
+              id="startDate"
+              type="date"
+              className="form-control"
+            />
           </div>
-          <div className="col-9">
-            <div className="d-flex justify-content-between align-items-center mb-10">
-              <div>
-                <h4 className="mb-2 text-primary-100">圖表分析</h4>
-                <p>分析訂單數量和機構所在地區</p>
-              </div>
-              <Select
-                onChange={handleInputChange}
-                options={chartOptions}
-                value={chartValues}
-              />
-            </div>
-            {chartValues.value != "countsByCity" && (
-              <div className="d-flex gap-2 align-items-center mb-10">
-                {/* 日期選擇 */}
-                <div className="input-group">
-                  <label className="input-group-text" htmlFor="startDate">
-                    開始日期
-                  </label>
-                  <input
-                    onChange={handleStartDateChange}
-                    value={startDate}
-                    id="startDate"
-                    type="date"
-                    className="form-control"
-                  />
-                </div>
 
-                <span className="fw-bold">到</span>
+          <span className="fw-bold">到</span>
 
-                <div className="input-group">
-                  <label className="input-group-text" htmlFor="endDate">
-                    結束日期
-                  </label>
-                  <input
-                    value={endDate}
-                    id="endDate"
-                    type="date"
-                    className="form-control"
-                    onChange={handleEndDateChange}
-                  />
-                </div>
-
-                {/* 查詢按鈕 */}
-                <button
-                  className="btn btn-primary text-nowrap"
-                  onClick={handleSearch}
-                >
-                  查詢
-                </button>
-              </div>
-            )}
-
-            <div className="d-flex gap-3 mb-3">
-              <div className="card w-100">
-                <div className="card-body">
-                  <Pie data={data} options={{ responsive: true }} />
-                </div>
-              </div>
-              <div className="card w-100">
-                <div className="card-body align-items-center d-flex">
-                  <Bar data={data} options={{ responsive: true }} />
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card-body">
-                <Line
-                  data={data}
-                  options={{
-                    responsive: true,
-                    scales: {
-                      y: {
-                        beginAtZero: true, // 確保 Y 軸從 0 開始
-                      },
-                    },
-                  }}
-                />
-              </div>
-            </div>
+          <div className="input-group">
+            <label className="input-group-text" htmlFor="endDate">
+              結束日期
+            </label>
+            <input
+              value={endDate}
+              id="endDate"
+              type="date"
+              className="form-control"
+              onChange={handleEndDateChange}
+            />
           </div>
+
+          {/* 查詢按鈕 */}
+          <button
+            className="btn btn-primary text-nowrap"
+            onClick={handleSearch}
+          >
+            查詢
+          </button>
+        </div>
+      )}
+
+      <div className="d-flex gap-3 mb-3">
+        <div className="card w-100">
+          <div className="card-body">
+            <Pie data={data} options={{ responsive: true }} />
+          </div>
+        </div>
+        <div className="card w-100">
+          <div className="card-body align-items-center d-flex">
+            <Bar data={data} options={{ responsive: true }} />
+          </div>
+        </div>
+      </div>
+      <div className="card">
+        <div className="card-body">
+          <Line
+            data={data}
+            options={{
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true, // 確保 Y 軸從 0 開始
+                },
+              },
+            }}
+          />
         </div>
       </div>
     </>

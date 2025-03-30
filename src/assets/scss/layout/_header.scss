@@ -94,3 +94,66 @@
     }
   } 
 }
+
+// 後台 Header
+.admin-header{
+  .navbar {
+    --bs-navbar-color: #fff;
+    --bs-navbar-hover-color: var(--bs-primary-110);
+    --bs-navbar-active-color: #fff;
+    --bs-navbar-toggler-font-size: 2.25rem;
+    --bs-navbar-toggler-border-radius: none;
+    --bs-navbar-toggler-focus-width: 0;
+    background-color: #33240E;
+  }
+  .navbar-toggler:hover{
+    color: var(--bs-primary-110);
+  }
+  // 登入後下拉選單
+  .dropdown-menu {
+    padding: 8px 0;
+    border: 1px solid var(--bs-primary-100);
+    border-radius: 0 0 5px 5px;
+    --bs-dropdown-link-hover-bg: var(--bs-primary-110);
+    --bs-dropdown-min-width: 5rem;
+  }
+  .dropdown-item {
+    color: #000000;
+    padding: 4px 16px;
+    &:hover{
+      background-color: var(--bs-primary-110);
+    }
+  }
+  .dropdown-menu[data-bs-popper]{
+    top: 102%;
+  }
+}
+
+@media (max-width: 992px) {
+  .admin-header{
+    .navbar {
+      --bs-navbar-hover-color: var(--bs-primary-110);
+      --bs-navbar-active-color: #000000;
+    }
+    .nav-link{
+      padding: 8px 32px;
+      &:hover{
+        background-color: var(--bs-primary-110);
+      }
+    }
+    // 登入後下拉選單
+    .dropdown-menu {
+      padding: 0;
+      border-radius: 0;
+      border: 0;
+      background-color: var(--bs-primary-110);
+    }
+    .dropdown-item {
+      color: #000000;
+      padding: 8px 64px;
+      &:hover{
+        background-color: var(--bs-primary-110);
+      }
+    }
+  } 
+}

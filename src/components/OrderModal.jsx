@@ -253,7 +253,7 @@ export default function OrderModal({
             </button>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary-110"
               onClick={handleUpdateOrder}
             >
               確認

@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import ListGroup from "../components/ListGroup";
 import axios from "axios";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 import { Link } from "react-router";
@@ -503,74 +502,68 @@ export default function AdminLProduct() {
     <>
       {/* toast */}
       <ToastContainer />
-      <div className="container pt-12">
-        <div className="row">
-          <div className="col-3">
-            <ListGroup />
-          </div>
-          <div className="col-9">
-            <div className="d-flex justify-content-between">
-              <h4 className="mb-2 text-primary-100">機構管理</h4>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => {
-                  handleOpenProductModal("create");
-                }}
-              >
-                新增機構
-              </button>
-            </div>
-            <p className="mb-10">查看所有產品</p>
-            <table className="table table-striped  admin-order">
-              <thead>
-                <tr>
-                  <th scope="col">產品編號</th>
-                  <th scope="col">機構名稱</th>
-                  <th scope="col">機構類型</th>
-                  <th scope="col">機構地址</th>
-                  <th scope="col">機構城市</th>
-                  <th scope="col">詳細資料</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
-                  <tr key={product.id}>
-                    <td>{product.id}</td>
-                    <td>{product.name}</td>
-                    <td>{product.category}</td>
-                    <td>{product.address}</td>
-                    <td>{product.city}</td>
-                    <td>
-                      <div className="btn-group">
-                        <button
-                          onClick={() =>
-                            handleOpenProductModal("update", product)
-                          }
-                          className="btn btn-outline-primary btn-sm"
-                          type="button"
-                        >
-                          編輯
-                        </button>
-                        <button
-                          onClick={() => handleOpenDelProductModal(product.id)}
-                          className="btn btn-outline-danger btn-sm"
-                          type="button"
-                        >
-                          刪除
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div className="d-flex justify-content-between">
+        <h4 className="mb-2 text-primary-100">機構管理</h4>
+        <button
+          type="button"
+          className="btn btn-primary-110"
+          onClick={() => {
+            handleOpenProductModal("create");
+          }}
+        >
+          新增機構
+        </button>
       </div>
+      <p className="mb-10">查看所有產品</p>
+      <table className="table table-striped  admin-order">
+        <thead>
+          <tr>
+            <th scope="col">產品編號</th>
+            <th scope="col">機構名稱</th>
+            <th scope="col">機構類型</th>
+            <th scope="col">機構地址</th>
+            <th scope="col">機構城市</th>
+            <th scope="col">詳細資料</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.category}</td>
+              <td>{product.address}</td>
+              <td>{product.city}</td>
+              <td>
+                <div className="btn-group">
+                  <button
+                    onClick={() =>
+                      handleOpenProductModal("update", product)
+                    }
+                    className="btn btn-outline-primary-80 btn-sm"
+                    type="button"
+                  >
+                    編輯
+                  </button>
+                  <button
+                    onClick={() => handleOpenDelProductModal(product.id)}
+                    className="btn btn-outline-danger btn-sm"
+                    type="button"
+                  >
+                    刪除
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+          
+        
+      
 
       {/* 分頁 */}
-      <nav aria-label="Page navigation example">
+      <nav className="admin-page" aria-label="Page navigation example">
         <ul className="pagination justify-content-center">
           <li
             onClick={(e) => {
@@ -580,7 +573,7 @@ export default function AdminLProduct() {
             }}
             className={`page-item ${currentPage == 1 && "disabled"}`}
           >
-            <Link className="page-link">上一頁</Link>
+            <Link className="page-link">&laquo;</Link>
           </li>
           {Array.from({ length: totalPages }).map((_, index) => {
             return (
@@ -710,7 +703,7 @@ export default function AdminLProduct() {
                           "" && (
                           <button
                             name="images"
-                            className="btn btn-outline-primary btn-sm w-100"
+                            className="btn btn-outline-primary-80 btn-sm w-100"
                             onClick={(e) => {
                               handleAddImage(e);
                             }}
@@ -770,7 +763,7 @@ export default function AdminLProduct() {
                           "" && (
                           <button
                             name="thumbs"
-                            className="btn btn-outline-primary btn-sm w-100"
+                            className="btn btn-outline-primary-80 btn-sm w-100"
                             onClick={(e) => {
                               handleAddImage(e);
                             }}
@@ -1061,7 +1054,7 @@ export default function AdminLProduct() {
                     <div className="btn-group w-100">
                       <button
                         name="roomCards"
-                        className="btn btn-outline-primary btn-sm w-100"
+                        className="btn btn-outline-primary-80 btn-sm w-100"
                         onClick={(e) => {
                           handleAddRoomType(e);
                         }}
@@ -1096,7 +1089,7 @@ export default function AdminLProduct() {
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary-110"
                 onClick={handleUpdateProduct}
               >
                 確認

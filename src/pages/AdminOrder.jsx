@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 import showSuccessMessage from "../assets/js/showSuccessMessage";
 import showErrorMessage from "../assets/js/showErrorMessage";
 import { Link } from "react-router";
-import ListGroup from "../components/ListGroup";
 import OrderModal from "../components/OrderModal";
 import DelOrderModal from "../components/DelOrderModal";
 
@@ -163,126 +162,117 @@ export default function AdminLOrder() {
     <>
       {/* toast */}
       <ToastContainer />
-      <div className="container pt-lg-12 pt-8">
-        <div className="row">
-          <div className="col-3">
-            <ListGroup />
-          </div>
-          <div className="col-9">
-            <h4 className="mb-2 text-primary-100">訂單管理</h4>
-            <p className="mb-10">查看所有使用者的訂單</p>
-            {/* 表格 */}
-            <table className="table table-striped  admin-order">
-              <thead>
-                <tr>
-                  <th scope="col">訂單編號</th>
-                  <th scope="col">入住者姓名</th>
-                  <th scope="col">手機號碼</th>
-                  <th scope="col">機構名稱</th>
-                  <th scope="col">入住房型</th>
-                  <th scope="col">入住日期</th>
-                  <th scope="col">詳細資料</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order) => (
-                  <tr key={order.id}>
-                    <td>{order.id}</td>
-                    <td>{order.orderData.fullName}</td>
-                    <td>{order.orderData.mobilePhone}</td>
-                    <td>{order.orderName}</td>
-                    <td>{order.orderData.roomType}</td>
-                    <td>{order.orderData.checkInDate}</td>
-                    <td>
-                      <div className="btn-group">
-                        <button
-                          onClick={() => handleOpenOrderModal(order)}
-                          className="btn btn-outline-primary btn-sm"
-                          type="button"
-                        >
-                          編輯
-                        </button>
-                        <button
-                          onClick={() => handleOpenDelOrderModal(order.id)}
-                          className="btn btn-outline-danger btn-sm"
-                          type="button"
-                        >
-                          刪除
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {/* 分頁 */}
-            <nav aria-label="Page navigation example">
-              <ul className="pagination justify-content-center">
-                <li
-                  onClick={(e) => {
-                    if (currentPage != 1) {
-                      handleChangePage(e, currentPage - 1);
-                    }
-                  }}
-                  className={`page-item ${currentPage == 1 && "disabled"}`}
+      <h4 className="mb-2 text-primary-100">訂單管理</h4>
+      <p className="mb-10">查看所有使用者的訂單</p>
+      {/* 表格 */}
+      <table className="table table-striped  admin-order">
+        <thead>
+          <tr>
+            <th scope="col">訂單編號</th>
+            <th scope="col">入住者姓名</th>
+            <th scope="col">手機號碼</th>
+            <th scope="col">機構名稱</th>
+            <th scope="col">入住房型</th>
+            <th scope="col">入住日期</th>
+            <th scope="col">詳細資料</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order) => (
+            <tr key={order.id}>
+              <td>{order.id}</td>
+              <td>{order.orderData.fullName}</td>
+              <td>{order.orderData.mobilePhone}</td>
+              <td>{order.orderName}</td>
+              <td>{order.orderData.roomType}</td>
+              <td>{order.orderData.checkInDate}</td>
+              <td>
+                <div className="btn-group">
+                  <button
+                    onClick={() => handleOpenOrderModal(order)}
+                    className="btn btn-outline-primary-80 btn-sm"
+                    type="button"
+                  >
+                    編輯
+                  </button>
+                  <button
+                    onClick={() => handleOpenDelOrderModal(order.id)}
+                    className="btn btn-outline-danger btn-sm"
+                    type="button"
+                  >
+                    刪除
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* 分頁 */}
+      <nav className="admin-page" aria-label="Page navigation example">
+        <ul className="pagination justify-content-center">
+          <li
+            onClick={(e) => {
+              if (currentPage != 1) {
+                handleChangePage(e, currentPage - 1);
+              }
+            }}
+            className={`page-item ${currentPage == 1 && "disabled"}`}
+          >
+            <Link className="page-link">&laquo;</Link>
+          </li>
+          {Array.from({ length: totalPages }).map((_, index) => {
+            return (
+              <li
+                className="page-item"
+                key={index + 1}
+                onClick={(e) => {
+                  handleChangePage(e, index + 1);
+                }}
+              >
+                <Link
+                  className={`page-link 
+          ${currentPage === index + 1 && "active"}
+            `}
                 >
-                  <Link className="page-link">上一頁</Link>
-                </li>
-                {Array.from({ length: totalPages }).map((_, index) => {
-                  return (
-                    <li
-                      className="page-item"
-                      key={index + 1}
-                      onClick={(e) => {
-                        handleChangePage(e, index + 1);
-                      }}
-                    >
-                      <Link
-                        className={`page-link 
-                ${currentPage === index + 1 && "active"}
-                  `}
-                      >
-                        {index + 1}
-                      </Link>
-                    </li>
-                  );
-                })}
-                <li
-                  className={`page-item ${
-                    currentPage == totalPages && "disabled"
-                  }`}
-                  onClick={(e) => {
-                    console.log("total", totalPages);
-                    if (currentPage < totalPages) {
-                      handleChangePage(e, currentPage + 1);
-                    }
-                  }}
-                >
-                  <Link className="page-link" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
+                  {index + 1}
+                </Link>
+              </li>
+            );
+          })}
+          <li
+            className={`page-item ${
+              currentPage == totalPages && "disabled"
+            }`}
+            onClick={(e) => {
+              console.log("total", totalPages);
+              if (currentPage < totalPages) {
+                handleChangePage(e, currentPage + 1);
+              }
+            }}
+          >
+            <Link className="page-link" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
 
-            {/* orderModal */}
-            <OrderModal
-              orderModalRef={orderModalRef}
-              handleCloseOrderModal={handleCloseOrderModal}
-              handleModalInputChange={handleModalInputChange}
-              handleUpdateOrder={handleUpdateOrder}
-              tempOrder={tempOrder}
-            />
-            {/* delModal */}
-            <DelOrderModal
-              orderDelModalRef={orderDelModalRef}
-              handleCloseDelOrderModal={handleCloseDelOrderModal}
-              handleDelOrder={handleDelOrder}
-              delId={delId}
-            />
-          </div>
-        </div>
-      </div>
+      {/* orderModal */}
+      <OrderModal
+        orderModalRef={orderModalRef}
+        handleCloseOrderModal={handleCloseOrderModal}
+        handleModalInputChange={handleModalInputChange}
+        handleUpdateOrder={handleUpdateOrder}
+        tempOrder={tempOrder}
+      />
+      {/* delModal */}
+      <DelOrderModal
+        orderDelModalRef={orderDelModalRef}
+        handleCloseDelOrderModal={handleCloseDelOrderModal}
+        handleDelOrder={handleDelOrder}
+        delId={delId}
+      />
     </>
   );
 }

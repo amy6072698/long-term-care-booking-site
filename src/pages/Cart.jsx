@@ -4,9 +4,10 @@ import BannerNoSearch from "../components/BannerNoSearch";
 import { useNavigate } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import { UserContext }  from "../contexts/UserContext";
+import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 
-let token;
-let myUserId;
+// let token;
+// let myUserId;
 
 export default function Cart() {
   const [cartsData, setCartsData] = useState([]);
@@ -15,25 +16,13 @@ export default function Cart() {
   const { isLogin } = useContext(UserContext); // 判斷是否登入
   // const { setIsLogin } = useContext(UserContext);
   // const { setUserName } = useContext(UserContext);
+  const { token, myUserId } = getTokenFromCookie();
 
   //取得cookie中的token和useId
-  const getToken = () => {
-    document.cookie = "myToken";
-    token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    myUserId = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myUserId\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
+  useEffect(() => {
     if (!token) {
       handleLoginModal();
     }
-  };
-
-  useEffect(() => {
-    getToken();
   }, []);
 
   //跳出登入視窗
@@ -60,7 +49,6 @@ export default function Cart() {
     };
     //如果登入成功則重新取得token，
     if (isLogin) {
-      getToken();
       fetchCartData();
     }
   }, [isLogin]);
@@ -108,7 +96,7 @@ export default function Cart() {
 
  // 清空購物車
  const handleDeleteAllClick = async () => {
-  getToken(); // 取得 userId
+  // getToken(); // 取得 userId
   if (!myUserId) {
     alert("用戶未登入，無法清空購物車");
     return;

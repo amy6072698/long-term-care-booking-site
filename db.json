@@ -38,7 +38,8 @@
       "gender": "male",
       "birthday": "1988-11-02",
       "phone": "0912345678",
-      "id": 4
+      "id": 4,
+      "role": "admin"
     }
   ],
   "products": [

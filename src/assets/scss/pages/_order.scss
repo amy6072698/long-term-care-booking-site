@@ -15,7 +15,7 @@ img{
 .order-content{
     background-color: #FFFCF8;
     padding-top: 56px;
-    padding-bottom: 48px;
+    padding-bottom: 56px;
     margin: 0 auto;
 }
 
@@ -59,28 +59,6 @@ img{
     right: 15px;
 }
 
-// calendar
-.calendar{
-    display: flex;
-    width: 256px;
-    justify-content: space-between;
-    border: black solid 1px;
-    border-radius: 5px;
-    padding: 4px 8px;
-}
-
-// calendar手機版大小
-@media(max-width:768px){
-    .calendar{
-        display: flex;
-        width: 202px;
-        justify-content: space-between;
-        border: black solid 1px;
-        border-radius: 5px;
-        padding: 4px 8px;
-    }
-}
-
 // modal彈出視窗的按鈕padding
 .modal-btn{
     padding: 13.8px 64.2px;
@@ -98,7 +76,7 @@ img{
 }
 
 // tab-content-style
-.tab-style{
+.cart-content{
     border: #B0B0B0 solid 1px;
     background-color: white;
     border-radius: 10px;
@@ -106,58 +84,10 @@ img{
 }
 
 @media(max-width:768px){
-    .tab-style{
+    .cart-content{
         padding: 12px 16px;
     }
 }
-
-// nav-pills-style
-.nav-pills-style{
-    border: #CC9239 solid 1px;
-    border-radius: 24px;
-}
-
-
-.custom-nav-pills .nav-link {
-    border-radius: 24px; // 圓角按鈕
-    color: #757575;; // 預設文字色
-    background-color: white;; // 預設背景色
-    padding: 8px 230px; // 調整按鈕內間距
-    transition: all 0.3s ease-in-outt; // 動態效果
-    white-space: nowrap; // 防止文字換行
-    // display: flex; /* 使用 flex 布局 */
-    // justify-content: center; /* 水平置中 */
-    // align-items: center; /* 垂直置中 */
-  }
-
-  @media(max-width:992px){
-    .custom-nav-pills .nav-link{
-        padding: 8px 100px; // 調整按鈕內間距
-    }
-}
-
-  @media(max-width:768px){
-    .custom-nav-pills .nav-link{
-        padding: 8px 40px; // 調整按鈕內間距
-    }
-}
-
- .custom-nav-pills .nav-link.active {
-    background-color: #FFC700; //  啟用按鈕的背景色
-    color: black; //  啟用按鈕的文字色
-  }
-  
-.custom-nav-pills .nav-link:hover {
-    background-color: #ffe8c6; // 滑滑鼠懸停時的背景色
-    color: black; // 滑滑鼠懸停時的文字色
-  }
-  
-.custom-nav-pills {
-    border-radius: 24px; // 確保保整組按鈕也有圓角
-    overflow: hidden;  // 防止內容溢出
-    border: 1px solid  #FFC700; // 整個區塊的邊框
-  }
-
 
 // next-btn
 .next-btn{
@@ -185,49 +115,7 @@ img{
     font-weight: 400;
     line-height: 28.8px;
 }
-// 線條容器
-.line-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%; // 根據需要調整寬度
-    height: 20px; // 線條和圓點的高度
-    padding:  0px 88px;
-  }
-// 左右圓點
-  .circle {
-    width: 15px;
-    height: 15px;
-    background-color: #FFB647;
-    border-radius: 50%;
-  }
-  
-// 左側線條
-  .left-line {
-    flex-grow: 1;
-    height: 5px;
-    background-color: #FFB647;
-  }
-  
-// 中間圓點
-  .middle-circle {
-    width: 15px;
-    height: 15px;
-    background-color: #FFB647;
-    border-radius: 50%;
-  }
-  
-//  右側線條
-  .right-line {
-    flex-grow: 1;
-    height: 1px;
-    background-color: #FFB647;
-  }
-// 空心圓點
-  .hollow-circle {
-    background-color: transparent;
-    border: 1px solid #FFB647;
-  }
+
 // 凸顯床位數字
   .last-bed{
     color: #c83f00;

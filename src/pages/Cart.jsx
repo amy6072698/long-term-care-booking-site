@@ -96,7 +96,6 @@ export default function Cart() {
 
  // 清空購物車
  const handleDeleteAllClick = async () => {
-  // getToken(); // 取得 userId
   if (!myUserId) {
     alert("用戶未登入，無法清空購物車");
     return;

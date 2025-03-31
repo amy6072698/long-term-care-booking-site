@@ -22,7 +22,7 @@ export default function AdminLOrder() {
   const itemsPerPage = useRef(10);
 
   // 取得訂單資料
-  // 將 getOrders 包裝成穩定函數，避免它在每次重新渲染時都被重新創建。
+  // 將 getOrders 包裝成穩定函數，避免它在每次重新渲染時都f被重新創建。
   const getOrders = useCallback(async () => {
     try {
       const { data, headers } = await axios.get(
@@ -35,6 +35,7 @@ export default function AdminLOrder() {
       );
       const totalCount = headers["x-total-count"];
       setTotalPages(Math.ceil(totalCount / itemsPerPage.current));
+      console.log('38',data);
       setOrders(data);
     } catch (error) {
       console.log(error);

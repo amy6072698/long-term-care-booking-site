@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 export default function DelOrderModal({
     orderDelModalRef,
     handleCloseDelOrderModal,
@@ -51,3 +52,9 @@ export default function DelOrderModal({
     </div>
   );
 }
+DelOrderModal.propTypes = {
+  orderDelModalRef: PropTypes.object,
+  handleCloseDelOrderModal: PropTypes.func,
+  handleDelOrder: PropTypes.func,
+  delId: PropTypes.number,
+};

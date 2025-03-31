@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Navigation, FreeMode, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -37,14 +37,8 @@ export default function ProductPage() {
     }
   }, [isLogin]);
 
-  //畫面渲染完成觸發取得產品
-  useEffect(() => {
-    getProducts();
-    getToken();
-  }, []);
-
   //取得產品資料
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     try {
       const res = await axios.get(`${BASE_URL}/products`);
       const productIndex = res.data.findIndex((item) => {
@@ -55,7 +49,15 @@ export default function ProductPage() {
       console.log(error);
       alert("取得產品資料失敗");
     }
-  };
+  },[productId])
+  
+  //畫面渲染完成觸發取得產品
+  useEffect(() => {
+    getProducts();
+    getToken();
+  }, [getProducts]);
+
+  
 
   return (
     <main>

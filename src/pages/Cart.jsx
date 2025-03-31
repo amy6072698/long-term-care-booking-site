@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import BannerNoSearch from "../components/BannerNoSearch";
 import { useNavigate } from "react-router";
@@ -18,18 +18,20 @@ export default function Cart() {
   // const { setUserName } = useContext(UserContext);
   const { token, myUserId } = getTokenFromCookie();
 
+  //跳出登入視窗
+  const handleLoginModal = useCallback(() => {
+    setLoginModalMode("login");
+    setIsLoginModalOpen(true);
+  },[setLoginModalMode, setIsLoginModalOpen])
+
   //取得cookie中的token和useId
   useEffect(() => {
     if (!token) {
       handleLoginModal();
     }
-  }, []);
+  }, [handleLoginModal,token]);
 
-  //跳出登入視窗
-  const handleLoginModal = () => {
-    setLoginModalMode("login");
-    setIsLoginModalOpen(true);
-  };
+  
 
   useEffect(() => {
     const fetchCartData = async () => {
@@ -51,7 +53,7 @@ export default function Cart() {
     if (isLogin) {
       fetchCartData();
     }
-  }, [isLogin]);
+  }, [isLogin,myUserId,token]);
 
   //一次只選取一張卡片
   const [selectId, setSelectId] = useState(null);

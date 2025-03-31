@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 export default function OrderModal({
   orderModalRef,
   handleCloseOrderModal,
@@ -264,3 +265,11 @@ export default function OrderModal({
     </div>
   );
 }
+
+OrderModal.propTypes = {
+  orderModalRef: PropTypes.object,
+  handleCloseOrderModal: PropTypes.func,
+  handleModalInputChange: PropTypes.func,
+  handleUpdateOrder: PropTypes.func,
+  tempOrder: PropTypes.array,
+};

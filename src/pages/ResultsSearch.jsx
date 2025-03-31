@@ -157,7 +157,7 @@ export default function ResultsSearch() {
                             alt="building"
                             style={{ height: "290px" }}
                           />
-                          <HeartCard />
+                          <HeartCard productId={product.id} />
                         </div>
                       </div>
                       <div className="col-md-7">

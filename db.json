@@ -2218,19 +2218,16 @@
   ],
   "collects": [
     {
-      "productId": 1,
-      "userId": 2,
-      "id": 3
+      "userId": "3",
+      "productId": 3,
+      "createdAt": "2025-03-31T07:24:13.842Z",
+      "id": 1
     },
     {
       "userId": "3",
-      "itemId": 1,
-      "id": 6
-    },
-    {
-      "userId": "3",
-      "itemId": 2,
-      "id": 7
+      "productId": 2,
+      "createdAt": "2025-03-31T07:24:14.930Z",
+      "id": 2
     }
   ]
 }

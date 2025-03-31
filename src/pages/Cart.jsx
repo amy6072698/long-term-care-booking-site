@@ -155,19 +155,19 @@ return (
                   立即預訂內沒有任何機構
                 </h5>
                 <p className="fs-7 fs-md-6">
-                  請加入機構到立即預訂
+                  請重新搜尋機構
                 </p>
               </div>
               {/* 頁籤尾頁 */}
               <div className="d-flex justify-content-center mt-3">
                 <div className="flex-column">
-                  <button
+                  <a
                     type="button"
                     className="btn next-btn next-btn-size fs-5 btn-primary-40"
-                    onClick={goToProductPage}
+                    href="#/"
                   >
-                    下一步
-                  </button>
+                    回首頁
+                  </a>
                 </div>
               </div>
           </div>) : 

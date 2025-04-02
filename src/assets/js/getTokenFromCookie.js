@@ -7,5 +7,8 @@ export default function getTokenFromCookie() {
     /(?:(?:^|.*;\s*)myUserId\s*=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
-  return { token, myUserId };
+  const selectProductId = document.cookie.replace(
+    /(?:(?:^|.*;\s*)selectProductId\s*=\s*([^;]*).*$)|^.*$/,
+    "$1");
+  return { token, myUserId, selectProductId };
 }

@@ -5,6 +5,7 @@ import ReactLoading from "react-loading";
 import { UserContext }  from "../contexts/UserContext";
 import showSuccessMessage from "../assets/js/showSuccessMessage";
 import showErrorMessage from "../assets/js/showErrorMessage";
+import PropTypes from 'prop-types';
 
 
 
@@ -86,5 +87,12 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
       )}
     </button>
   );
+}
+Booking.propTypes = {
+  product:PropTypes.object,
+  token:PropTypes.string,
+  myUserId:PropTypes.string,
+  isLoading:PropTypes.bool,
+  setIsLoading:PropTypes.func
 }
 export default Booking;

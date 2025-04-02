@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import BannerNoSearch from "../components/BannerNoSearch";
 import { useNavigate } from "react-router";
@@ -18,18 +18,20 @@ export default function Cart() {
   // const { setUserName } = useContext(UserContext);
   const { token, myUserId } = getTokenFromCookie();
 
+  //跳出登入視窗
+  const handleLoginModal = useCallback(() => {
+    setLoginModalMode("login");
+    setIsLoginModalOpen(true);
+  },[setLoginModalMode, setIsLoginModalOpen])
+
   //取得cookie中的token和useId
   useEffect(() => {
     if (!token) {
       handleLoginModal();
     }
-  }, []);
+  }, [handleLoginModal,token]);
 
-  //跳出登入視窗
-  const handleLoginModal = () => {
-    setLoginModalMode("login");
-    setIsLoginModalOpen(true);
-  };
+  
 
   useEffect(() => {
     const fetchCartData = async () => {
@@ -51,7 +53,7 @@ export default function Cart() {
     if (isLogin) {
       fetchCartData();
     }
-  }, [isLogin]);
+  }, [isLogin,myUserId,token]);
 
   //一次只選取一張卡片
   const [selectId, setSelectId] = useState(null);
@@ -96,7 +98,6 @@ export default function Cart() {
 
  // 清空購物車
  const handleDeleteAllClick = async () => {
-  // getToken(); // 取得 userId
   if (!myUserId) {
     alert("用戶未登入，無法清空購物車");
     return;
@@ -156,19 +157,19 @@ return (
                   立即預訂內沒有任何機構
                 </h5>
                 <p className="fs-7 fs-md-6">
-                  請加入機構到立即預訂
+                  請重新搜尋機構
                 </p>
               </div>
               {/* 頁籤尾頁 */}
               <div className="d-flex justify-content-center mt-3">
                 <div className="flex-column">
-                  <button
+                  <a
                     type="button"
                     className="btn next-btn next-btn-size fs-5 btn-primary-40"
-                    onClick={goToProductPage}
+                    href="#/"
                   >
-                    下一步
-                  </button>
+                    回首頁
+                  </a>
                 </div>
               </div>
           </div>) : 

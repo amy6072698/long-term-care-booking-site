@@ -6,12 +6,14 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import Cleave from "cleave.js/react";
 import "cleave.js/dist/addons/cleave-phone.TW";
+import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 
-let token;
-let myUserId;
-let selectProductId;
+// let token;
+// let myUserId;
+// let selectProductId;
 
 export default function Checkout() {
+  const { token, myUserId, selectProductId } = getTokenFromCookie();
   const { id: productId } = useParams();
   const navigate = useNavigate();
   const [checkoutData, setCheckoutData] = useState({});
@@ -31,27 +33,27 @@ export default function Checkout() {
   });
 
   //取得token和登入id、selectProductId
-  const getToken = () => {
-    document.cookie = "myToken";
-    token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    myUserId = document.cookie.replace(
-      /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-    selectProductId = document.cookie.replace(
-      /(?:(?:^|.*;\s*)selectProductId\s*\=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-  };
+  // const getToken = () => {
+  //   document.cookie = "myToken";
+  //   token = document.cookie.replace(
+  //     /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+  //     "$1"
+  //   );
+  //   myUserId = document.cookie.replace(
+  //     /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
+  //     "$1"
+  //   );
+  //   selectProductId = document.cookie.replace(
+  //     /(?:(?:^|.*;\s*)selectProductId\s*\=\s*([^;]*).*$)|^.*$/,
+  //     "$1"
+  //   );
+  // };
 
   //元件渲染完後觸發請求id
   //使用600無法的原因可能是products資料表中沒有userId做辨認
   //請求完資料後重設roomType的預設值
   useEffect(() => {
-    getToken();
+    getTokenFromCookie();
     (async () => {
       try {
         const { data } = await axios.get(`${BASE_URL}/products/${productId}`);
@@ -62,7 +64,7 @@ export default function Checkout() {
         console.log(error);
       }
     })();
-  }, []);
+  }, [productId]);
 
   //處理提交
   const onSubmit = (data, e) => {
@@ -126,7 +128,7 @@ export default function Checkout() {
       setPrice(result.price);
       setRoomType(result.roomType);
     }
-  }, [selectedRoomType]);
+  }, [selectedRoomType, checkoutData.roomCards]);
 
   // 判斷哪間發行信用卡並將規則回傳
   function getCreditCardType(cardNumber) {

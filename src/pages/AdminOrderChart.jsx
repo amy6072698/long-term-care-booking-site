@@ -1,39 +1,54 @@
 import { defaults } from "chart.js/auto";
 import { Pie, Bar, Line } from "react-chartjs-2";
-import ListGroup from "../components/ListGroup";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import Select from "react-select";
+import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 
-// 響應是
+
+
+// 全域響應式
 defaults.responsive = true;
 
 export default function AdminOrderChart() {
+  const { token } = getTokenFromCookie();
   const [chartData, setChartData] = useState([]);
   const [chartObj, setChartObj] = useState([]);
 
-  useEffect(() => {
-    getProducts();
-  }, []);
 
   // 取得產品資料
-  const getProducts = () => {
+  const getProducts = useCallback(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`${BASE_URL}/products`);
+        const { data } = await axios.get(`${BASE_URL}/640/products`,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setChartData(data);
       } catch (error) {
         console.log(error);
       }
     })();
-  };
+  },[token])
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
 
   // 取得訂單資料
   const getOrders = () => {
     (async () => {
       try {
-        const { data } = await axios.get(`${BASE_URL}/orders?_expand=product`);
+        const { data } = await axios.get(`${BASE_URL}/orders?_expand=product`,{
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
         setChartData(data);
       } catch (error) {
         console.log(error);

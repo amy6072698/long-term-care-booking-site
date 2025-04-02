@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import HeartCard from "../components/HeartCard";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import StarIcon from "../assets/images/Icon/Stars-Change.svg?react";
 import axios from "axios";
@@ -15,102 +15,123 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const indexHotsCategories = [
   {
     title: "長期照顧中心",
-    engName: "longTermCareCenter"
+    engName: "longTermCareCenter",
   },
   {
     title: "安養中心",
-    engName: "restHome"
+    engName: "restHome",
   },
   {
     title: "護理之家",
-    engName: "nursingHome"
+    engName: "nursingHome",
   },
   {
     title: "日間照顧中心",
-    engName: "dayCareCenter"
-  }
-]
+    engName: "dayCareCenter",
+  },
+];
 
 const indexReviewsData = [
   {
-    title: '輕鬆媒合',
-    context: '長照預約服務網讓我能輕鬆找到適合的長照機構，省去了繁瑣的現場詢問。網站操作簡單，預約流程流暢，非常方便！',
-    userImage: 'https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-04.png?raw=true',
-    userName: '郭先生'
+    title: "輕鬆媒合",
+    context:
+      "長照預約服務網讓我能輕鬆找到適合的長照機構，省去了繁瑣的現場詢問。網站操作簡單，預約流程流暢，非常方便！",
+    userImage:
+      "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-04.png?raw=true",
+    userName: "郭先生",
   },
   {
-    title: '資訊透明',
-    context: '使用這個預約網後，我發現各機構的服務詳情和評價都很清楚，讓我能夠仔細比較，選擇最適合的長照服務，感覺很安心。',
-    userImage: 'https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-05.png?raw=true',
-    userName: '李小姐'
+    title: "資訊透明",
+    context:
+      "使用這個預約網後，我發現各機構的服務詳情和評價都很清楚，讓我能夠仔細比較，選擇最適合的長照服務，感覺很安心。",
+    userImage:
+      "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-05.png?raw=true",
+    userName: "李小姐",
   },
   {
-    title: '即時更新',
-    context: '預約服務網的即時更新功能非常好，讓我隨時能夠掌握各機構的最新服務和床位情況。這樣的靈活性讓我感到很放心！',
-    userImage: 'https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-03.png?raw=true',
-    userName: '王先生'
+    title: "即時更新",
+    context:
+      "預約服務網的即時更新功能非常好，讓我隨時能夠掌握各機構的最新服務和床位情況。這樣的靈活性讓我感到很放心！",
+    userImage:
+      "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-03.png?raw=true",
+    userName: "王先生",
   },
   {
-    title: '貼心解答 安心選擇',
-    context: '客服非常耐心，回答了我很多疑問，最終選擇的長照機構也非常滿意，感謝這個平台！',
-    userImage: 'https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-01.png?raw=true',
-    userName: '張先生'
+    title: "貼心解答 安心選擇",
+    context:
+      "客服非常耐心，回答了我很多疑問，最終選擇的長照機構也非常滿意，感謝這個平台！",
+    userImage:
+      "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-01.png?raw=true",
+    userName: "張先生",
   },
   {
-    title: '快速確認',
-    context: '整個預約過程很順利，選擇多樣,，約後很快就收到確認通知，家人都覺得很安心。',
-    userImage: 'https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-02.png?raw=true',
-    userName: '林小姐'
+    title: "快速確認",
+    context:
+      "整個預約過程很順利，選擇多樣,，約後很快就收到確認通知，家人都覺得很安心。",
+    userImage:
+      "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-02.png?raw=true",
+    userName: "林小姐",
   },
   {
-    title: '找到理想護理之家',
-    context: '這個預約網讓我找到了一家非常適合的護理之家，服務周到，網站使用也非常方便。',
-    userImage: 'https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-07.png?raw=true',
-    userName: '黃太太'
-  }
-]
+    title: "找到理想護理之家",
+    context:
+      "這個預約網讓我找到了一家非常適合的護理之家，服務周到，網站使用也非常方便。",
+    userImage:
+      "https://github.com/Jack-Xiao-2024/Project_D01/blob/dev/assets/images/User/Ellipse-07.png?raw=true",
+    userName: "黃太太",
+  },
+];
 
 const indexFaqsData = [
   {
     id: 1,
-    question: '如何註冊預約長照服務網的帳號？',
-    answer: '訪問網站首頁，點擊「註冊｜登入」按鈕，填寫必要的個人資訊，包括姓名、電話和電子信箱，然後按照提示完成註冊程序即可。'
+    question: "如何註冊預約長照服務網的帳號？",
+    answer:
+      "訪問網站首頁，點擊「註冊｜登入」按鈕，填寫必要的個人資訊，包括姓名、電話和電子信箱，然後按照提示完成註冊程序即可。",
   },
   {
     id: 2,
-    question: '如何查看點愛心收藏的長照機構？',
-    answer: '您可以在點愛心收藏喜歡的長照機構後，進入會員中心頁面，選擇「收藏機構」，查看收藏的長照機構，若想取消也可以在此取消收藏。'
+    question: "如何查看點愛心收藏的長照機構？",
+    answer:
+      "您可以在點愛心收藏喜歡的長照機構後，進入會員中心頁面，選擇「收藏機構」，查看收藏的長照機構，若想取消也可以在此取消收藏。",
   },
   {
     id: 3,
-    question: '如何找到適合的長照機構？',
-    answer: '您可以利用網站的搜尋功能，根據地區、醫療或照護需求篩選長照機構，查看詳細資訊和用戶評價，以便做出最佳選擇。'
+    question: "如何找到適合的長照機構？",
+    answer:
+      "您可以利用網站的搜尋功能，根據地區、醫療或照護需求篩選長照機構，查看詳細資訊和用戶評價，以便做出最佳選擇。",
   },
   {
     id: 4,
-    question: '預約參訪機構需要支付費用嗎？',
-    answer: '預約參訪不會收取預約費用，但具體長照機構的各項服務收費標準可能會有所不同，建議在參訪前確認清楚。'
+    question: "預約參訪機構需要支付費用嗎？",
+    answer:
+      "預約參訪不會收取預約費用，但具體長照機構的各項服務收費標準可能會有所不同，建議在參訪前確認清楚。",
   },
   {
     id: 5,
-    question: '如果遇到技術問題，如何聯繫客服？',
-    answer: '在網站最底下有提供客服社群聯繫方式。您可以通過這些方式聯繫客服，並描述您遇到的問題，客服將協助您解決。'
-  }
-]
+    question: "如果遇到技術問題，如何聯繫客服？",
+    answer:
+      "在網站最底下有提供客服社群聯繫方式。您可以通過這些方式聯繫客服，並描述您遇到的問題，客服將協助您解決。",
+  },
+];
 
 export default function Home() {
-  const [ indexHotsData, setIndexHotsData ] = useState([]);
-  const [ clickedCategory, setClickedCategory ] = useState("長期照顧中心");
+  const [indexHotsData, setIndexHotsData] = useState([]);
+  const [clickedCategory, setClickedCategory] = useState("長期照顧中心");
 
-  const getIndexHotsData = async(category) => {
+  const getIndexHotsData = async (category) => {
     try {
-      const res = await axios.get(`${BASE_URL}/products?category_like=${encodeURIComponent(category)}&_sort=like&_order=desc&_start=0&_end=3`);
+      const res = await axios.get(
+        `${BASE_URL}/products?category_like=${encodeURIComponent(
+          category
+        )}&_sort=like&_order=desc&_start=0&_end=3`
+      );
       setIndexHotsData(res.data);
     } catch (error) {
       console.error(error);
-      alert('取得人氣機構失敗');
+      alert("取得人氣機構失敗");
     }
-  }
+  };
 
   // 預設載入 "長期照顧中心"
   useEffect(() => {
@@ -119,9 +140,8 @@ export default function Home() {
 
   const handleHotsTabClick = (category) => {
     setClickedCategory(category);
-  }
+  };
 
-  
   return (
     <>
       <div className="index">
@@ -143,15 +163,17 @@ export default function Home() {
                 role="tablist"
               >
                 {indexHotsCategories.map((category) => (
-                  <li 
+                  <li
                     key={category.engName}
                     className="col nav-item px-lg-5 px-2"
                     role="presentation"
                     style={{ width: "180px" }}
                   >
                     <button
-                      onClick={() =>                     handleHotsTabClick(category.title)}
-                      className={`nav-link ${category.title === clickedCategory && 'active'}`}
+                      onClick={() => handleHotsTabClick(category.title)}
+                      className={`nav-link ${
+                        category.title === clickedCategory && "active"
+                      }`}
                       style={{ width: "156px" }}
                       id={`pills-${category.engName}-tab`}
                       data-bs-toggle="pill"
@@ -186,16 +208,15 @@ export default function Home() {
                   <div className="hots-cards px-4 pb-lg-0 pb-13">
                     {indexHotsData.map((item) => (
                       <div
-                      key={item.id}
-                      className="card-shadow card-hover-big rounded-2 position-relative"
-                      style={{ width: "312px" }}
+                        key={item.id}
+                        className="card-shadow card-hover-big rounded-2 position-relative"
+                        style={{ width: "312px" }}
                       >
-                        <HeartCard/>
+                        <HeartCard productId={item.id} />
                         <div
                           className="hots-card-image rounded-top-2"
                           style={{
-                            backgroundImage:
-                              `url(${item.thumbs[0]})`
+                            backgroundImage: `url(${item.thumbs[0]})`,
                           }}
                         ></div>
                         <div className="px-7 pt-9 pb-11">
@@ -211,7 +232,9 @@ export default function Home() {
                               src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/c686e8ab8f54332bdd0d43ab1421309a7ffb91e6/assets/images/Icon/Map.svg"
                               alt="map icon"
                             />
-                            <span className="ms-2 align-middle">{item.address}</span>
+                            <span className="ms-2 align-middle">
+                              {item.address}
+                            </span>
                           </p>
                           <p
                             className="card-para-truncate"
@@ -235,16 +258,15 @@ export default function Home() {
                   <div className="hots-cards px-4 pb-lg-0 pb-13">
                     {indexHotsData.map((item) => (
                       <div
-                      key={item.id}
-                      className="card-shadow card-hover-big rounded-2 position-relative"
-                      style={{ width: "312px" }}
+                        key={item.id}
+                        className="card-shadow card-hover-big rounded-2 position-relative"
+                        style={{ width: "312px" }}
                       >
-                        <HeartCard/>
+                        <HeartCard />
                         <div
                           className="hots-card-image rounded-top-2"
                           style={{
-                            backgroundImage:
-                              `url(${item.thumbs[0]})`
+                            backgroundImage: `url(${item.thumbs[0]})`,
                           }}
                         ></div>
                         <div className="px-7 pt-9 pb-11">
@@ -260,7 +282,9 @@ export default function Home() {
                               src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/c686e8ab8f54332bdd0d43ab1421309a7ffb91e6/assets/images/Icon/Map.svg"
                               alt="map icon"
                             />
-                            <span className="ms-2 align-middle">{item.address}</span>
+                            <span className="ms-2 align-middle">
+                              {item.address}
+                            </span>
                           </p>
                           <p
                             className="card-para-truncate"
@@ -284,16 +308,15 @@ export default function Home() {
                   <div className="hots-cards px-4 pb-lg-0 pb-13">
                     {indexHotsData.map((item) => (
                       <div
-                      key={item.id}
-                      className="card-shadow card-hover-big rounded-2 position-relative"
-                      style={{ width: "312px" }}
+                        key={item.id}
+                        className="card-shadow card-hover-big rounded-2 position-relative"
+                        style={{ width: "312px" }}
                       >
-                        <HeartCard/>
+                        <HeartCard />
                         <div
                           className="hots-card-image rounded-top-2"
                           style={{
-                            backgroundImage:
-                              `url(${item.thumbs[0]})`
+                            backgroundImage: `url(${item.thumbs[0]})`,
                           }}
                         ></div>
                         <div className="px-7 pt-9 pb-11">
@@ -309,7 +332,9 @@ export default function Home() {
                               src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/c686e8ab8f54332bdd0d43ab1421309a7ffb91e6/assets/images/Icon/Map.svg"
                               alt="map icon"
                             />
-                            <span className="ms-2 align-middle">{item.address}</span>
+                            <span className="ms-2 align-middle">
+                              {item.address}
+                            </span>
                           </p>
                           <p
                             className="card-para-truncate"
@@ -333,16 +358,15 @@ export default function Home() {
                   <div className="hots-cards px-4 pb-lg-0 pb-13">
                     {indexHotsData.map((item) => (
                       <div
-                      key={item.id}
-                      className="card-shadow card-hover-big rounded-2 position-relative"
-                      style={{ width: "312px" }}
+                        key={item.id}
+                        className="card-shadow card-hover-big rounded-2 position-relative"
+                        style={{ width: "312px" }}
                       >
-                        <HeartCard/>
+                        <HeartCard />
                         <div
                           className="hots-card-image rounded-top-2"
                           style={{
-                            backgroundImage:
-                              `url(${item.thumbs[0]})`
+                            backgroundImage: `url(${item.thumbs[0]})`,
                           }}
                         ></div>
                         <div className="px-7 pt-9 pb-11">
@@ -358,7 +382,9 @@ export default function Home() {
                               src="https://raw.githubusercontent.com/Jack-Xiao-2024/Project_D01/c686e8ab8f54332bdd0d43ab1421309a7ffb91e6/assets/images/Icon/Map.svg"
                               alt="map icon"
                             />
-                            <span className="ms-2 align-middle">{item.address}</span>
+                            <span className="ms-2 align-middle">
+                              {item.address}
+                            </span>
                           </p>
                           <p
                             className="card-para-truncate"
@@ -494,18 +520,18 @@ export default function Home() {
               使用長照好厝邊
             </h6>
           </div>
-            {/* Swiper 用戶評價卡片 */}
+          {/* Swiper 用戶評價卡片 */}
           <div className="reviewSwiper-container">
             <Swiper
               modules={[Navigation, Pagination]}
               cssMode={true}
               navigation={{
                 nextEl: ".swiper-next",
-                prevEl: ".swiper-prev"
-                }}
+                prevEl: ".swiper-prev",
+              }}
               pagination={{
                 clickable: true,
-                el: ".swiper-pagination"
+                el: ".swiper-pagination",
               }}
               breakpoints={{
                 0: {
@@ -517,22 +543,22 @@ export default function Home() {
                 },
                 768: {
                   loop: true,
-                  direction: 'horizontal',
+                  direction: "horizontal",
                   slidesPerView: 2,
                   spaceBetween: 24,
                 },
                 992: {
                   loop: true,
-                  direction: 'horizontal',
+                  direction: "horizontal",
                   slidesPerView: 3,
                   spaceBetween: 32,
                 },
                 1400: {
                   loop: true,
-                  direction: 'horizontal',
+                  direction: "horizontal",
                   slidesPerView: 4,
                   spaceBetween: 64,
-                }
+                },
               }}
             >
               {indexReviewsData.map((item) => (
@@ -554,12 +580,13 @@ export default function Home() {
                         style={{ width: "44px", height: "44px" }}
                         alt="user picture"
                       />
-                      <p className="card-text text-white-100 me-4">{item.userName}</p>
+                      <p className="card-text text-white-100 me-4">
+                        {item.userName}
+                      </p>
                     </div>
                   </div>
                 </SwiperSlide>
               ))}
-
             </Swiper>
           </div>
           {/* Swiper next、prev、pagination 底下頁面控制按鈕 */}
@@ -574,7 +601,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* index 常見問題 Ｑ＆Ａ 區段 */}  
+        {/* index 常見問題 Ｑ＆Ａ 區段 */}
         <section className="index-faq bg-primary-30" id="faq">
           <div className="container">
             <h4 className="text-center text-secondary-80 fs-lg-2 mb-lg-9 mb-10">

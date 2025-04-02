@@ -4,7 +4,7 @@ import { Outlet, Link, useNavigate } from "react-router";
 import Profile from "../assets/images/Account_Icon/profile.svg?react";
 import Paste from "../assets/images/Account_Icon/paste.svg?react";
 import Favorite from "../assets/images/Account_Icon/favorite.svg?react";
-import Building from "../assets/images/Account_Icon/building.svg?react";
+// import Building from "../assets/images/Account_Icon/building.svg?react";
 
 const accountInnerTab = [
   {
@@ -22,11 +22,11 @@ const accountInnerTab = [
     title: "收藏機構",
     icon: <Favorite className="icon-color p-1 me-5" />,
   },
-  {
-    path: "profile",
-    title: "參訪記錄",
-    icon: <Building className="icon-color p-1 me-5" />,
-  },
+  // {
+  //   path: "profile",
+  //   title: "參訪記錄",
+  //   icon: <Building className="icon-color p-1 me-5" />,
+  // },
 ];
 
 export default function AccountLayout() {

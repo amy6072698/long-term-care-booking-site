@@ -1,5 +1,9 @@
 .admin-list-group{
+  position: fixed;
+  top: 0;
+  bottom: 0;
   .list-group{
+    margin-top: 80px;
     --bs-list-group-color: #fff;
     --bs-list-group-bg: #33240E;
     --bs-list-group-active-color: var(--bs-primary-110);

@@ -502,7 +502,7 @@ export default function AdminLProduct() {
     <>
       {/* toast */}
       <ToastContainer />
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between pt-14">
         <h4 className="mb-2 text-primary-100">機構管理</h4>
         <button
           type="button"

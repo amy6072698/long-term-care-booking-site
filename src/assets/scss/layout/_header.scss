@@ -97,6 +97,10 @@
 
 // 後台 Header
 .admin-header{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
   .navbar {
     --bs-navbar-color: #fff;
     --bs-navbar-hover-color: var(--bs-primary-110);

@@ -144,6 +144,13 @@ export default function ResultsSearch() {
       <div className="content pt-12 pt-md-14 result-content">
         <div className="container">
           <div className="row d-flex flex-column gy-7 gy-lg-9">
+            {resultsSearch.length === 0 && (
+              <div className="col text-center py-10">
+                <h5 className="mb-3">找不到符合搜尋條件的結果</h5>
+                <p className="fs-6 mb-3">請重新選擇搜尋條件</p>
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSsIwESVlH4UGWgc8NFkm__Q04vO3d4exRYtuem4uO3pEoA6YkLsCfug0RYWURp6uhOqDdU11mtEPS8hSRSTy_chmGNiCme8VwpcBCtkjpHvNEdRwCyQIQiUpqkrK1X6gfwK7um4HDosWU/s500/magnifier7_oldman.png" alt="查無搜尋結果" />
+              </div>
+            )}
             {resultsSearch.map((product) => (
               <div className="col" key={product.id}>
                 <div className="cards shadow rounded">

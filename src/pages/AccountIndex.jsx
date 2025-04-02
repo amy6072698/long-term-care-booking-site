@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import Profile from "../assets/images/Account_Icon/profile.svg?react";
 import Paste from "../assets/images/Account_Icon/paste.svg?react";
 import Favorite from "../assets/images/Account_Icon/favorite.svg?react";
-import Building from "../assets/images/Account_Icon/building.svg?react";
+// import Building from "../assets/images/Account_Icon/building.svg?react";
 
 const accountIndexTab = [
   {
@@ -20,17 +20,17 @@ const accountIndexTab = [
     description: "查看您已預訂留床的機構",
   },
   {
-    path: "inner/purchase",
+    path: "inner/collect",
     title: "收藏機構",
     icon: <Favorite className="icon-color p-1 me-5" />,
     description: "查看您已收藏的機構",
   },
-  {
-    path: "inner/profile",
-    title: "參訪記錄",
-    icon: <Building className="icon-color p-1 me-5" />,
-    description: "查看您已預約參訪的機構",
-  },
+  // {
+  //   path: "inner/profile",
+  //   title: "參訪記錄",
+  //   icon: <Building className="icon-color p-1 me-5" />,
+  //   description: "查看您已預約參訪的機構",
+  // },
 ];
 
 export default function AccountIndex() {

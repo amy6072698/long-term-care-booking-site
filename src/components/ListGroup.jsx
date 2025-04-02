@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 export default function ListGroup() {
   const adminPath = [
@@ -22,14 +21,26 @@ export default function ListGroup() {
       description: "查看圖表分析",
     },
   ];
-  const [isActive, setIsActive] = useState('訂單管理');
+
+  const location = useLocation();
+
+  // 判斷當前路徑是否是 item.path 或其子路徑
+  const isPathActive = (path) => {
+    // 精確匹配 "/admin"
+    if (path === "/admin") {
+      return location.pathname === "/admin";
+    }
+    // 其他路徑可以是前綴匹配
+    return location.pathname.startsWith(path);
+  };
+
   return (
-    <div className="admin-list-group">
-      <ul className="list-group mt-6">
+    <>
+      <ul className="list-group">
         {adminPath.map((item,index) => {
           return (
-            <li className={`list-group-item p-0 border-0 mb-1 ${isActive === item.title && 'active'}`} key={index}>
-              <Link onClick={() => setIsActive(item.title)} to={item.path} className="d-block py-2 px-4 text-center fs-5">
+            <li className={`list-group-item p-0 border-0 mb-1 ${isPathActive(item.path) ? 'active' : ''}`} key={index}>
+              <Link to={item.path} className="d-block py-2 px-4 text-center fs-5">
                 <i className={`bi ${item.icon} p-1 me-5`}></i>
                 {item.title}
               </Link>
@@ -37,6 +48,6 @@ export default function ListGroup() {
           );
         })}
       </ul>
-    </div>
+    </>
   );
 }

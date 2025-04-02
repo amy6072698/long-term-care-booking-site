@@ -214,7 +214,7 @@ export default function AdminOrderChart() {
     <>
       <div className="d-flex justify-content-between align-items-center mb-10">
         <div>
-          <h4 className="mb-2 text-primary-100">圖表分析</h4>
+          <h4 className="mb-2 text-primary-100 pt-14">圖表分析</h4>
           <p>分析訂單數量和機構所在地區</p>
         </div>
         <Select

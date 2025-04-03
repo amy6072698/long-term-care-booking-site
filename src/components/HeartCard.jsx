@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -103,6 +104,12 @@ const HeartCard = ({ productId, onRemove }) => {
       />
     </a>
   );
+};
+
+
+HeartCard.propTypes = {
+  productId:PropTypes.number, 
+  onRemove:PropTypes.func
 };
 
 export default HeartCard;

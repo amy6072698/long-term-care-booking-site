@@ -408,7 +408,7 @@ export default function ProductPage() {
                     <h6 className="d-flex align-items-center gap-1 justify-content-center fs-7 fs-lg-6">
                       每月
                       <span className="h5 align-self-center mb-0 text-secondary-40">
-                        {room.price}
+                        {room.price.toLocaleString()}
                       </span>
                       元起
                     </h6>

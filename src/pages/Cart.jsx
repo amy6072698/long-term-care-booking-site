@@ -6,16 +6,12 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 import { UserContext }  from "../contexts/UserContext";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 
-// let token;
-// let myUserId;
 
 export default function Cart() {
   const [cartsData, setCartsData] = useState([]);
   const { setIsLoginModalOpen } = useContext(UserContext);
   const { setLoginModalMode } = useContext(UserContext);
   const { isLogin } = useContext(UserContext); // 判斷是否登入
-  // const { setIsLogin } = useContext(UserContext);
-  // const { setUserName } = useContext(UserContext);
   const { token, myUserId } = getTokenFromCookie();
 
   //跳出登入視窗
@@ -307,7 +303,7 @@ return (
                               {item.product.roomCards[0].roomType}
                             </p>
                             <p className="room-price fs-5">
-                              NTD {item.product.roomCards[0].price}
+                              NTD {item.product.roomCards[0].price.toLocaleString()}
                             </p>
                           </div>
                         </div>

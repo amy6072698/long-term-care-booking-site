@@ -8,10 +8,6 @@ import Cleave from "cleave.js/react";
 import "cleave.js/dist/addons/cleave-phone.TW";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 
-// let token;
-// let myUserId;
-// let selectProductId;
-
 export default function Checkout() {
   const { token, myUserId, selectProductId } = getTokenFromCookie();
   const { id: productId } = useParams();
@@ -32,23 +28,6 @@ export default function Checkout() {
     mode: "onChange",
   });
 
-  //取得token和登入id、selectProductId
-  // const getToken = () => {
-  //   document.cookie = "myToken";
-  //   token = document.cookie.replace(
-  //     /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
-  //     "$1"
-  //   );
-  //   myUserId = document.cookie.replace(
-  //     /(?:(?:^|.*;\s*)myUserId\s*\=\s*([^;]*).*$)|^.*$/,
-  //     "$1"
-  //   );
-  //   selectProductId = document.cookie.replace(
-  //     /(?:(?:^|.*;\s*)selectProductId\s*\=\s*([^;]*).*$)|^.*$/,
-  //     "$1"
-  //   );
-  // };
-
   //元件渲染完後觸發請求id
   //使用600無法的原因可能是products資料表中沒有userId做辨認
   //請求完資料後重設roomType的預設值
@@ -68,11 +47,9 @@ export default function Checkout() {
 
   //處理提交
   const onSubmit = (data, e) => {
-    // setTimeout(() => {
     e.preventDefault();
     handleCheckoutSuccess();
     addOrderItem(data);
-    // }, 0);
   };
 
   // 結帳api
@@ -244,7 +221,7 @@ export default function Checkout() {
                           })}
                           defaultValue={checkoutData?.roomCards?.[0]?.roomType}
                           id="roomType"
-                          className="form-select py-5
+                          className="form-select py-4
       checkout-border-primary"
                           aria-label="Default
       select example"

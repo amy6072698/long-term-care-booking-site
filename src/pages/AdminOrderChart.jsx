@@ -152,7 +152,7 @@ export default function AdminOrderChart() {
 
   // 開始日
   const handleStartDateChange = (e) => {
-    console.log(e);
+
     setStartDate(e.target.value);
   };
 
@@ -180,7 +180,6 @@ export default function AdminOrderChart() {
     if (searchData.length == 0) {
       alert("區間內無資料");
     }
-    console.log("searchData", searchData);
     handleChartData(searchData, chartType);
   };
 
@@ -189,12 +188,10 @@ export default function AdminOrderChart() {
     const filterData = orderData.filter((item) => {
       return item.orderData?.checkInDate;
     });
-    console.log("filterData", filterData);
     let filter = "";
     if (type === "bookingsByCategory") {
       filter = filterData.reduce((accumulator, currentItem) => {
         const orderName = currentItem.product.category;
-        // console.log('orderName',orderName);
         accumulator[[orderName]] = (accumulator[orderName] || 0) + 1;
         return accumulator;
       }, {});
@@ -207,7 +204,6 @@ export default function AdminOrderChart() {
       }, {});
     }
     setChartObj(filter);
-    console.log(type, filter);
   };
 
   return (

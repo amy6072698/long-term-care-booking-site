@@ -81,7 +81,6 @@ export default function AdminLProduct() {
       const totalCount = headers["x-total-count"];
       setTotalPages(Math.ceil(totalCount / itemsPerPage.current));
       setProducts(data);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -128,7 +127,6 @@ export default function AdminLProduct() {
 
   // 關閉刪除productModal
   const handleCloseProductModal = () => {
-    console.log("sus");
     const modalInstance = Modal.getInstance(productModalRef.current);
     modalInstance.hide();
   };
@@ -245,11 +243,6 @@ export default function AdminLProduct() {
     );
   }, []);
 
-  // 監聽tempProduct
-  useEffect(() => {
-    console.log(tempProduct);
-  }, [tempProduct]);
-
   const [allowanceValues, setAllowanceValues] = useState([]);
   const [caringItemValues, setCaringItemValues] = useState([]);
   const [medicalServiceValues, setMedicalServiceValues] = useState([]);
@@ -312,7 +305,6 @@ export default function AdminLProduct() {
       });
     } else {
       const newValues = selected ? selected.map((item) => item.value) : [];
-      console.log("selected", selected);
       setTempProduct({
         ...tempProduct,
         [name]: newValues,
@@ -403,14 +395,9 @@ export default function AdminLProduct() {
           },
         }
       );
-      // console.log(res);
-      // handleCloseProductModal();
       showSuccessMessage(`編輯成功！`);
-      // getProducts();
     } catch (error) {
       console.log(error);
-      // const { message } = error;
-      // showErrorMessage(message);
     }
   };
 
@@ -483,12 +470,11 @@ export default function AdminLProduct() {
   // 刪除api
   const handleDelProduct = async (e, id) => {
     try {
-      const res = await axios.delete(`${BASE_URL}/660/products/${id}`, {
+      await axios.delete(`${BASE_URL}/660/products/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
       handleCloseDelProductModal();
       getProducts();
       showSuccessMessage(`刪除成功！`);
@@ -597,7 +583,6 @@ export default function AdminLProduct() {
           <li
             className={`page-item ${currentPage == totalPages && "disabled"}`}
             onClick={(e) => {
-              console.log("total", totalPages);
               if (currentPage < totalPages) {
                 handleChangePage(e, currentPage + 1);
               }
@@ -1062,7 +1047,7 @@ export default function AdminLProduct() {
                         新增機構房型
                       </button>
 
-                      {tempProduct.thumbs.length > 1 && (
+                      {tempProduct.roomCards.length > 0 && (
                         <button
                           name="roomCards"
                           className="btn btn-outline-danger btn-sm w-100"

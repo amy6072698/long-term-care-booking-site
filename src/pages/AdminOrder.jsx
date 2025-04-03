@@ -15,7 +15,7 @@ import DelOrderModal from "../components/DelOrderModal";
 export default function AdminLOrder() {
   const { token } = getTokenFromCookie();
   const [orders, setOrders] = useState([]);
-  const [tempOrder, setTempOrder] = useState([]);
+  const [tempOrder, setTempOrder] = useState({});
   const [delId, setDelId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);  
@@ -35,7 +35,7 @@ export default function AdminLOrder() {
       );
       const totalCount = headers["x-total-count"];
       setTotalPages(Math.ceil(totalCount / itemsPerPage.current));
-      console.log('38',data);
+
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -65,6 +65,7 @@ export default function AdminLOrder() {
 
   // 打開orderModal
   const handleOpenOrderModal = (order) => {
+    console.log(order);
     const modalInstance = Modal.getInstance(orderModalRef.current);
     setTempOrder(order);
     modalInstance.show();
@@ -91,7 +92,7 @@ export default function AdminLOrder() {
   //  更新訂單
   const handleUpdateOrder = async () => {
     try {
-      const res = await axios.put(
+      await axios.put(
         `${BASE_URL}/660/orders/${tempOrder.id}`,
         {
           ...tempOrder,
@@ -102,7 +103,6 @@ export default function AdminLOrder() {
           },
         }
       );
-      console.log(res);
       handleCloseOrderModal();
       showSuccessMessage(`編輯成功！`);
       getOrders();
@@ -115,12 +115,11 @@ export default function AdminLOrder() {
   // 刪除api
   const handleDelOrder = async (e, id) => {
     try {
-      const res = await axios.delete(`${BASE_URL}/660/orders/${id}`, {
+      await axios.delete(`${BASE_URL}/660/orders/${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
       handleCloseDelOrderModal();
       getOrders();
       showSuccessMessage(`刪除成功！`);
@@ -246,7 +245,6 @@ export default function AdminLOrder() {
               currentPage == totalPages && "disabled"
             }`}
             onClick={(e) => {
-              console.log("total", totalPages);
               if (currentPage < totalPages) {
                 handleChangePage(e, currentPage + 1);
               }

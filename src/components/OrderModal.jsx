@@ -271,5 +271,5 @@ OrderModal.propTypes = {
   handleCloseOrderModal: PropTypes.func,
   handleModalInputChange: PropTypes.func,
   handleUpdateOrder: PropTypes.func,
-  tempOrder: PropTypes.array,
+  tempOrder: PropTypes.object,
 };

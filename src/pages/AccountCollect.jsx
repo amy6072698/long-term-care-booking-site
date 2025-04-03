@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import HeartCard from "../components/HeartCard";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 
@@ -11,10 +11,10 @@ export default function AccountProduct() {
   const [products, setProducts] = useState([]);
 
   //取得收藏機構
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     // setLoading(true);
     // setError(null);
-
+    
     try {
       // 取得包含產品資訊的收藏資料
       const response = await axios.get(`${BASE_URL}/collects`, {
@@ -50,7 +50,7 @@ export default function AccountProduct() {
           })
           .filter((item) => item !== null); // 過濾掉不含產品資料的項目
 
-        console.log("成功提取產品資料:", productData);
+        // console.log("成功提取產品資料:", productData);
         setProducts(productData);
       } else {
         console.warn("獲取的資料格式不符合預期");
@@ -63,11 +63,11 @@ export default function AccountProduct() {
     } finally {
       // setLoading(false);
     }
-  };
+  },[myUserId,token])
   // 組件載入時獲取資料
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   // **處理刪除收藏**
   const handleRemoveProduct = (removedProductId) => {

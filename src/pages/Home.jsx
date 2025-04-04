@@ -262,7 +262,7 @@ export default function Home() {
                         className="card-shadow card-hover-big rounded-2 position-relative"
                         style={{ width: "312px" }}
                       >
-                        <HeartCard />
+                        <HeartCard productId={item.id} />
                         <div
                           className="hots-card-image rounded-top-2"
                           style={{
@@ -312,7 +312,7 @@ export default function Home() {
                         className="card-shadow card-hover-big rounded-2 position-relative"
                         style={{ width: "312px" }}
                       >
-                        <HeartCard />
+                        <HeartCard productId={item.id} />
                         <div
                           className="hots-card-image rounded-top-2"
                           style={{
@@ -362,7 +362,7 @@ export default function Home() {
                         className="card-shadow card-hover-big rounded-2 position-relative"
                         style={{ width: "312px" }}
                       >
-                        <HeartCard />
+                        <HeartCard productId={item.id} />
                         <div
                           className="hots-card-image rounded-top-2"
                           style={{

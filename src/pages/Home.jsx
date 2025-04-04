@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 
 import StarIcon from "../assets/images/Icon/Stars-Change.svg?react";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -144,6 +145,7 @@ export default function Home() {
 
   return (
     <>
+      <ToastContainer />
       <div className="index">
         {/* index 人氣機構精選區段 */}
         <section className="index-hots pb-lg-14 pb-0">

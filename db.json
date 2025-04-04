@@ -49,6 +49,15 @@
       "birthday": "2025-04-04",
       "phone": "0912345678",
       "id": 5
+    },
+    {
+      "email": "123@gmail.com",
+      "password": "$2a$10$AP1nIBq50zFTwwY0sdVV6.vcfoRtHgMqwp8LykXrrBtyVyyO5Re72",
+      "name": "Tim",
+      "gender": "male",
+      "birthday": "2000-07-25",
+      "phone": "0984658493",
+      "id": 6
     }
   ],
   "products": [
@@ -2254,9 +2263,21 @@
     },
     {
       "userId": "3",
-      "productId": 3,
-      "createdAt": "2025-04-02T13:57:17.520Z",
+      "productId": 1,
+      "createdAt": "2025-04-04T10:27:14.679Z",
       "id": 2
+    },
+    {
+      "userId": "3",
+      "productId": 5,
+      "createdAt": "2025-04-04T10:27:27.247Z",
+      "id": 3
+    },
+    {
+      "userId": "6",
+      "productId": 4,
+      "createdAt": "2025-04-04T10:29:23.813Z",
+      "id": 5
     }
   ]
 }

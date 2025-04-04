@@ -53,7 +53,7 @@ const router = createHashRouter([
                 element: <AccountPurchase />,
               },
               {
-                path: "purchaseDetail",
+                path: "purchaseDetail/:id",
                 element: <OrderDetail />,
               },
             ],

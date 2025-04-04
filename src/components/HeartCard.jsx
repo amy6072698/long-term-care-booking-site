@@ -3,19 +3,26 @@ import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 import axios from "axios";
 import PropTypes from "prop-types";
 import showSuccessMessage from "../assets/js/showSuccessMessage";
+import showErrorMessage from "../assets/js/showErrorMessage";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-const HeartCard = ({ productId, onRemove }) => {
+const HeartCard = ({ productId, onRemove, openLoginModal }) => {
   const { token, myUserId } = getTokenFromCookie();
   const [heart, setHeart] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [collectId, setCollectId] = useState(null); // 收藏的 ID
 
+  // **檢查使用者是否已登入**
+  const isUserLoggedIn = () => {
+    return !!token && !!myUserId;
+  };
+
   // **檢查該用戶是否已收藏**
   useEffect(() => {
     const checkCollect = async () => {
+      if (!isUserLoggedIn()) return;
       try {
         const response = await axios.get(`${BASE_URL}/collects`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -36,7 +43,7 @@ const HeartCard = ({ productId, onRemove }) => {
           }
         }
       } catch (err) {
-        console.error("Error fetching heart status:", err);
+        console.error("錯誤：檢查收藏狀態失敗", err);
         setError(err.message);
       }
     };
@@ -47,6 +54,18 @@ const HeartCard = ({ productId, onRemove }) => {
   // **點擊切換收藏**
   const heartCollect = async (e) => {
     e.preventDefault();
+
+    // 檢查是否已登入
+    if (!isUserLoggedIn()) {
+      console.log("使用者未登入，開啟登入視窗");
+      if (openLoginModal && typeof openLoginModal === "function") {
+        openLoginModal();
+      } else {
+        alert("請先登入才能收藏機構");
+      }
+      return;
+    }
+
     if (loading) return;
 
     setLoading(true);
@@ -107,10 +126,10 @@ const HeartCard = ({ productId, onRemove }) => {
   );
 };
 
-
 HeartCard.propTypes = {
-  productId:PropTypes.number, 
-  onRemove:PropTypes.func
+  productId: PropTypes.number,
+  onRemove: PropTypes.func,
+  openLoginModal: PropTypes.func, // 新增開啟登入視窗的函數
 };
 
 export default HeartCard;

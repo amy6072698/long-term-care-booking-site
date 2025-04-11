@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
 import axios from "axios";
 import PropTypes from "prop-types";
 import showSuccessMessage from "../assets/js/showSuccessMessage";
-import showErrorMessage from "../assets/js/showErrorMessage";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -11,13 +10,12 @@ const HeartCard = ({ productId, onRemove, openLoginModal }) => {
   const { token, myUserId } = getTokenFromCookie();
   const [heart, setHeart] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [collectId, setCollectId] = useState(null); // 收藏的 ID
 
   // **檢查使用者是否已登入**
-  const isUserLoggedIn = () => {
+  const isUserLoggedIn = useCallback(() => {
     return !!token && !!myUserId;
-  };
+  }, [token, myUserId]);
 
   // **檢查該用戶是否已收藏**
   useEffect(() => {
@@ -29,27 +27,24 @@ const HeartCard = ({ productId, onRemove, openLoginModal }) => {
           params: { userId: myUserId, productId: productId },
         });
 
-        if (response.status === 200) {
-          const collectedItem = response.data.find(
-            (item) => item.userId === myUserId && item.productId === productId
-          );
+        const collectedItem = response.data.find(
+          (item) => item.userId === myUserId && item.productId === productId
+        );
 
-          if (collectedItem) {
-            setHeart(true);
-            setCollectId(collectedItem.id);
-          } else {
-            setHeart(false);
-            setCollectId(null);
-          }
+        if (collectedItem) {
+          setHeart(true);
+          setCollectId(collectedItem.id);
+        } else {
+          setHeart(false);
+          setCollectId(null);
         }
       } catch (err) {
         console.error("錯誤：檢查收藏狀態失敗", err);
-        setError(err.message);
       }
     };
 
     checkCollect();
-  }, [token, myUserId, productId]);
+  }, [isUserLoggedIn, token, myUserId, productId]);
 
   // **點擊切換收藏**
   const heartCollect = async (e) => {
@@ -65,11 +60,8 @@ const HeartCard = ({ productId, onRemove, openLoginModal }) => {
       }
       return;
     }
-
     if (loading) return;
-
     setLoading(true);
-    setError(null);
 
     try {
       if (!heart) {
@@ -105,7 +97,6 @@ const HeartCard = ({ productId, onRemove, openLoginModal }) => {
       }
     } catch (err) {
       console.error(err);
-      setError(err.message || "收藏操作失敗");
     } finally {
       setLoading(false);
     }

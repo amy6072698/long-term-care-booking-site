@@ -6,7 +6,7 @@ export default function Other() {
             <div className="container">
                 <div className="row g-6 g-md-14 justify-content-center">
                     {/* 卡片 1 */}
-                    <div className="col-md-6 col-12">
+                    <div className="col-md-6 col-12 mb-6 mb-md-0">
                         <div className="card h-100 shadow-sm" style={{maxWidth: "100%" }}>
                             <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="card-img-top" alt="小型復康巴士"/>
                             <div className="card-body">
@@ -20,7 +20,7 @@ export default function Other() {
                         </div>
                     </div>
                     {/* 卡片 2 */}
-                    <div className="col-md-6 col-12">
+                    <div className="col-md-6 col-12 mb-6 mb-md-0">
                         <div className="card h-100 shadow-sm" style={{maxWidth: "100%" }}>
                             <img src="https://images.unsplash.com/photo-1565615833231-e8c91a38a012?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="card-img-top" alt="輔具服務單位"/>
                             <div className="card-body">
@@ -32,12 +32,6 @@ export default function Other() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {/* 回首頁 */}
-                    <div className="d-flex justify-content-center">
-                      <a href="#/">
-                        <button type="button" className="btn other-btn-style other-btn fs-6 fs-md-4 btn-primary-40 mt-5 mt-md-10" href="#/">回首頁</button>
-                      </a>
                     </div>
                 </div>
             </div>

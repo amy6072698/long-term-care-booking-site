@@ -4,7 +4,7 @@ export default function AboutUs() {
     <div className="main">
         <div className="news-content">
           <div className="container">
-              <div className="row row-cols-1 row-cols-md-2 g-5 g-md-12">
+              <div className="row row-cols-1 row-cols-md-2 g-8 g-md-12">
                 {/* 卡片 1 */}
                 <div className="col">
                     <div className="card news-card ease-in-out h-100 shadow-sm" style={{maxWidth: "100%" }}> 
@@ -44,21 +44,15 @@ export default function AboutUs() {
                 {/* 卡片 4 */}
                 <div className="col">
                     <div className="card news-card ease-in-out h-100 shadow-sm" style={{maxWidth: "100%" }}>
-                    <a href="https://www.sw.ntpc.gov.tw/home.jsp?id=19985c6f908a8bb3">
-                        <img src="https://images.unsplash.com/photo-1569937703691-0f9b8cf21a25?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="card-img-top" alt="身心障礙者福利"/>
-                    </a>
-                    <div className="card-body">
-                        <p className="card-title fs-5 fs-md-4">身心障礙者福利</p>
-                        <p className="card-text fs-7 fs-md-6">提供身心障礙鑒定及需求評估制度、經濟安全服務、社會參與服務等，一系列身障者保障及福利。</p>
-                    </div>
+                        <a href="https://www.sw.ntpc.gov.tw/home.jsp?id=19985c6f908a8bb3">
+                            <img src="https://images.unsplash.com/photo-1569937703691-0f9b8cf21a25?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="card-img-top" alt="身心障礙者福利"/>
+                        </a>
+                        <div className="card-body">
+                            <p className="card-title fs-5 fs-md-4">身心障礙者福利</p>
+                            <p className="card-text fs-7 fs-md-6">提供身心障礙鑒定及需求評估制度、經濟安全服務、社會參與服務等，一系列身障者保障及福利。</p>
+                        </div>
                     </div>
                 </div>
-              </div>
-              {/* 回首頁 */}
-              <div className="d-flex justify-content-center">
-                <a href="#/">
-                  <button type="button" className="btn news-btn-style news-btn fs-6 fs-md-4 btn-primary-40 mt-5 mt-md-10">回首頁</button>
-                </a>
               </div>
           </div>
         </div>

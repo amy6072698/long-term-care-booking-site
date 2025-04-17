@@ -42,7 +42,7 @@ export default function Cart() {
         );
         setCartsData(data);
       } catch (error) {
-        console.error("取得購物車資料失敗", error);
+        alert(`取得購物車資料失敗：${error.message}`);
       }
     };
     //如果登入成功則重新取得token，
@@ -88,7 +88,7 @@ export default function Cart() {
       setCartsData(cartsData.filter((item) => item.id !== deleteId));
       setDeleteId(null); // 關閉 Modal
     } catch (error) {
-      console.error("刪除失敗", error);
+      alert(`刪除失敗：${error.message}`);
     }
   };
 
@@ -136,16 +136,6 @@ return (
           {cartsData.length === 0 ? 
           // 購物車為空顯示提示訊息
           (<div className="cart-content">
-                {/* 全部刪除按鈕 */}
-                <div className="d-flex justify-content-end px-2 mb-11">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary-40 all-font"
-                    onClick={handleDeleteAllClick}
-                  >
-                    全部刪除
-                  </button>
-                </div>
               {/* 加入購物車資訊 */}
               <div className="d-flex justify-content-center flex-column align-items-center mb-10 mb-md-14">
                 <img className="img-fluid" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiH9i4Wm47al7owhheYuyvI9kPffsFjgHdSNLtaL572LmdaxthXFGiKNn4sbYMaVNx9omD5HFbC6qkT6d4DJtvJpNJFjFwoTJHeOCU1MAP4H2P2nvHYUaBC7Q4d-rO3PKXvf564pdE9EBp6/s600/big_family_kurumaisu.png" alt="提示購物車為空" />
@@ -155,18 +145,6 @@ return (
                 <p className="fs-7 fs-md-6">
                   請重新搜尋機構
                 </p>
-              </div>
-              {/* 頁籤尾頁 */}
-              <div className="d-flex justify-content-center mt-3">
-                <div className="flex-column">
-                  <a
-                    type="button"
-                    className="btn next-btn next-btn-size fs-5 btn-primary-40"
-                    href="#/"
-                  >
-                    回首頁
-                  </a>
-                </div>
               </div>
           </div>) : 
           // 購物車有資料顯示購物車內容

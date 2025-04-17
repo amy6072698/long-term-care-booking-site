@@ -55,8 +55,7 @@ export default function ResultsSearch() {
         // 處理總頁數，用總資料數除以每頁顯示幾筆再用 Math.ceil 處理無條件進位
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
       } catch (error) {
-        console.log(error);
-        alert("取得產品搜尋失敗");
+        alert(`取得產品搜尋失敗：${error.message}`);
       }
     },
     [currentPage]
@@ -68,10 +67,8 @@ export default function ResultsSearch() {
         `${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}`
       );
       setResultsSearch(res.data);
-      // console.log(res.data);
     } catch (error) {
-      console.log(error);
-      alert("取得產品失敗");
+      alert(`取得產品失敗：${error.message}`);
     }
   }, [currentPage]);
 
@@ -118,7 +115,6 @@ export default function ResultsSearch() {
     // 若 getParams 非空值取得符合搜尋參數的 products，是空值則取得所有 products
     if (getParams) {
       getProductsSearch(getParams);
-      // console.log(resultsSearch);
     } else {
       getProducts();
     }
@@ -140,8 +136,8 @@ export default function ResultsSearch() {
     <>
       <ToastContainer />
       {/* 搜尋結果卡片 */}
-      <div className="content pt-12 pt-md-14 result-content">
-        <div className="container">
+      <div className="content py-12 py-md-14 result-content">
+        <div className={`container ${totalPages > 1 ? "pt-14":"py-14"}`}>
           <div className="row d-flex flex-column gy-7 gy-lg-9">
             {resultsSearch.length === 0 && (
               <div className="col text-center py-10">
@@ -270,9 +266,9 @@ export default function ResultsSearch() {
 
       {/* 分頁 */}
       {totalPages > 1 && (
-        <nav aria-label="...">
+        <nav aria-label="..." className="content pb-13">
           {/* 上一頁 */}
-          <ul className="pagination d-lg-flex py-8 justify-content-center ">
+          <ul className="pagination d-lg-flex justify-content-center mb-0 pb-13">
             <li className={`page-item ${currentPage === 1 && "disabled"}`}>
               <button
                 className={`page-link ${currentPage === 1 && "disabled"} `}

@@ -38,8 +38,7 @@ export default function AccountProfile() {
       Object.keys(res.data).forEach((key) => setValue(key, res.data[key] || ''));
 
     } catch (error) {
-      console.log(error);
-      alert("取得使用者資料失敗");
+      alert(`取得使用者資料失敗：${error.message}`);
     }
   },[setValue]);
 
@@ -58,8 +57,7 @@ export default function AccountProfile() {
         [key]: value
       });
     } catch (error) {
-      console.log(error);
-      alert("更新失敗，請稍後再試");
+      alert(`更新失敗，請稍後再試：${error.message}`);
     }
   }
 

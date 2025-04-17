@@ -55,8 +55,7 @@ export default function ResultsSearch() {
         // 處理總頁數，用總資料數除以每頁顯示幾筆再用 Math.ceil 處理無條件進位
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
       } catch (error) {
-        console.log(error);
-        alert("取得產品搜尋失敗");
+        alert(`取得產品搜尋失敗：${error.message}`);
       }
     },
     [currentPage]
@@ -68,10 +67,8 @@ export default function ResultsSearch() {
         `${BASE_URL}/products?_page=${currentPage}&_limit=${itemsPerPage}`
       );
       setResultsSearch(res.data);
-      // console.log(res.data);
     } catch (error) {
-      console.log(error);
-      alert("取得產品失敗");
+      alert(`取得產品失敗：${error.message}`);
     }
   }, [currentPage]);
 
@@ -118,7 +115,6 @@ export default function ResultsSearch() {
     // 若 getParams 非空值取得符合搜尋參數的 products，是空值則取得所有 products
     if (getParams) {
       getProductsSearch(getParams);
-      // console.log(resultsSearch);
     } else {
       getProducts();
     }

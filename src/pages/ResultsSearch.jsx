@@ -140,8 +140,8 @@ export default function ResultsSearch() {
     <>
       <ToastContainer />
       {/* 搜尋結果卡片 */}
-      <div className="content pt-12 pt-md-14 result-content">
-        <div className="container">
+      <div className="content py-12 py-md-14 result-content">
+        <div className={`container ${totalPages > 1 ? "pt-14":"py-14"}`}>
           <div className="row d-flex flex-column gy-7 gy-lg-9">
             {resultsSearch.length === 0 && (
               <div className="col text-center py-10">
@@ -270,9 +270,9 @@ export default function ResultsSearch() {
 
       {/* 分頁 */}
       {totalPages > 1 && (
-        <nav aria-label="...">
+        <nav aria-label="..." className="content pb-13">
           {/* 上一頁 */}
-          <ul className="pagination d-lg-flex py-8 justify-content-center ">
+          <ul className="pagination d-lg-flex justify-content-center mb-0 pb-13">
             <li className={`page-item ${currentPage === 1 && "disabled"}`}>
               <button
                 className={`page-link ${currentPage === 1 && "disabled"} `}

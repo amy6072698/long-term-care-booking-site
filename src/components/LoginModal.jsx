@@ -149,7 +149,7 @@ function LoginModal(){
   return (
   <>
     
-    <div ref={loginModalRef} className="modal fade" id="logInModal" aria-labelledby="logInModalToggleLabel" tabIndex="-1">
+    <div ref={loginModalRef} className="modal fade placeholder-gray-500" id="logInModal" aria-labelledby="logInModalToggleLabel" tabIndex="-1">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header border-bottom-0">
@@ -209,97 +209,98 @@ function LoginModal(){
             <div className="modal-body py-0 px-14">
               <h5 className="modal-title text-center mb-4" id="logInModalToggleLabel">註冊</h5>
               <form onSubmit={onSubmitSignup} className="d-flex flex-column justify-content-center">
-                <label htmlFor="email" className="fs-6">電子信箱</label>
-                <input
-                {...register("email",{
-                  required: "Email 欄位必填",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Email 格式錯誤"
-                  }
-                })} 
-                type="email" className={`form-control rounded-1 fs-6 py-1 mt-1 ${errors.email ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="email" placeholder="作為帳號使用" aria-label="Email" autoComplete="email"/>
+                <div className="overflow-y-scroll px-5" style={{height: '200px'}}>
+                  <label htmlFor="email" className="fs-6">電子信箱</label>
+                  <input
+                  {...register("email",{
+                    required: "Email 欄位必填",
+                    pattern: {
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                      message: "Email 格式錯誤"
+                    }
+                  })} 
+                  type="email" className={`form-control rounded-1 fs-6 py-1 mt-1 ${errors.email ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="email" placeholder="作為帳號使用" aria-label="Email" autoComplete="email"/>
 
-                {errors.email && <p className="text-danger mb-6">{errors.email.message}</p>}
+                  {errors.email && <p className="text-danger mb-6">{errors.email.message}</p>}
 
 
-                <label htmlFor="password" className="fs-6">密碼</label>
-                <input
-                {...register("password",{
-                  required: "密碼欄位必填",
-                  minLength: {
-                    value: 6,
-                    message: "密碼長度最少 6 碼"
-                  }
-                })} 
-                type="password" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.password ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="password" placeholder="設定密碼" aria-label="Password" autoComplete="current-password"/>
+                  <label htmlFor="password" className="fs-6">密碼</label>
+                  <input
+                  {...register("password",{
+                    required: "密碼欄位必填",
+                    minLength: {
+                      value: 6,
+                      message: "密碼長度最少 6 碼"
+                    }
+                  })} 
+                  type="password" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.password ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="password" placeholder="設定密碼" aria-label="Password" autoComplete="current-password"/>
 
-                {errors.password && <p className="text-danger mb-6">{errors.password.message}</p>}
+                  {errors.password && <p className="text-danger mb-6">{errors.password.message}</p>}
 
-                
-                <label htmlFor="name" className="fs-6">姓名</label>
-                <input
-                {...register("name",{
-                  required: "姓名欄位必填"
-                })} 
-                type="text" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.name ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="name" placeholder="陳小明" aria-label="Name" autoComplete="username"/>
+                  
+                  <label htmlFor="name" className="fs-6">姓名</label>
+                  <input
+                  {...register("name",{
+                    required: "姓名欄位必填"
+                  })} 
+                  type="text" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.name ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="name" placeholder="陳小明" aria-label="Name" autoComplete="username"/>
 
-                {errors.name && <p className="text-danger mb-6">{errors.name.message}</p>}
+                  {errors.name && <p className="text-danger mb-6">{errors.name.message}</p>}
 
-                <div>
-                  <p className="fs-6">性別</p>
+                  <div>
+                    <p className="fs-6">性別</p>
 
-                  <div className="form-check form-check-inline fs-6">
-                    <input
-                    {...register("gender", {
-                      required: "性別欄位必填"
-                    })} value="male" 
-                    className={`form-check-input ${errors.gender ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} type="radio" 
-                    id="male"/>
-                    <label className="form-check-label" htmlFor="male">
-                      男
-                    </label>
+                    <div className="form-check form-check-inline fs-6">
+                      <input
+                      {...register("gender", {
+                        required: "性別欄位必填"
+                      })} value="male" 
+                      className={`form-check-input ${errors.gender ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} type="radio" 
+                      id="male"/>
+                      <label className="form-check-label" htmlFor="male">
+                        男
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline fs-6">
+                      <input 
+                      {...register("gender",  {
+                        required: "性別欄位必填"
+                      })} value="female" 
+                      className={`form-check-input ${errors.gender ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} type="radio" 
+                      id="female"/>
+                      <label className="form-check-label" htmlFor="female">
+                        女
+                      </label>
+                    </div>
+
+                    {errors.gender && <p className="text-danger mb-6">{errors.gender.message}</p>}
+
                   </div>
-                  <div className="form-check form-check-inline fs-6">
-                    <input 
-                    {...register("gender",  {
-                      required: "性別欄位必填"
-                    })} value="female" 
-                    className={`form-check-input ${errors.gender ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} type="radio" 
-                    id="female"/>
-                    <label className="form-check-label" htmlFor="female">
-                      女
-                    </label>
-                  </div>
 
-                  {errors.gender && <p className="text-danger mb-6">{errors.gender.message}</p>}
+                  <label htmlFor="birthday" className="fs-6">生日</label>
+                  <input 
+                  {...register("birthday",{
+                    required: "生日欄位必填"
+                  })}
+                  type="date" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.birthday ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="birthday" aria-label="Birthday"/>
 
+                  {errors.birthday && <p className="text-danger mb-6">{errors.birthday.message}</p>}
+
+
+                  <label htmlFor="phone" className="fs-6">電話</label>
+                  <input 
+                  {...register("phone",{
+                    required: "電話欄位必填",
+                    pattern: {
+                      value: /^(0[2-8]\d{7}|09\d{8})$/,
+                      message: "電話格式錯誤"
+                    }
+                  })} 
+                  type="tel" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.phone ? 'is-invalid mb-1' : 'border-primary-50'}`} id="phone" placeholder="0912-345-678" aria-label="Phone"/>
+
+                  {errors.phone && <p className="text-danger mb-11">{errors.phone.message}</p>}
                 </div>
-
-                <label htmlFor="birthday" className="fs-6">生日</label>
-                <input 
-                {...register("birthday",{
-                  required: "生日欄位必填"
-                })}
-                type="date" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.birthday ? 'is-invalid mb-1' : 'mb-6 border-primary-50'}`} id="birthday" aria-label="Birthday"/>
-
-                {errors.birthday && <p className="text-danger mb-6">{errors.birthday.message}</p>}
-
-
-                <label htmlFor="phone" className="fs-6">電話</label>
-                <input 
-                {...register("phone",{
-                  required: "電話欄位必填",
-                  pattern: {
-                    value: /^(0[2-8]\d{7}|09\d{8})$/,
-                    message: "電話格式錯誤"
-                  }
-                })} 
-                type="tel" className={`form-control rounded-1 fs-6 py-1 my-1 ${errors.phone ? 'is-invalid mb-1' : 'mb-11 border-primary-50'}`} id="phone" placeholder="0912-345-678" aria-label="Phone"/>
-
-                {errors.phone && <p className="text-danger mb-11">{errors.phone.message}</p>}
-                
-                <button type="submit" className="btn btn-primary-40 custom-primary-btn fs-6 p-4">註冊</button>
+                <button type="submit" className="btn btn-primary-40 custom-primary-btn fs-6 p-4 mt-11">註冊</button>
               </form>
             </div>
             <div className="modal-footer d-flex justify-content-center border-top-0 px-5 pt-5 pb-9">

@@ -4,7 +4,7 @@ export default function AboutUs() {
     <div className="main">
         <div className="news-content">
           <div className="container">
-              <div className="row row-cols-1 row-cols-md-2 g-5 g-md-12">
+              <div className="row row-cols-1 row-cols-md-2 g-8 g-md-12">
                 {/* 卡片 1 */}
                 <div className="col">
                     <div className="card news-card ease-in-out h-100 shadow-sm" style={{maxWidth: "100%" }}> 
@@ -53,12 +53,6 @@ export default function AboutUs() {
                     </div>
                     </div>
                 </div>
-              </div>
-              {/* 回首頁 */}
-              <div className="d-flex justify-content-center">
-                <a href="#/">
-                  <button type="button" className="btn news-btn-style news-btn fs-6 fs-md-4 btn-primary-40 mt-5 mt-md-10">回首頁</button>
-                </a>
               </div>
           </div>
         </div>

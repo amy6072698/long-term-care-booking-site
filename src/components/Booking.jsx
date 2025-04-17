@@ -2,12 +2,10 @@ import axios from "axios";
 import { useContext } from "react";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import ReactLoading from "react-loading";
-import { UserContext }  from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 import showSuccessMessage from "../assets/js/showSuccessMessage";
 import showErrorMessage from "../assets/js/showErrorMessage";
-import PropTypes from 'prop-types';
-
-
+import PropTypes from "prop-types";
 
 function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
   const { isLogin } = useContext(UserContext); // 用來判斷是否登入
@@ -61,7 +59,6 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
       }, 3000);
     } catch (error) {
       const { data } = error.response;
-      console.log(error);
       showErrorMessage(data);
     }
   };
@@ -89,10 +86,10 @@ function Booking({ product, token, myUserId, isLoading, setIsLoading }) {
   );
 }
 Booking.propTypes = {
-  product:PropTypes.object,
-  token:PropTypes.string,
-  myUserId:PropTypes.string,
-  isLoading:PropTypes.bool,
-  setIsLoading:PropTypes.func
-}
+  product: PropTypes.object,
+  token: PropTypes.string,
+  myUserId: PropTypes.string,
+  isLoading: PropTypes.bool,
+  setIsLoading: PropTypes.func,
+};
 export default Booking;

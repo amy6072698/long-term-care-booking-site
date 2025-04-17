@@ -75,7 +75,6 @@ function Searchbar() {
 
   useEffect(() => {
     getTaiwanCity();
-    // console.log(cityData);
   }, []);
 
   // 當縣市改變取得相應的地區選項資料更新至 regionData ，並用 cityValue 讓電腦版與手機板縣市選取的值同步
@@ -134,7 +133,6 @@ function Searchbar() {
   const handleSearchSubmit = handleSubmit((data) => {
     // 解構 data 中 需要用到的 值，提交後 data 有各項下拉框內的提交值
     const { category, city, region, caringItem, medicalService } = data;
-    // console.log(data);
 
     // 將 機構類型 提交值加入 params
     if (category) {

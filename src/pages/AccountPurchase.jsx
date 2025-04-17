@@ -14,13 +14,11 @@ export default function AccountPurchase() {
         const data = await axios.get(
           `${BASE_URL}/600/orders?userId=${myUserId}&_expand=product`,
           {
-            //這邊待複習
             headers: {
               authorization: `Bearer ${token}`,
             },
           }
         );
-        // console.log(data.data);
         setOrders(data.data);
       } catch (error) {
         console.log(error);

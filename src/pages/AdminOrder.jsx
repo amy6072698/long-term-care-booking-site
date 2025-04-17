@@ -10,15 +10,13 @@ import { Link } from "react-router";
 import OrderModal from "../components/OrderModal";
 import DelOrderModal from "../components/DelOrderModal";
 
-
-
 export default function AdminLOrder() {
   const { token } = getTokenFromCookie();
   const [orders, setOrders] = useState([]);
   const [tempOrder, setTempOrder] = useState({});
   const [delId, setDelId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);  
+  const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = useRef(10);
 
   // 取得訂單資料
@@ -65,7 +63,6 @@ export default function AdminLOrder() {
 
   // 打開orderModal
   const handleOpenOrderModal = (order) => {
-    console.log(order);
     const modalInstance = Modal.getInstance(orderModalRef.current);
     setTempOrder(order);
     modalInstance.show();
@@ -156,8 +153,6 @@ export default function AdminLOrder() {
     setCurrentPage(page);
   };
 
-  
-
   return (
     <>
       {/* toast */}
@@ -241,9 +236,7 @@ export default function AdminLOrder() {
             );
           })}
           <li
-            className={`page-item ${
-              currentPage == totalPages && "disabled"
-            }`}
+            className={`page-item ${currentPage == totalPages && "disabled"}`}
             onClick={(e) => {
               if (currentPage < totalPages) {
                 handleChangePage(e, currentPage + 1);

@@ -12,9 +12,6 @@ export default function AccountProduct() {
 
   //取得收藏機構
   const getProducts = useCallback(async () => {
-    // setLoading(true);
-    // setError(null);
-    
     try {
       // 取得包含產品資訊的收藏資料
       const response = await axios.get(`${BASE_URL}/collects`, {
@@ -50,7 +47,7 @@ export default function AccountProduct() {
           })
           .filter((item) => item !== null); // 過濾掉不含產品資料的項目
 
-        // console.log("成功提取產品資料:", productData);
+      
         setProducts(productData);
       } else {
         console.warn("獲取的資料格式不符合預期");
@@ -58,12 +55,9 @@ export default function AccountProduct() {
       }
     } catch (error) {
       console.error("獲取收藏資料時發生錯誤:", error);
-      // setError(error.message || "無法獲取收藏資料");
       setProducts([]);
-    } finally {
-      // setLoading(false);
-    }
-  },[myUserId,token])
+    } 
+  }, [myUserId, token]);
   // 組件載入時獲取資料
   useEffect(() => {
     getProducts();

@@ -52,7 +52,6 @@ const HeartCard = ({ productId, onRemove, openLoginModal }) => {
 
     // 檢查是否已登入
     if (!isUserLoggedIn()) {
-      console.log("使用者未登入，開啟登入視窗");
       if (openLoginModal && typeof openLoginModal === "function") {
         openLoginModal();
       } else {

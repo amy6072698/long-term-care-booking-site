@@ -41,8 +41,8 @@ export default function Cart() {
           }
         );
         setCartsData(data);
-      } catch (error) {
-        alert(`取得購物車資料失敗：${error.message}`);
+      } catch {
+        // empty
       }
     };
     //如果登入成功則重新取得token，
@@ -119,9 +119,8 @@ export default function Cart() {
     // 更新前端狀態，確保 UI 同步
     setCartsData(cartsData.filter((item) => item.userId != myUserId));
     alert("購物車已清空！");
-  } catch (error) {
-    console.error("清空購物車失敗", error);
-    alert("清空購物車失敗，請稍後再試！");
+  } catch  {
+    // empty
   }
 };
 

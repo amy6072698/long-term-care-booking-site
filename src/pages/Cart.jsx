@@ -118,7 +118,6 @@ export default function Cart() {
     setCartsData(cartsData.filter((item) => item.userId != myUserId));
     alert("購物車已清空！");
   } catch (error) {
-    console.error("清空購物車失敗", error);
     alert("清空購物車失敗，請稍後再試！");
   }
 };

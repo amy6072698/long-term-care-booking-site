@@ -35,8 +35,8 @@ export default function AdminLOrder() {
       setTotalPages(Math.ceil(totalCount / itemsPerPage.current));
 
       setOrders(data);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      showErrorMessage(`取得訂單資料失敗`);
     }
   }, [token, currentPage]);
 

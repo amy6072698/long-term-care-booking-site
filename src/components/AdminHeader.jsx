@@ -76,8 +76,7 @@ function AdminHeader() {
       setUserName(res.data.name);
       
       setIsLogin(true);
-    } catch (error) {
-      console.error("Token 驗證失敗，可能已過期", error);
+    } catch {
       setIsLogin(false);
     }
   },[setIsLogin, setIsAdmin, setUserName]);

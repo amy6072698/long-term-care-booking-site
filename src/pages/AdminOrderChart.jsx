@@ -5,8 +5,8 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 import Select from "react-select";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
-
-
+import showErrorMessage from "../assets/js/showErrorMessage";
+import { ToastContainer } from "react-toastify";
 
 // 全域響應式
 defaults.responsive = true;
@@ -16,42 +16,38 @@ export default function AdminOrderChart() {
   const [chartData, setChartData] = useState([]);
   const [chartObj, setChartObj] = useState([]);
 
-
   // 取得產品資料
   const getProducts = useCallback(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`${BASE_URL}/640/products`,
-          {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setChartData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  },[token])
-
-  useEffect(() => {
-    getProducts();
-  }, [getProducts]);
-
-
-  // 取得訂單資料
-  const getOrders = () => {
-    (async () => {
-      try {
-        const { data } = await axios.get(`${BASE_URL}/orders?_expand=product`,{
+        const { data } = await axios.get(`${BASE_URL}/640/products`, {
           headers: {
             authorization: `Bearer ${token}`,
           },
         });
         setChartData(data);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        showErrorMessage(`取得產品資料失敗`);
+      }
+    })();
+  }, [token]);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
+  // 取得訂單資料
+  const getOrders = () => {
+    (async () => {
+      try {
+        const { data } = await axios.get(`${BASE_URL}/orders?_expand=product`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+        setChartData(data);
+      } catch {
+        showErrorMessage(`取得訂單資料失敗`);
       }
     })();
   };
@@ -152,7 +148,6 @@ export default function AdminOrderChart() {
 
   // 開始日
   const handleStartDateChange = (e) => {
-
     setStartDate(e.target.value);
   };
 
@@ -208,6 +203,7 @@ export default function AdminOrderChart() {
 
   return (
     <>
+      <ToastContainer />
       <div className="d-flex justify-content-between align-items-center mb-10">
         <div>
           <h4 className="mb-2 text-primary-100 pt-14">圖表分析</h4>

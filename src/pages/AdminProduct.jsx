@@ -81,8 +81,8 @@ export default function AdminLProduct() {
       const totalCount = headers["x-total-count"];
       setTotalPages(Math.ceil(totalCount / itemsPerPage.current));
       setProducts(data);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      showErrorMessage(`取得產品資料失敗`);
     }
   }, [token, currentPage]);
 
@@ -396,8 +396,8 @@ export default function AdminLProduct() {
         }
       );
       showSuccessMessage(`編輯成功！`);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      showErrorMessage(`編輯失敗！`);
     }
   };
 
@@ -416,8 +416,8 @@ export default function AdminLProduct() {
         }
       );
       showSuccessMessage(`新增成功！`);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      showSuccessMessage(`新增失敗！`);
     }
   };
 
@@ -523,9 +523,7 @@ export default function AdminLProduct() {
               <td>
                 <div className="btn-group">
                   <button
-                    onClick={() =>
-                      handleOpenProductModal("update", product)
-                    }
+                    onClick={() => handleOpenProductModal("update", product)}
                     className="btn btn-outline-primary-80 btn-sm"
                     type="button"
                   >
@@ -544,9 +542,6 @@ export default function AdminLProduct() {
           ))}
         </tbody>
       </table>
-          
-        
-      
 
       {/* 分頁 */}
       <nav className="admin-page" aria-label="Page navigation example">

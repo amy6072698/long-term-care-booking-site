@@ -45,8 +45,7 @@ export default function ProductPage() {
         return item.id === Number(productId);
       });
       setProduct(res.data[productIndex]);
-    } catch (error) {
-      console.log(error);
+    } catch {
       alert("取得產品資料失敗");
     }
   },[productId])

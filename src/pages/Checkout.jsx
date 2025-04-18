@@ -7,6 +7,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 import Cleave from "cleave.js/react";
 import "cleave.js/dist/addons/cleave-phone.TW";
 import getTokenFromCookie from "../assets/js/getTokenFromCookie";
+import showErrorMessage from "../assets/js/showErrorMessage";
 
 export default function Checkout() {
   const { token, myUserId, selectProductId } = getTokenFromCookie();
@@ -39,8 +40,8 @@ export default function Checkout() {
         setCheckoutData(data);
         setPrice(data.roomCards[0].price);
         setRoomType(data.roomCards[0].roomType);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        showErrorMessage(`取得產品資料失敗`);
       }
     })();
   }, [productId]);
@@ -48,7 +49,6 @@ export default function Checkout() {
   //處理提交
   const onSubmit = (data, e) => {
     e.preventDefault();
-    handleCheckoutSuccess();
     addOrderItem(data);
   };
 
@@ -70,8 +70,9 @@ export default function Checkout() {
           },
         }
       );
-    } catch (error) {
-      console.log(error);
+      handleCheckoutSuccess();
+    } catch {
+      showErrorMessage(`取得結帳失敗`);
     }
   };
   //結帳後刪除立即預訂內容
@@ -84,9 +85,8 @@ export default function Checkout() {
       });
       navigate("/checkoutSuccess");
       reset();
-    } catch (error) {
-      console.log(error);
-      alert("結帳失敗");
+    } catch {
+      showErrorMessage(`取得結帳失敗`);
     }
   };
 

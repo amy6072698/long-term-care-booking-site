@@ -1,8 +1,8 @@
 # React專題【長照好厝邊】
 
 ## 專案路徑
--   [GitHub repo]([https://github.com/](https://github.com/Jack-Xiao-2024/ReactC5)
--   [GitHub pages]([https://](https://jack-xiao-2024.github.io/ReactC5/))
+-   [GitHub repo](https://github.com/Jack-Xiao-2024/ReactC5)
+-   [GitHub pages](https://jack-xiao-2024.github.io/ReactC5/)
 
 ## 程式專題作者
 -   [Jack](https://github.com/Jack-Xiao-2024)
@@ -152,6 +152,7 @@
 
 ## 圖片素材來源
 
+-   [Unsplash](https://unsplash.com/)
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -163,4 +164,4 @@ Currently, two official plugins are available:
 
 [ ](https://github.com/kayaribi/Realm_of_Journeys#%E5%9C%96%E7%89%87%E7%B4%A0%E6%9D%90%E4%BE%86%E6%BA%90)
 
--   [Unsplash](https://unsplash.com/)
+

@@ -135,6 +135,10 @@
 
 ![新增機構](https://cdn.discordapp.com/attachments/1379089252972761229/1379095975410536479/c2445ac68d2c384b.png?ex=683efeb6&is=683dad36&hm=30554fe2fec64d12c354ae987c6cd3e69d7078ce5de9b0e9b777ec3679b8efba&)
 
+-   分析圖表
+
+![分析圖表](https://cdn.discordapp.com/attachments/1379089252972761229/1379096560272670790/0dcbf08f7100ac91.png?ex=683eff42&is=683dadc2&hm=bde9aa03fdeefc66e2263c413b9ac3d9b3251e96a2759f4a0e63d938c925cfe5&)
+
 ---
 
 ## 特別感謝 \- 專題指導

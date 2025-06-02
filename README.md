@@ -5,6 +5,12 @@
 - GitHub pages
 - GitHub pages 後台管理頁
 
+# 程式專題作者
+- Jack
+- Chris Chen
+- Amy
+- KOMATSU PEI
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

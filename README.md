@@ -1,4 +1,4 @@
-# React【長照好厝邊】
+# React專題【長照好厝邊】
 
 # 專案路徑
 - GitHub repo

@@ -1,8 +1,11 @@
-# React專題【長照好厝邊】
+# React 專題【長照好厝邊】
 
 ## 專案路徑
 -   [GitHub repo](https://github.com/Jack-Xiao-2024/ReactC5)
 -   [GitHub pages](https://jack-xiao-2024.github.io/ReactC5/)
+-   後台登入帳密：
+    -   帳號：1@mail.com
+    -   密碼：123123
 
 ## 程式專題作者
 -   [Jack](https://github.com/Jack-Xiao-2024)

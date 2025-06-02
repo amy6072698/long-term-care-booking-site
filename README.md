@@ -50,6 +50,7 @@
 ### 登入註冊頁面
 
 -   可登入會員，或點選註冊
+
 ![登入頁面](https://cdn.discordapp.com/attachments/1379089252972761229/1379091055919632519/0eb84aa6e53a3479.png?ex=683efa22&is=683da8a2&hm=8d27eb0302aa657098273fc7a75240fb20e4c91eff468e523ba245a10f3131d9&)
 
 -   可註冊會員，或立即登入，切換到登入頁面
@@ -72,6 +73,11 @@
 
 ![產品詳情頁](https://cdn.discordapp.com/attachments/1379089252972761229/1379090707792269353/f8a302c0972eb8ad.png?ex=683ef9cf&is=683da84f&hm=901e54a7d3038ed3d32a0d001c946514ab1a318e9ec98c6859a6143419bde31d&)
 
+---
+
+### 立即預訂
+
+![立即預訂](https://cdn.discordapp.com/attachments/1379089252972761229/1379092808018956379/fade9c8906652824.png?ex=683efbc3&is=683daa43&hm=47df387f1b7dff401ae0b9b2c6c099729771e9f60f8ee218c3a4db59f84ffed4&)
 
 ---
 
@@ -79,7 +85,11 @@
 
 -   填寫入住時間及入住者資訊，方便確認與調整。
 
+![入住時間及入住者資訊](https://cdn.discordapp.com/attachments/1379089252972761229/1379093170230394880/6f383641320b6322.png?ex=683efc1a&is=683daa9a&hm=d210af7a8b7631e22359264a8de455be1b2dfca152183db1ac6ce00e0ed8205a&)
+
 -   提供填寫信用卡一次付清，輕鬆完成結帳。
+
+![表單驗證](https://cdn.discordapp.com/attachments/1379089252972761229/1379093506664169542/e49ae7b5e71b6110.png?ex=683efc6a&is=683daaea&hm=dd720b5390c136f4899c8e3d64315054c77a9c0004abd47da021491951313016&)
 
 ---
 
@@ -103,17 +113,27 @@
 
 -   可以查看會員資料，有需要時可以修改內容。
 
+![會員中心首頁](https://cdn.discordapp.com/attachments/1379089252972761229/1379094167308861554/94011ccbe63c05f4.png?ex=683efd07&is=683dab87&hm=3ed8cdd474ad939433a073381c47509ccb765ca2715fec37e64ff4ec352ee501&)
+
 -   結帳完成後可以到留床紀錄查看結帳後的詳細資訊。
 
+![會員資料](https://cdn.discordapp.com/attachments/1379089252972761229/1379094382090653697/9676bf9df851f11e.png?ex=683efd3b&is=683dabbb&hm=6472ce4605990be565c512b0d8396ca17f02f99dd1f450df023097b99e531e86&)
+
 -   收藏完機構後可以在會員中心查看各間機構特色方便進行比較。
+
+![收藏機構](https://cdn.discordapp.com/attachments/1379089252972761229/1379095178748366989/71490cbe2734bc11.png?ex=683efdf8&is=683dac78&hm=ee3bedae5ef38ad5bb6b323ad8e863fba8421e1448b76a420eb93a211f17aa05&)
 
 ---
 
 ### 後台頁面
 
--   管理員登入頁。
+-   管理訂單。
 
--   產品列表，可編輯或新增、下架產品。
+![管理訂單](https://cdn.discordapp.com/attachments/1379089252972761229/1379095518147514379/212c96fae6cf3b85.png?ex=683efe49&is=683dacc9&hm=122769db6366c946124f14e7fe1ba478fe9167cd5e1497b0d01b173c2d77ee8b&)
+
+-   管理機構，可編輯或新增、下架機構。
+
+![新增機構](https://cdn.discordapp.com/attachments/1379089252972761229/1379095975410536479/c2445ac68d2c384b.png?ex=683efeb6&is=683dad36&hm=30554fe2fec64d12c354ae987c6cd3e69d7078ce5de9b0e9b777ec3679b8efba&)
 
 ---
 

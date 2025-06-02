@@ -1,20 +1,19 @@
 # React專題【長照好厝邊】
 
 ## 專案路徑
--   [GitHub repo](https://github.com/)
--   [GitHub pages](https://)
--   [GitHub pages 後台管理頁](https://)
+-   [GitHub repo]([https://github.com/](https://github.com/Jack-Xiao-2024/ReactC5)
+-   [GitHub pages]([https://](https://jack-xiao-2024.github.io/ReactC5/))
 
 ## 程式專題作者
--   [Jack]()
--   [Chris Chen]()
--   [Amy]()
--   [KOMATSU PEI]()
-
+-   [Jack](https://github.com/Jack-Xiao-2024)
+-   [Chris Chen](https://github.com/chrischen666)
+-   [Amy](https://github.com/amy6072698)
+-   [KOMATSU PEI](https://github.com/KOMATSUPEI)
 
 ## 開發技術
 
 ### 前端技術
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
 
 ### 開發與版本控制
@@ -23,14 +22,14 @@
 
 ### 設計與協作工具
 
+
+
 ---
 
 ## 網站導覽
 
 
 ### 首頁
-
-
 
 -   以動態視覺與簡潔文字，營造沉浸式體驗，吸引使用者加入會員，開啟夢想旅程！
 
